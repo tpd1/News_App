@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/logout"
-        android:icon="@drawable/log_out"
-        android:visible="true"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:title="@string/logout"/>
 
     <item
         android:id="@+id/appSettings"
         android:title="@string/app_settings"
-        app:showAsAction="never"
-        android:icon="@drawable/sun_icon"/>
+        app:showAsAction="never" />
 
 
 

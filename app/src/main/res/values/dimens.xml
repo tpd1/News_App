@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+
+    <dimen name="dashboard_card_width">150dp</dimen>
+    <dimen name="dashboard_card_height">120dp</dimen>
+    <dimen name="dashboard_card_text_top">10dp</dimen>
 </resources>
