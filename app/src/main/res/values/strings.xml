@@ -10,7 +10,7 @@
     <string name="weather">Weather</string>
     <string name="my_profile">My Profile</string>
     <string name="upload">Upload</string>
-    <string name="bookmarks">Saved Articles</string>
+    <string name="bookmarks">Bookmarks</string>
     <string name="choose_topics">Select Topics</string>
     <string name="sign_out">Sign Out</string>
     <string name="my_account">Manage Account</string>
@@ -27,5 +27,8 @@
     <string name="category_sports">Sports</string>
     <string name="category_technology">Technology</string>
     <string name="select_topics">Select Topics Below</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="trending">Trending</string>
+    <string name="all">All</string>
 
 </resources>

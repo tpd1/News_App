@@ -4,7 +4,7 @@
     <dimen name="margin_small">10dp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
 
-    <dimen name="dashboard_card_width">150dp</dimen>
-    <dimen name="dashboard_card_height">120dp</dimen>
+    <dimen name="dashboard_card_width">130dp</dimen>
+    <dimen name="dashboard_card_height">110dp</dimen>
     <dimen name="dashboard_card_text_top">10dp</dimen>
 </resources>

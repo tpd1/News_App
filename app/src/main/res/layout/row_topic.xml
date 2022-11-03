@@ -6,15 +6,19 @@
     android:layout_height="80dp"
     android:layout_marginTop="20dp">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/md_theme_light_primaryContainer" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/selector"
         android:clickable="true"
-        android:focusable="true"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="6dp" />
+        android:focusable="true" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
@@ -34,26 +38,29 @@
     </com.google.android.material.card.MaterialCardView>
 
 
+
+
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/dashboard_card_text"
         android:id="@+id/category_title"
-        android:textSize="18sp"
+        style="@style/dashboard_card_text"
+        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="@string/topic_title"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/materialCardView2" />
 
 
     <androidx.appcompat.widget.AppCompatImageButton
+        style="?attr/materialIconButtonStyle"
         android:id="@+id/appCompatImageView"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-
         android:layout_marginEnd="16dp"
         android:src="@drawable/tick_box"
         app:layout_constraintBottom_toBottomOf="parent"

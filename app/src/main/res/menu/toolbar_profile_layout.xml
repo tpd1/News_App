@@ -11,7 +11,4 @@
         android:title="@string/app_settings"
         app:showAsAction="never" />
 
-
-
-
 </menu>
