@@ -2,6 +2,7 @@
 <resources>
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="margin_small">10dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
 
     <dimen name="dashboard_card_width">150dp</dimen>
     <dimen name="dashboard_card_height">120dp</dimen>
