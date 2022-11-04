@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="200dp"
-    android:layout_marginTop="20dp">
+    android:layout_height="305dp"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/news_row_card_view"
@@ -14,65 +14,88 @@
         android:layout_margin="3dp"
         app:cardBackgroundColor="@color/md_theme_light_surface"
         tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="3dp" />
+        tools:layout_editor_absoluteY="3dp">
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/row_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/selector"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        style="@style/category_row_card"
-        app:cardBackgroundColor="@color/md_theme_light_secondaryContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/news_image"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/news_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/md_theme_light_secondary"
+                android:scaleType="centerCrop" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/news_headline"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:padding="@dimen/margin_small"
+                    android:text="@string/news_headline" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/publisher_icon"
+                    android:layout_width="80dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/log_out"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:backgroundTint="@color/md_theme_light_primary"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:scaleType="centerInside" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/bookmark_button"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_width="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/add_bookmark"
+                        android:background="@color/md_theme_light_surface"
+                        android:layout_height="match_parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/share_button"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_width="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_baseline_share_24"
+                        android:background="@color/md_theme_light_surface"
+                        android:layout_height="match_parent"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </com.google.android.material.card.MaterialCardView>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/news_headline"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-
-        android:gravity="center_vertical"
-        android:text="@string/news_headline"
-        android:textSize="18sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/news_content"
-        app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        app:layout_constraintTop_toTopOf="@+id/news_row_card_view" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/news_content"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-
-        android:gravity="center_vertical"
-        android:text="@string/news_content"
-        android:textSize="18sp"
-
-        app:layout_constraintEnd_toEndOf="@+id/news_row_card_view" />
-
-
-
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>

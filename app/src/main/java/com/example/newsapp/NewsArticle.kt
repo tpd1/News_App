@@ -2,7 +2,7 @@ package com.example.newsapp
 
 class NewsArticle {
     private var headline: String? = null
-    private var content: String? = null
+    private var publisherIcon: Int = 0
     private var modelImage: Int = 0
 
     fun getHeadline():String {
@@ -13,12 +13,12 @@ class NewsArticle {
         this.headline = name
     }
 
-    fun getContent(): String {
-        return content.toString()
+    fun getPublisherIcon(): Int {
+        return publisherIcon
     }
 
-    fun setContent(content: String) {
-        this.content = content
+    fun setPublisherIcon(image_drawable: Int) {
+        this.publisherIcon = image_drawable
     }
 
     fun getImages(): Int {

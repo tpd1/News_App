@@ -12,7 +12,7 @@ class NewsRecyclerAdapter(private val imageModelArrayList: MutableList<NewsArtic
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var imgView = itemView.findViewById<View>(R.id.news_image) as ImageView
         var newsHeadline = itemView.findViewById<View>(R.id.news_headline) as TextView
-        var newsContent = itemView.findViewById<View>(R.id.news_content) as TextView
+        var publisherIcon = itemView.findViewById<View>(R.id.publisher_icon) as ImageView
     }
 
     override fun getItemCount(): Int {
@@ -29,7 +29,7 @@ class NewsRecyclerAdapter(private val imageModelArrayList: MutableList<NewsArtic
         val info = imageModelArrayList[position]
         holder.imgView.setImageResource(info.getImages())
         holder.newsHeadline.text = info.getHeadline()
-        holder.newsContent.text = info.getContent()
+        holder.publisherIcon.setImageResource(info.getPublisherIcon())
     }
 
 
