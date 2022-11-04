@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:layout_height="200dp"
     android:layout_marginTop="20dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_margin="3dp"
-        android:id="@+id/row_card_view"
+        android:id="@+id/news_row_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/md_theme_light_secondaryContainer" />
+        android:layout_margin="3dp"
+        app:cardBackgroundColor="@color/md_theme_light_surface"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -30,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/category_icon"
+            android:id="@+id/news_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,34 +44,35 @@
     </com.google.android.material.card.MaterialCardView>
 
 
-
-
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/category_title"
+        android:id="@+id/news_headline"
         style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+
         android:gravity="center_vertical"
-        android:text="@string/topic_title"
+        android:text="@string/news_headline"
         android:textSize="18sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+        app:layout_constraintEnd_toStartOf="@+id/news_content"
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        app:layout_constraintTop_toTopOf="@+id/row_card_view" />
+        app:layout_constraintTop_toTopOf="@+id/news_row_card_view" />
 
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        style="?attr/materialIconButtonStyle"
-        android:id="@+id/appCompatImageView"
-        android:layout_width="70dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/news_content"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/tick_box"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        android:gravity="center_vertical"
+        android:text="@string/news_content"
+        android:textSize="18sp"
+
+        app:layout_constraintEnd_toEndOf="@+id/news_row_card_view" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

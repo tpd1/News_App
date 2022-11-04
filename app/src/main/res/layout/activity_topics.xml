@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
+        android:id="@+id/topic_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/margin_small"
@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/topics_selected">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/toolbar_profile_layout"
+            app:menu="@menu/toolbar_profile_top"
             app:navigationIcon="@drawable/up_icon"
             app:title="@string/news_topics"
             app:titleCentered="true" />
@@ -50,7 +50,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/topics_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

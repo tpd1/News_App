@@ -30,5 +30,12 @@
     <string name="most_popular">Most Popular</string>
     <string name="trending">Trending</string>
     <string name="all">All</string>
+    <string name="_0_topics_selected">0 Topics Selected</string>
+    <string name="firstname_lastname">Firstname Lastname</string>
+    <string name="search">Search</string>
+    <string name="notifications">Notifications</string>
+    <string name="most_read">Most Read</string>
+    <string name="news_content">News Content</string>
+    <string name="news_headline">News Headline</string>
 
 </resources>
