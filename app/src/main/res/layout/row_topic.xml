@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_marginTop="20dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
+        android:id="@+id/row_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/md_theme_light_primaryContainer" />
+        app:cardBackgroundColor="@color/md_theme_light_secondaryContainer" />
+
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/textView"
+        android:id="@+id/row_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/selector"
@@ -23,6 +23,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         style="@style/category_row_card"
+        app:cardBackgroundColor="@color/md_theme_light_secondaryContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -52,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        app:layout_constraintTop_toTopOf="@+id/materialCardView2" />
+        app:layout_constraintTop_toTopOf="@+id/row_card_view" />
 
 
     <androidx.appcompat.widget.AppCompatImageButton
