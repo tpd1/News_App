@@ -14,4 +14,9 @@
     <dimen name="dashboard_card_width">130dp</dimen>
     <dimen name="dashboard_card_height">110dp</dimen>
     <dimen name="dashboard_card_text_top">10dp</dimen>
+    <dimen name="topic_row_height">80dp</dimen>
+    <dimen name="topic_card_margin">3dp</dimen>
+    <dimen name="news_card_height">330dp</dimen>
+    <dimen name="news_card_margin_top">20dp</dimen>
+    <dimen name="news_card_margin">2dp</dimen>
 </resources>

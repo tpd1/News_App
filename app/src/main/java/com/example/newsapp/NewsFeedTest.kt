@@ -24,14 +24,21 @@ class NewsFeedTest: AppCompatActivity() {
 
     private fun populateList(): ArrayList<NewsArticle> {
         val list = ArrayList<NewsArticle>()
-        val myImageList = arrayOf(R.drawable.pinhead, R.drawable.profile_example, R.drawable.profile_example, R.drawable.profile_example)
-        val publisherIcon = arrayOf(R.drawable.reuters, R.drawable.bbc_logo_big, R.drawable.profile_example, R.drawable.profile_example)
-        val myImageNameList = arrayOf("TIMDB Rates Hellraiser 10/10. \"The greatest film of all time\"", "Headline 2", "Headline 3", "Headline 4")
-//        val newsContentList = arrayOf("By Tim Deville", "Content 2", "Content 3", "Content 4")
+        val myImageList = arrayOf(R.drawable.twitter_article_image, R.drawable.bbc_article_image, R.drawable.shark_article_image)
+        val publisherIcon = arrayOf(R.drawable.reuters, R.drawable.bbc_logo_big, R.drawable.guardian_logo)
+        val myCategoryList = arrayOf("Technology", "General", "Science")
+        val myDateList = arrayOf("Yesterday", "8:15am", "2 days ago")
+        val myImageNameList = arrayOf(
+            "Twitter says 50% of staff laid off, moves to reassure on content moderation",
+            "Train strikes: Passengers warned of disruption after walkouts suspended",
+            "Scientists discover ‘world’s largest’ seagrass forest – by strapping cameras to sharks")
 
-        for (i in 0..3) {
+        for (i in 0..2) {
             val imageModel = NewsArticle()
             imageModel.setHeadline(myImageNameList[i])
+            imageModel.setCategory(myCategoryList[i])
+            imageModel.setArticleDate(myDateList[i])
+
             imageModel.setPublisherIcon(publisherIcon[i])
             imageModel.setImages(myImageList[i])
             list.add(imageModel)

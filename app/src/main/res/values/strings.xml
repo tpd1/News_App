@@ -37,5 +37,9 @@
     <string name="most_read">Most Read</string>
     <string name="news_content">News Content</string>
     <string name="news_headline">News Headline</string>
+    <string name="image_description_topic">Image descriping topic</string>
+    <string name="tick_box_description">Tick box</string>
+    <string name="topic_category">Topic Category</string>
+    <string name="article_date">Article Date</string>
 
 </resources>

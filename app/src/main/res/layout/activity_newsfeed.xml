@@ -1,17 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--    Author: Tim Deville (2003506)-->
+<!--    Layout for the news feed activity. -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--    Top app bar-->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        app:liftOnScroll="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_nav_bar"
@@ -22,10 +25,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/toolbar_newsfeed_top"
+            app:navigationIcon="@drawable/logo_placeholder"
             app:title="@string/news"
             app:titleCentered="true" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--    Bottom Navigation bar-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         style="@style/bottom_nav_bar"
@@ -33,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
+    <!--Topic tabs (currently hard-coded but will later be populated from user selection-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
@@ -75,7 +81,7 @@
             android:text="@string/category_health" />
     </com.google.android.material.tabs.TabLayout>
 
-
+    <!--RecyclerView populating page using row_news_article.xml-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/news_recycler_view"
         android:layout_width="match_parent"
@@ -83,14 +89,10 @@
         android:layout_margin="@dimen/margin_small"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout">
-
     </androidx.recyclerview.widget.RecyclerView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

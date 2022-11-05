@@ -11,12 +11,6 @@
         <item name="android:clickable">true</item>
     </style>
 
-    <style name="dashboard_card_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:orientation">vertical</item>
-    </style>
 
     <style name="bottom_nav_bar">
         <item name="android:layout_width">match_parent</item>

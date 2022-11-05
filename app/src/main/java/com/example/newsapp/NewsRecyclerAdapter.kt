@@ -11,8 +11,12 @@ class NewsRecyclerAdapter(private val imageModelArrayList: MutableList<NewsArtic
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var imgView = itemView.findViewById<View>(R.id.news_image) as ImageView
-        var newsHeadline = itemView.findViewById<View>(R.id.news_headline) as TextView
         var publisherIcon = itemView.findViewById<View>(R.id.publisher_icon) as ImageView
+
+        var newsHeadline = itemView.findViewById<View>(R.id.news_headline) as TextView
+        var category = itemView.findViewById<View>(R.id.topic_text) as TextView
+        var datePosted = itemView.findViewById<View>(R.id.date_posted) as TextView
+
     }
 
     override fun getItemCount(): Int {
@@ -28,8 +32,12 @@ class NewsRecyclerAdapter(private val imageModelArrayList: MutableList<NewsArtic
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = imageModelArrayList[position]
         holder.imgView.setImageResource(info.getImages())
-        holder.newsHeadline.text = info.getHeadline()
         holder.publisherIcon.setImageResource(info.getPublisherIcon())
+
+        holder.newsHeadline.text = info.getHeadline()
+        holder.category.text = info.getCategory()
+        holder.datePosted.text = info.getArticleDate()
+
     }
 
 
