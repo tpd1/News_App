@@ -18,7 +18,7 @@
     <string name="news_topics">News Topics</string>
     <string name="topic_title">Topic Title</string>
 
-<!--    News Categories-->
+    <!--    News Categories-->
     <string name="category_business">Business</string>
     <string name="category_entertainment">Entertainment</string>
     <string name="category_general">General</string>
@@ -41,5 +41,7 @@
     <string name="tick_box_description">Tick box</string>
     <string name="topic_category">Topic Category</string>
     <string name="article_date">Article Date</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

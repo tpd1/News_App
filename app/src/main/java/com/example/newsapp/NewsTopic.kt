@@ -1,22 +1,3 @@
 package com.example.newsapp
 
-class NewsTopic {
-    private var modelName: String? = null
-    private var modelImage: Int = 0
-
-    fun getNames():String {
-        return modelName.toString()
-    }
-
-    fun setNames(name: String) {
-        this.modelName = name
-    }
-
-    fun getImages(): Int {
-        return modelImage
-    }
-
-    fun setImages(image_drawable: Int) {
-        this.modelImage = image_drawable
-    }
-}
+data class NewsTopic(var modelName: String? = null, var modelImage: Int = 0)

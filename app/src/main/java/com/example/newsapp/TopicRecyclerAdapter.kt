@@ -27,8 +27,8 @@ class TopicRecyclerAdapter(private val imageModelArrayList: MutableList<NewsTopi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = imageModelArrayList[position]
-        holder.imgView.setImageResource(info.getImages())
-        holder.categoryTitle.text = info.getNames()
+        holder.imgView.setImageResource(info.modelImage)
+        holder.categoryTitle.text = info.modelName
     }
 
 

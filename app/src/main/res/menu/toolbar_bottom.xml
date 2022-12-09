@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/news"
+        android:id="@+id/newsFragment"
         android:enabled="true"
         android:icon="@drawable/top_stories_icon"
         android:title="@string/news" />
 
     <item
-        android:id="@+id/weather"
+        android:id="@+id/weatherFragment"
         android:enabled="true"
         android:icon="@drawable/sun_icon"
         android:title="@string/weather" />
 
     <item
-        android:id="@+id/read_list"
+        android:id="@+id/bookmarksFragment"
         android:enabled="true"
         android:icon="@drawable/to_read_icon"
         android:title="@string/bookmarks" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/profile_icon"
         android:title="@string/profile" />

@@ -35,12 +35,11 @@ class NewsFeedTest: AppCompatActivity() {
 
         for (i in 0..2) {
             val imageModel = NewsArticle()
-            imageModel.setHeadline(myImageNameList[i])
-            imageModel.setCategory(myCategoryList[i])
-            imageModel.setArticleDate(myDateList[i])
-
-            imageModel.setPublisherIcon(publisherIcon[i])
-            imageModel.setImages(myImageList[i])
+            imageModel.headline = myImageNameList[i]
+            imageModel.category = myCategoryList[i]
+            imageModel.articleDate = myDateList[i]
+            imageModel.publisherIcon = publisherIcon[i]
+            imageModel.modelImage = myImageList[i]
             list.add(imageModel)
         }
         return list

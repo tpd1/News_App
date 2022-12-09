@@ -31,12 +31,12 @@ class NewsRecyclerAdapter(private val imageModelArrayList: MutableList<NewsArtic
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = imageModelArrayList[position]
-        holder.imgView.setImageResource(info.getImages())
-        holder.publisherIcon.setImageResource(info.getPublisherIcon())
+        holder.imgView.setImageResource(info.modelImage)
+        holder.publisherIcon.setImageResource(info.publisherIcon)
 
-        holder.newsHeadline.text = info.getHeadline()
-        holder.category.text = info.getCategory()
-        holder.datePosted.text = info.getArticleDate()
+        holder.newsHeadline.text = info.headline
+        holder.category.text = info.category
+        holder.datePosted.text = info.articleDate
 
     }
 
