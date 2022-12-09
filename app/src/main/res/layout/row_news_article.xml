@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@color/md_theme_light_secondary"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:ignore="ImageContrastCheck" />
 
             <!--            Nested vertical LinearLayout for headline-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -80,7 +81,8 @@
                     android:adjustViewBounds="true"
                     android:backgroundTint="@color/md_theme_light_primary"
                     android:scaleType="centerInside"
-                    android:src="@drawable/logo_placeholder" />
+                    android:src="@drawable/logo_placeholder"
+                    tools:ignore="ImageContrastCheck" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/date_posted"
@@ -105,6 +107,7 @@
                         android:layout_marginEnd="@dimen/margin_small"
                         android:background="@color/md_theme_light_surface"
                         android:scaleType="centerInside"
+                        android:contentDescription="@string/bookmarks"
                         android:src="@drawable/add_bookmark" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -114,6 +117,7 @@
                         android:layout_marginEnd="@dimen/margin_small"
                         android:background="@color/md_theme_light_surface"
                         android:scaleType="centerInside"
+                        android:contentDescription="@string/share_button"
                         android:src="@drawable/ic_baseline_share_24" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

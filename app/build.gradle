@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 
@@ -37,6 +37,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
 }
 
 dependencies {
@@ -54,5 +56,8 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.fragment:fragment-ktx:1.5.5"
+
+    // Shimmer effect when loading recyclerview items
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 }

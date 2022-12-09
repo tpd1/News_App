@@ -5,7 +5,6 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="top_stories">Top Stories</string>
-    <string name="read_list">Read list</string>
     <string name="news">News</string>
     <string name="weather">Weather</string>
     <string name="my_profile">My Profile</string>
@@ -37,19 +36,13 @@
     <string name="most_read">Most Read</string>
     <string name="news_content">News Content</string>
     <string name="news_headline">News Headline</string>
-    <string name="image_description_topic">Image descriping topic</string>
+    <string name="image_description_topic">Image description topic</string>
     <string name="tick_box_description">Tick box</string>
     <string name="topic_category">Topic Category</string>
     <string name="article_date">Article Date</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_news_topics_text">Select News Topics</string>
-    <string name="entertainment_tick_box">Entertainment tick box</string>
-    <string name="health_tick_box">Health tick box</string>
-    <string name="general_tick_box">General tick box</string>
-    <string name="sports_tick_box">Sports tick box</string>
-    <string name="science_tick_box">Science tick box</string>
-    <string name="technology_tick_box">Technology tick box</string>
+
+    <!--    Topic toggle switch Descriptions-->
     <string name="business_topic_switch">Business Topic Switch</string>
     <string name="entertainment_topic_switch">Entertainment topic switch</string>
     <string name="general_topic_switch">General topic switch</string>
@@ -57,5 +50,6 @@
     <string name="science_topic_switch">Science topic switch</string>
     <string name="sports_topic_switch">Sports topic switch</string>
     <string name="technology_topic_switch">Technology topic switch</string>
+    <string name="share_button">Share</string>
 
 </resources>
