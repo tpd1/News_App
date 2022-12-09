@@ -50,5 +50,12 @@
     <string name="sports_tick_box">Sports tick box</string>
     <string name="science_tick_box">Science tick box</string>
     <string name="technology_tick_box">Technology tick box</string>
+    <string name="business_topic_switch">Business Topic Switch</string>
+    <string name="entertainment_topic_switch">Entertainment topic switch</string>
+    <string name="general_topic_switch">General topic switch</string>
+    <string name="health_topic_switch">Health topic switch</string>
+    <string name="science_topic_switch">Science topic switch</string>
+    <string name="sports_topic_switch">Sports topic switch</string>
+    <string name="technology_topic_switch">Technology topic switch</string>
 
 </resources>

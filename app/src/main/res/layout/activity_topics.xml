@@ -47,396 +47,362 @@
     <!--    Design change from coursework 1. Decided to hard-code topics rather than use recyclerView
  to simplify the design. The topics available aren't likely to change frequently-->
 
-    <!--    Topic 1: Business -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/business_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/topics_selected">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/business_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/business"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/business_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_business"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/business_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/business_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/business_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <!--    Topic 1: Business -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/business_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/entertainment_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 2: Entertainment -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/entertainment_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/business_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/entertainment_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/entertainment"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/topics_selected">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/entertainment_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_entertainment"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/entertainment_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/entertainment_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/entertainment_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/business_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/business"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/business_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_business"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/business_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/business_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/business_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/business_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 2: Entertainment -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/entertainment_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/general_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 3: General -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/general_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entertainment_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/general_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/general"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/business_topic_card_view">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/general_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_general"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/general_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/general_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/general_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/entertainment_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/entertainment"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/entertainment_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_entertainment"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/entertainment_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/entertainment_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/entertainment_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/entertainment_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 3: General -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/general_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/health_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 4: Health -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/health_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/general_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/health_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/health"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/entertainment_topic_card_view">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/health_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_health"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/health_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/health_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/health_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/general_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/general"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/general_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_general"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/general_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/general_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/general_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/general_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 4: Health -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/health_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/science_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 5: Science -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/science_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/health_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/science_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/science"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/general_topic_card_view">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/science_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_science"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/science_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/science_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/science_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/health_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/health"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/health_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_health"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/health_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/health_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/health_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/health_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 5: Science -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/science_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/sports_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 6: Sports -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/sports_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/science_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/sports_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/sports"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/health_topic_card_view">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/sports_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_sports"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/sports_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/sports_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/sports_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/science_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/science"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/science_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_science"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/science_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/science_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/science_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/science_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 6: Sports -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sports_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/technology_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--    Topic 7: Technology -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/technology_topic_card_view"
-        style="@style/topic_select_card_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sports_topic_card_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/technology_topic_image"
-                style="@style/topic_row_imageview"
-                android:background="@drawable/technology"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/science_topic_card_view">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/technology_topic_text"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/category_technology"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/technology_topic_button"
-                app:layout_constraintStart_toEndOf="@+id/technology_topic_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/technology_topic_button"
-                style="?attr/materialIconButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/tick_box_description"
-                android:src="@drawable/tick_box"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/sports_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/sports"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sports_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_sports"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/sports_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/sports_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/sports_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/sports_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 7: Technology -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/technology_topic_card_view"
+                style="@style/topic_select_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sports_topic_card_view">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/technology_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/technology"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/technology_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/category_technology"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/technology_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/technology_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    &lt;!&ndash;    Topic 7: Technology &ndash;&gt;-->
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/technology_constraint_layout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="@dimen/topic_row_height"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/sports_constraint_layout">-->
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/technology_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/technology_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:id="@+id/technology_topic_card_view"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="@dimen/topic_card_margin"-->
-    <!--            app:cardBackgroundColor="@color/md_theme_light_surface" />-->
-
-    <!--        <androidx.appcompat.widget.AppCompatImageView-->
-    <!--            android:id="@+id/technology_topic_image"-->
-    <!--            style="@style/topic_row_imageview"-->
-    <!--            android:background="@drawable/technology"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="@+id/technology_topic_card_view"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/technology_topic_text" />-->
-
-    <!--        <androidx.appcompat.widget.AppCompatTextView-->
-    <!--            android:id="@+id/technology_topic_text"-->
-    <!--            style="@style/TextAppearance.MaterialComponents.Headline6"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:gravity="center_vertical"-->
-    <!--            android:text="@string/category_technology"-->
-    <!--            android:textSize="18sp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toStartOf="@+id/technology_topic_button"-->
-    <!--            app:layout_constraintStart_toEndOf="@+id/technology_topic_image"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/technology_topic_card_view" />-->
-
-    <!--        <androidx.appcompat.widget.AppCompatImageButton-->
-    <!--            android:id="@+id/technology_topic_button"-->
-    <!--            style="?attr/materialIconButtonStyle"-->
-    <!--            android:layout_width="70dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_marginEnd="16dp"-->
-    <!--            android:contentDescription="@string/technology_tick_box"-->
-    <!--            android:src="@drawable/tick_box"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" />-->
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
