@@ -11,15 +11,21 @@
         <item name="android:clickable">true</item>
     </style>
 
-    <style name="category_row_card">
+    <style name="topic_select_card_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/topic_row_height</item>
+        <item name="android:layout_margin">@dimen/topic_card_margin</item>
+        <item name="cardBackgroundColor">@color/md_theme_light_surface</item>
+    </style>
+
+    <style name="topic_row_imageview">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">6dp</item>
-        <item name="android:layout_marginStart">20dp</item>
-        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:layout_margin">7dp</item>
         <item name="strokeWidth">1dp</item>
-
     </style>
+
+
 
     <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/roboto</item>
