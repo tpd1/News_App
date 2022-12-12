@@ -51,5 +51,6 @@
     <string name="sports_topic_switch">Sports topic switch</string>
     <string name="technology_topic_switch">Technology topic switch</string>
     <string name="share_button">Share</string>
+    <string name="manage_account">Manage Account</string>
 
 </resources>

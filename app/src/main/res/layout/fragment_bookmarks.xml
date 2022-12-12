@@ -6,28 +6,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.BookmarksFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/bookmarksAppBarLayout"
-        android:layout_width="match_parent"
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/bookmarksAppBarLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:liftOnScroll="true">-->
+
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:id="@+id/bookmarks_top_nav_bar"-->
+<!--            style="@style/Widget.MaterialComponents.Toolbar.Primary"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/top_appbar_height"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:menu="@menu/toolbar_bookmarks_top"-->
+<!--            app:navigationIcon="@drawable/up_icon"-->
+<!--            app:title="@string/bookmarks"-->
+<!--            app:titleCentered="true" />-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Bookmarks Fragment"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:liftOnScroll="true">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/bookmarks_top_nav_bar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/top_appbar_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/toolbar_bookmarks_top"
-            app:navigationIcon="@drawable/up_icon"
-            app:title="@string/bookmarks"
-            app:titleCentered="true" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

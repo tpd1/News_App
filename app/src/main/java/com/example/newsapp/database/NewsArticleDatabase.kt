@@ -16,13 +16,13 @@ import com.example.newsapp.model.Article
  */
 @TypeConverters(SourceConverter::class)
 @Database(entities = [Article::class], version = 1)
-abstract class ArticleDB : RoomDatabase() {
+abstract class NewsArticleDatabase : RoomDatabase() {
 
     abstract fun articleDao(): ArticleDBDao
     // To create the database
     companion object {
         @Volatile
-        private var dbInstance: ArticleDB? = null
+        private var dbInstance: NewsArticleDatabase? = null
 
         // Called whenever we create a database.
         // If database is null, call createDB function.
@@ -31,7 +31,7 @@ abstract class ArticleDB : RoomDatabase() {
         }
 
         private fun createDB(context: Context) =
-            Room.databaseBuilder(context.applicationContext, ArticleDB::class.java, NEWS_DATABASE_NAME)
+            Room.databaseBuilder(context.applicationContext, NewsArticleDatabase::class.java, NEWS_DATABASE_NAME)
                 .build()
     }
 

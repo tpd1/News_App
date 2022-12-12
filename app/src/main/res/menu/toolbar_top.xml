@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/search_button"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search"/>
+<!--    <item-->
+<!--        android:id="@+id/search_button"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        android:title="@string/search"/>-->
 
     <item
         android:id="@+id/notifications"
@@ -14,18 +14,18 @@
         android:title="@string/notifications"/>
 
     <item
-        android:id="@+id/app_settings"
+        android:id="@+id/appSettingsFragment"
         android:title="@string/app_settings"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/acc_settings"
+        android:id="@+id/manageAccountFragment"
         android:title="@string/my_account"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/logout"
-        app:showAsAction="never"
-        android:title="@string/logout"/>
+<!--    <item-->
+<!--        android:id="@+id/logout"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="@string/logout"/>-->
 
 </menu>

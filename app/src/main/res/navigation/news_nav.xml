@@ -8,34 +8,63 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.newsapp.ui.NewsFragment"
-        android:label="fragment_news"
-        tools:layout="@layout/fragment_news_feed" >
+        android:label="@string/news"
+        tools:layout="@layout/fragment_news" >
         <action
             android:id="@+id/action_newsFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.newsapp.ui.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_topicSelectFragment"
+            app:destination="@id/topicSelectFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/weatherFragment"
         android:name="com.example.newsapp.ui.WeatherFragment"
-        android:label="fragment_weather"
+        android:label="@string/weather"
         tools:layout="@layout/fragment_weather" />
+
     <fragment
         android:id="@+id/bookmarksFragment"
         android:name="com.example.newsapp.ui.BookmarksFragment"
-        android:label="fragment_bookmarks"
+        android:label="@string/bookmarks"
         tools:layout="@layout/fragment_bookmarks" >
         <action
             android:id="@+id/action_bookmarksFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.example.newsapp.ui.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" />
+
+    <fragment
+        android:id="@+id/topicSelectFragment"
+        android:name="com.example.newsapp.ui.TopicSelectFragment"
+        android:label="@string/choose_topics"
+        tools:layout="@layout/fragment_topic_select" >
+        <action
+            android:id="@+id/action_topicSelectFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appSettingsFragment"
+        android:name="com.example.newsapp.ui.AppSettingsFragment"
+        android:label="@string/app_settings"
+        tools:layout="@layout/fragment_app_settings" />
+    <fragment
+        android:id="@+id/manageAccountFragment"
+        android:name="com.example.newsapp.ui.ManageAccountFragment"
+        android:label="@string/manage_account"
+        tools:layout="@layout/fragment_manage_account" />
+
 </navigation>

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.newsapp.R
 
-class WeatherFragment : Fragment() {
+class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
