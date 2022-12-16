@@ -1,41 +1,63 @@
 package com.example.newsapp
 
-import android.util.Property
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.ListAdapter
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.newsapp.databinding.RowNewsArticleBinding
-import com.example.newsapp.model.Article
-import com.squareup.picasso.Picasso
+import com.example.newsapp.model.NewsArticle
+//import com.example.newsapp.model.Article
 
-class NewsAdapter : ListAdapter<Article, NewsAdapter.ViewHolder>(NewsArticleDiffUtil()) {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
-    // Holds each row in recyclerview
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentArticle = getItem(position)
-        holder.bind(currentArticle)
+    private var articles = mutableListOf<NewsArticle>()
+
+    fun setList(list: MutableList<NewsArticle>) {
+        this.articles = list
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
+    //Holds each row in recyclerview
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentArticle = articles[position]
+        holder.bind(currentArticle)
+    }
+
+    fun setData(data: MutableList<NewsArticle>) {
+        this.articles = data
+        notifyDataSetChanged()
+    }
+
 
     //Use view binding to row_news_article
-    class ViewHolder(val binding: RowNewsArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: RowNewsArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(article: Article) {
-            binding.article = article
+        fun bind(article: NewsArticle) {
+            binding.newsRowCardView.apply {
+                Log.i("Url: ", article.imageUrl.toString())
+                Glide.with(this)
+                    .load(article.imageUrl)
+                    .centerCrop()
+                    //.error(R.drawable.settings_icon)
+                    .into(binding.newsImage)
+
+            }
+            binding.newsHeadline.text = article.title
+            binding.publisherIcon.text = article.sourceID
+            binding.datePosted.text = article.pubDate
+
             binding.executePendingBindings()
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup): ViewHolder { //parent is RecyclerView
                 val inflater = LayoutInflater.from(parent.context)
                 val binding = RowNewsArticleBinding.inflate(inflater, parent, false)
                 return ViewHolder(binding)
@@ -43,18 +65,21 @@ class NewsAdapter : ListAdapter<Article, NewsAdapter.ViewHolder>(NewsArticleDiff
         }
 
     }
+
+    override fun getItemCount(): Int {
+        return articles.size
+    }
 }
 
 
+//Diff Util Class
+private class NewsArticleDiffUtil : DiffUtil.ItemCallback<NewsArticle>() {
 
-// Diff Util Class
-private class NewsArticleDiffUtil : DiffUtil.ItemCallback<Article>() {
-
-    override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-        return oldItem.articleID == newItem.articleID
+    override fun areItemsTheSame(oldItem: NewsArticle, newItem: NewsArticle): Boolean {
+        return oldItem.title == newItem.title
     }
 
-    override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+    override fun areContentsTheSame(oldItem: NewsArticle, newItem: NewsArticle): Boolean {
         return oldItem == newItem
     }
 

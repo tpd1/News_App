@@ -11,7 +11,7 @@
     <data>
         <variable
             name="article"
-            type="com.example.newsapp.model.Article" />
+            type="com.example.newsapp.model.NewsArticle" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -67,7 +67,7 @@
                         android:layout_height="100dp"
                         android:padding="@dimen/margin_small"
 
-                        android:text="@{article.title}" />
+                        android:text="@string/topic_title" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -82,16 +82,18 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/publisher_icon"
+                        style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
+                        android:gravity="center"
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginBottom="0dp"
                         android:adjustViewBounds="true"
+                        tools:text="Test"
                         android:backgroundTint="@color/md_theme_light_primary"
                         android:scaleType="centerInside"
-                        android:src="@drawable/logo_placeholder"
                         tools:ignore="ImageContrastCheck" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -101,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="@dimen/margin_small"
-                        android:text="@{article.publishedAt}" />
+                        android:text="published at" />
 
                     <!--            Nested horizontal LinearLayout for buttons-->
                     <androidx.appcompat.widget.LinearLayoutCompat

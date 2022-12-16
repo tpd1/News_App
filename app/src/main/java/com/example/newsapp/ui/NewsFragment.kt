@@ -2,63 +2,45 @@ package com.example.newsapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.example.newsapp.Constants
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.NewsAdapter
-import androidx.databinding.DataBindingUtil
 import com.example.newsapp.R
-import com.example.newsapp.model.APIHandler
 import com.example.newsapp.databinding.FragmentNewsBinding
-import com.example.newsapp.model.Article
-import com.squareup.picasso.Picasso
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.newsapp.model.NewsArticle
+import com.example.newsapp.model.ArticleViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsFragment : Fragment(R.layout.fragment_news) {
-    lateinit var adapter: NewsAdapter
-    lateinit var model: Article
+    private lateinit var newsViewModel : ArticleViewModel
+    private lateinit var newsfeedBinding: FragmentNewsBinding
+    private val adapter = NewsAdapter()
 
-    private var newsfeedBinding: FragmentNewsBinding? = null
+    // View is passed from Fragment constructor because we defined it there.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentNewsBinding.inflate(inflater, container, false)
-        newsfeedBinding = binding
-        return binding.root
-    }
+        newsfeedBinding = FragmentNewsBinding.bind(view)
+        newsfeedBinding.lifecycleOwner = this
 
-
-    private fun initiateAPIRequest() {
-        val api = Retrofit.Builder()
-            .baseUrl(Constants.ROOT_API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(APIHandler::class.java)
-
-    }
-
-    private fun initiateRecyclerView() {
+        newsViewModel = ViewModelProvider(requireActivity())[ArticleViewModel::class.java]
+        newsfeedBinding.newsRecyclerView.adapter = adapter
+        newsfeedBinding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
+        getTopNews()
 
-    }
-
-    companion object {
-        @BindingAdapter("fetchImgFromUrl")
-        fun fetchImgFromUrl(imgView: ImageView, url: String) {
-            Picasso
-                .get()
-                .load(url)
-                .into(imgView)
         }
 
 
+    private fun getTopNews() {
+        newsViewModel.getLatestNews()
+        newsViewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
+            response.results.let { adapter.setData(it as MutableList<NewsArticle>) }
+        }
     }
+
+
 }

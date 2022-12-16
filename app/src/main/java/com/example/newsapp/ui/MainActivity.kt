@@ -16,8 +16,9 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -38,15 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(topAppBar)
         topAppBar.setupWithNavController(navController)
-
-
-//        //Set up top menu bar
-//        findViewById<MaterialToolbar>(R.id.top_nav_bar)
-//            .setupWithNavController(navController)
-
-
-
-
 
 
         // Set up bottom navigation bar
