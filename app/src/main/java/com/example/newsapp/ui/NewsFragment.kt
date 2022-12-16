@@ -3,16 +3,12 @@ package com.example.newsapp.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.NewsAdapter
+import com.example.newsapp.model.NewsAdapter
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsBinding
 import com.example.newsapp.model.NewsArticle
 import com.example.newsapp.model.ArticleViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class NewsFragment : Fragment(R.layout.fragment_news) {
     private lateinit var newsViewModel : ArticleViewModel
     private lateinit var newsfeedBinding: FragmentNewsBinding
@@ -25,12 +21,12 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         newsfeedBinding = FragmentNewsBinding.bind(view)
         newsfeedBinding.lifecycleOwner = this
 
-        newsViewModel = ViewModelProvider(requireActivity())[ArticleViewModel::class.java]
-        newsfeedBinding.newsRecyclerView.adapter = adapter
-        newsfeedBinding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-
-        getTopNews()
+//        newsViewModel = ViewModelProvider(requireActivity())[ArticleViewModel::class.java]
+//        newsfeedBinding.newsRecyclerView.adapter = adapter
+//        newsfeedBinding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//
+//
+//        getTopNews()
 
         }
 
@@ -38,7 +34,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun getTopNews() {
         newsViewModel.getLatestNews()
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
-            response.results.let { adapter.setData(it as MutableList<NewsArticle>) }
+            response.results.let { adapter.setList(it as MutableList<NewsArticle>) }
         }
     }
 

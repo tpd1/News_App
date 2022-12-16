@@ -27,6 +27,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(action)
         }
 
+        profileBinding!!.manageAccountCard.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToManageAccountFragment()
+            findNavController().navigate(action)
+        }
+
+        profileBinding!!.appSettingsCard.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToAppSettingsFragment()
+            findNavController().navigate(action)
+        }
+
+        profileBinding!!.bookmarksCard.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToBookmarksFragment()
+            findNavController().navigate(action)
+        }
+
         return binding.root
     }
 

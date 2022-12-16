@@ -1,4 +1,4 @@
-package com.example.newsapp
+package com.example.newsapp.model
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.newsapp.R
 import com.example.newsapp.databinding.RowNewsArticleBinding
-import com.example.newsapp.model.NewsArticle
-//import com.example.newsapp.model.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
@@ -29,12 +28,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         holder.bind(currentArticle)
     }
 
-    fun setData(data: MutableList<NewsArticle>) {
-        this.articles = data
-        notifyDataSetChanged()
-    }
-
-
     //Use view binding to row_news_article
     class ViewHolder(private val binding: RowNewsArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -45,7 +38,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
                 Glide.with(this)
                     .load(article.imageUrl)
                     .centerCrop()
-                    //.error(R.drawable.settings_icon)
+                    .error(R.drawable.settings_icon)
                     .into(binding.newsImage)
 
             }

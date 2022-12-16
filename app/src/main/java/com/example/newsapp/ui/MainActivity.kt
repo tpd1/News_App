@@ -16,9 +16,8 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -45,8 +44,9 @@ class MainActivity : AppCompatActivity() {
         AppBarConfiguration(
             setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
         )
-        findViewById<BottomNavigationView>(R.id.bottomNavView)
-        .setupWithNavController(navController)
+        mainBinding.bottomNavView.setupWithNavController(navController)
+        //findViewById<BottomNavigationView>(R.id.bottomNavView)
+
 
 //        val topAppBar: MaterialToolbar = mainBinding.topNavBar
 //        topAppBar.setOnMenuItemClickListener { menuItem ->

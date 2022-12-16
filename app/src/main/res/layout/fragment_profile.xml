@@ -136,7 +136,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/account_settings_card"
+                android:id="@+id/manage_account_card"
                 style="@style/dashboard_card_view">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -163,7 +163,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/app_settings"
+                android:id="@+id/app_settings_card"
                 style="@style/dashboard_card_view">
 
                 <androidx.appcompat.widget.LinearLayoutCompat

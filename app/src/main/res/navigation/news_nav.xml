@@ -23,6 +23,15 @@
         <action
             android:id="@+id/action_profileFragment_to_topicSelectFragment"
             app:destination="@id/topicSelectFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_appSettingsFragment"
+            app:destination="@id/appSettingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_manageAccountFragment"
+            app:destination="@id/manageAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_bookmarksFragment"
+            app:destination="@id/bookmarksFragment" />
     </fragment>
 
     <fragment
@@ -60,11 +69,19 @@
         android:id="@+id/appSettingsFragment"
         android:name="com.example.newsapp.ui.AppSettingsFragment"
         android:label="@string/app_settings"
-        tools:layout="@layout/fragment_app_settings" />
+        tools:layout="@layout/fragment_app_settings" >
+        <action
+            android:id="@+id/action_appSettingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/manageAccountFragment"
         android:name="com.example.newsapp.ui.ManageAccountFragment"
         android:label="@string/manage_account"
-        tools:layout="@layout/fragment_manage_account" />
+        tools:layout="@layout/fragment_manage_account" >
+        <action
+            android:id="@+id/action_manageAccountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>
