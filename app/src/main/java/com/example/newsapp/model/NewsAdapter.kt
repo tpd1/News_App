@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
 import com.example.newsapp.databinding.RowNewsArticleBinding
+import java.util.*
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
@@ -42,12 +43,14 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
                     .into(binding.newsImage)
 
             }
+            binding.topicText.text = article.category[0].replaceFirstChar { it.uppercase() }
             binding.newsHeadline.text = article.title
-            binding.publisherIcon.text = article.sourceID
+            binding.sourceText.text = article.sourceID.replaceFirstChar { it.uppercase() }
             binding.datePosted.text = article.pubDate
 
             binding.executePendingBindings()
         }
+
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder { //parent is RecyclerView

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 //Inject repository into viewModel
 
-class ArticleViewModel constructor(
+class ArticleViewModel (
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 
@@ -19,7 +19,7 @@ class ArticleViewModel constructor(
     var newsLiveData = MutableLiveData<APIResponse>()
 
     fun getLatestNews() = viewModelScope.launch {
-        //newsLiveData.value = articleRepository.getLatestNews()
+        newsLiveData.value = articleRepository.getLatestNews()
     }
 
 

@@ -6,9 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-class RemoteNewsSource constructor(
-    private val newsAPIHandler: NewsApiService
-) {
+class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
 
     suspend fun getLatestNews(): APIResponse = newsAPIHandler.getLatestNews()
 

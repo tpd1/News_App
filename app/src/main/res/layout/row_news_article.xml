@@ -83,8 +83,8 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/publisher_icon"
-                        style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+                        android:id="@+id/source_text"
+                        style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:gravity="center"

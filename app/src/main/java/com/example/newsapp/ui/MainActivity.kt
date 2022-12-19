@@ -1,27 +1,38 @@
 package com.example.newsapp.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
+import androidx.activity.viewModels
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
+import com.example.newsapp.UtilsContainer
+import com.example.newsapp.data.DataStoreRepo
 import com.example.newsapp.databinding.ActivityMainBinding
+import com.example.newsapp.model.ArticleViewModel
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
+// Main activity that sets up the view model for the news fragment to use, along with a shared
+// article repository and database.
 class MainActivity : AppCompatActivity() {
+    val dataRepo = DataStoreRepo(this)
 
     private lateinit var navController: NavController
     private lateinit var mainBinding: ActivityMainBinding
+    // Utils container creates one instance of dependencies for other classes across app.
+    val utilsContainer = UtilsContainer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         val topAppBar: MaterialToolbar = mainBinding.topNavBar
-
         setSupportActionBar(topAppBar)
         topAppBar.setupWithNavController(navController)
 
@@ -45,27 +55,6 @@ class MainActivity : AppCompatActivity() {
             setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
         )
         mainBinding.bottomNavView.setupWithNavController(navController)
-        //findViewById<BottomNavigationView>(R.id.bottomNavView)
-
-
-//        val topAppBar: MaterialToolbar = mainBinding.topNavBar
-//        topAppBar.setOnMenuItemClickListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id. -> {
-//                    // Handle edit text press
-//                    true
-//                }
-//                R.id.favorite -> {
-//                    // Handle favorite icon press
-//                    true
-//                }
-//                R.id.more -> {
-//                    // Handle more item (inside overflow menu) press
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
 
     }
 
