@@ -20,10 +20,12 @@
     <!--    News Categories-->
     <string name="category_business">Business</string>
     <string name="category_entertainment">Entertainment</string>
-    <string name="category_general">General</string>
+    <string name="environment">Environment</string>
     <string name="category_health">Health</string>
     <string name="category_science">Science</string>
     <string name="category_sports">Sports</string>
+    <string name="food">Food</string>
+    <string name="politics">Politics</string>
     <string name="category_technology">Technology</string>
     <string name="select_topics">Select Topics Below</string>
     <string name="most_popular">Most Popular</string>
@@ -52,5 +54,8 @@
     <string name="technology_topic_switch">Technology topic switch</string>
     <string name="share_button">Share</string>
     <string name="manage_account">Manage Account</string>
+
+    <string name="food_topic_switch">Food topic switch</string>
+
 
 </resources>

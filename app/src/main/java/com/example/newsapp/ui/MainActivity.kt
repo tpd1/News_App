@@ -26,11 +26,14 @@ import com.google.android.material.appbar.MaterialToolbar
 
 // Main activity that sets up the view model for the news fragment to use, along with a shared
 // article repository and database.
+
 class MainActivity : AppCompatActivity() {
-    val dataRepo = DataStoreRepo(this)
+    // Create class to handle storing and loading of user settings (e.g. topic selection)
+    lateinit var dataStoreRepo: DataStoreRepo
 
     private lateinit var navController: NavController
     private lateinit var mainBinding: ActivityMainBinding
+
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
 
@@ -45,16 +48,19 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
         navController = navHostFragment.findNavController()
 
+        // Set up bottom navigation bar
         val topAppBar: MaterialToolbar = mainBinding.topNavBar
         setSupportActionBar(topAppBar)
         topAppBar.setupWithNavController(navController)
 
 
-        // Set up bottom navigation bar
+
         AppBarConfiguration(
             setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
         )
         mainBinding.bottomNavView.setupWithNavController(navController)
+
+        dataStoreRepo = DataStoreRepo(this)
 
     }
 

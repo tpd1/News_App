@@ -29,7 +29,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         val repo = (activity as MainActivity).utilsContainer.newsRepo
         newsViewModel = ArticleViewModel(repo)
 
-        getTopNews()
+        //getTopNews()
 
         }
 

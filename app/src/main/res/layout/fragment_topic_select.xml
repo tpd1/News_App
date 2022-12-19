@@ -164,10 +164,10 @@
 
             <!--    Topic 3: General -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/general_topic_card_view"
+                android:id="@+id/environment_topic_card_view"
                 style="@style/topic_select_card_view"
                 android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/health_topic_card_view"
+                app:layout_constraintBottom_toTopOf="@+id/food_topic_card_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/entertainment_topic_card_view">
@@ -177,28 +177,28 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/general_topic_image"
+                        android:id="@+id/environment_topic_image"
                         style="@style/topic_row_imageview"
-                        android:background="@drawable/general"
+                        android:background="@drawable/environment"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/general_topic_text"
+                        android:id="@+id/environment_topic_text"
                         style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/category_general"
+                        android:text="@string/environment"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/general_topic_switch"
-                        app:layout_constraintStart_toEndOf="@+id/general_topic_image"
+                        app:layout_constraintEnd_toStartOf="@+id/environment_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/environment_topic_image"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/general_topic_switch"
+                        android:id="@+id/environment_topic_switch"
                         style="?attr/materialIconButtonStyle"
                         android:layout_width="70dp"
                         android:layout_height="match_parent"
@@ -211,7 +211,56 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!--    Topic 4: Health -->
+            <!--    Topic 4: Food -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/food_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/health_topic_card_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/entertainment_topic_card_view">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/food_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/food"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/food_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/food"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/food_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/food_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/food_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/food_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 5: Health -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/health_topic_card_view"
                 style="@style/topic_select_card_view"
@@ -254,6 +303,55 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="16dp"
                         android:contentDescription="@string/health_topic_switch"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--    Topic 6: Politics -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/politics_topic_card_view"
+                style="@style/topic_select_card_view"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/science_topic_card_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/health_topic_card_view">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/politics_topic_image"
+                        style="@style/topic_row_imageview"
+                        android:background="@drawable/politics"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/politics_topic_text"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/politics"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/politics_topic_switch"
+                        app:layout_constraintStart_toEndOf="@+id/politics_topic_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/politics_topic_switch"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@string/science_topic_switch"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
