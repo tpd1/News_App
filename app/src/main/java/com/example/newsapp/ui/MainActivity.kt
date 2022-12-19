@@ -1,15 +1,9 @@
 package com.example.newsapp.ui
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -20,7 +14,7 @@ import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
 import com.example.newsapp.databinding.ActivityMainBinding
-import com.example.newsapp.model.ArticleViewModel
+import com.example.newsapp.model.TopicViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
 
@@ -30,8 +24,12 @@ import com.google.android.material.appbar.MaterialToolbar
 class MainActivity : AppCompatActivity() {
     // Create class to handle storing and loading of user settings (e.g. topic selection)
     lateinit var dataStoreRepo: DataStoreRepo
+    lateinit var topicsViewModel: TopicViewModel
 
+    // NavController for navigation using NavGraph
     private lateinit var navController: NavController
+
+    //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 
     // Utils container creates one instance of dependencies for other classes across app.
@@ -54,13 +52,14 @@ class MainActivity : AppCompatActivity() {
         topAppBar.setupWithNavController(navController)
 
 
-
         AppBarConfiguration(
             setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
         )
         mainBinding.bottomNavView.setupWithNavController(navController)
 
+        // Initialise datastore repository for topics here, as we need the values for the tab layout.
         dataStoreRepo = DataStoreRepo(this)
+        topicsViewModel = TopicViewModel(dataStoreRepo)
 
     }
 

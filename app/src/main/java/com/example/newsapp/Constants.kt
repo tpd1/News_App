@@ -18,6 +18,7 @@ class Constants {
         const val SCIENCE = "science"
         const val SPORTS = "sports"
         const val TECHNOLOGY = "technology"
+        const val TRENDING = "trending"
 
         const val NEWS_DATABASE_NAME = "news_database"
         const val ARTICLE_TABLE = "articles_table"

@@ -1,7 +1,5 @@
 package com.example.newsapp.model
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +18,10 @@ class ArticleViewModel (
 
     fun getLatestNews() = viewModelScope.launch {
         newsLiveData.value = articleRepository.getLatestNews()
+    }
+
+    fun getCategoryNews(topic: String)  = viewModelScope.launch {
+        newsLiveData.value = articleRepository.getCategoryNews(topic)
     }
 
 
