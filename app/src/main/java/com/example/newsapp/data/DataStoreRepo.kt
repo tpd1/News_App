@@ -1,0 +1,138 @@
+package com.example.newsapp.data
+
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
+import com.example.newsapp.Constants
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.PREF_DATASTORE_NAME)
+
+class DataStoreRepo(context: Context) {
+    private val dataStore = context.dataStore // This is the only way i could make it work?
+
+
+    // Keys for the preference datastore representing the topic toggle switches
+    object TopicKeys {
+        val business = booleanPreferencesKey(Constants.BUSINESS)
+        val entertainment = booleanPreferencesKey(Constants.ENTERTAINMENT)
+        val environment = booleanPreferencesKey(Constants.ENVIRONMENT)
+        val food = booleanPreferencesKey(Constants.FOOD)
+        val health = booleanPreferencesKey(Constants.HEALTH)
+        val politics = booleanPreferencesKey(Constants.POLITICS)
+        val science = booleanPreferencesKey(Constants.SCIENCE)
+        val sports = booleanPreferencesKey(Constants.SPORTS)
+        val technology = booleanPreferencesKey(Constants.TECHNOLOGY)
+    }
+
+    val businessEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.business] ?: false
+    }
+
+    val entertainmentEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.entertainment] ?: false
+    }
+
+    val environmentEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.environment] ?: false
+    }
+
+    val foodEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.food] ?: false
+    }
+
+    val healthEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.health] ?: false
+    }
+
+    val politicsEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.politics] ?: false
+    }
+
+    val scienceEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.science] ?: false
+    }
+
+    val sportsEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.sports] ?: false
+    }
+
+    val technologyEnabled: Flow<Boolean> = dataStore.data.map { i ->
+        i[TopicKeys.technology] ?: false
+    }
+
+    // Called when changing a datastore preference (as the user toggles a switch).
+    suspend fun setBusinessEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.business] = enabled
+        }
+    }
+
+    suspend fun setEntertainmentEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.entertainment] = enabled
+        }
+    }
+
+    suspend fun setEnvironmentEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.environment] = enabled
+        }
+    }
+
+    suspend fun setFoodEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.food] = enabled
+        }
+    }
+
+    suspend fun setHealthEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.health] = enabled
+        }
+    }
+
+    suspend fun setPoliticsEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.politics] = enabled
+        }
+    }
+
+    suspend fun setScienceEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.science] = enabled
+        }
+    }
+
+    suspend fun setSportsEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.sports] = enabled
+        }
+    }
+
+    suspend fun setTechnologyEnabled(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.technology] = enabled
+        }
+    }
+
+    // For having a toggle that sets all on or off
+    suspend fun setAllTopics(enabled: Boolean) {
+        dataStore.edit { pref ->
+            pref[TopicKeys.business] = enabled
+            pref[TopicKeys.entertainment] = enabled
+            pref[TopicKeys.environment] = enabled
+            pref[TopicKeys.food] = enabled
+            pref[TopicKeys.health] = enabled
+            pref[TopicKeys.politics] = enabled
+            pref[TopicKeys.science] = enabled
+            pref[TopicKeys.sports] = enabled
+            pref[TopicKeys.technology] = enabled
+        }
+    }
+}
+
