@@ -1,12 +1,18 @@
 package com.example.newsapp.model
 
+import android.util.Log
+import androidx.constraintlayout.widget.ConstraintSet.Transform
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.Constants
 import com.example.newsapp.data.DataStoreRepo
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.HashMap
 
 class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
 
@@ -23,6 +29,7 @@ class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
         Constants.TECHNOLOGY to false,
     )
 
+
     // Linked to
     val businessEnabled: LiveData<Boolean> = dataRepo.businessEnabled.asLiveData()
     val entertainmentEnabled: LiveData<Boolean> = dataRepo.entertainmentEnabled.asLiveData()
@@ -33,6 +40,7 @@ class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     val scienceEnabled: LiveData<Boolean> = dataRepo.scienceEnabled.asLiveData()
     val sportsEnabled: LiveData<Boolean> = dataRepo.sportsEnabled.asLiveData()
     val technologyEnabled: LiveData<Boolean> = dataRepo.technologyEnabled.asLiveData()
+
 
     fun setBusinessEnabled(value: Boolean) {
         topicsList[Constants.BUSINESS] = value
@@ -105,11 +113,9 @@ class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
         }
     }
 
-//    fun printList() {
-//        for ((key, value) in topicsList) {
-//            println("$key = $value")
-//        }
-//    }
+    fun countTopics(): Int {
+        return Collections.frequency(topicsList.values, true)
+    }
 
 
 }
