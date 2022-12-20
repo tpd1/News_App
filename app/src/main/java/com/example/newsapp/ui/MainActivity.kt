@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -23,14 +24,14 @@ import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
     // Create class to handle storing and loading of user settings (e.g. topic selection)
-    lateinit var dataStoreRepo: DataStoreRepo
+    private lateinit var dataStoreRepo: DataStoreRepo
     lateinit var topicsViewModel: TopicViewModel
 
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
 
     //Data binding for this activity
-    private lateinit var mainBinding: ActivityMainBinding
+    lateinit var mainBinding: ActivityMainBinding
 
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
@@ -46,21 +47,34 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        // Set up bottom navigation bar
+        // Set up top app bar
         val topAppBar: MaterialToolbar = mainBinding.topNavBar
         setSupportActionBar(topAppBar)
         topAppBar.setupWithNavController(navController)
 
-
-        AppBarConfiguration(
-            setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
-        )
-        mainBinding.bottomNavView.setupWithNavController(navController)
+        // set up bottom navigation bar:
+        createBottomNavBar()
 
         // Initialise datastore repository for topics here, as we need the values for the tab layout.
         dataStoreRepo = DataStoreRepo(this)
         topicsViewModel = TopicViewModel(dataStoreRepo)
 
+    }
+
+    private fun createBottomNavBar() {
+        AppBarConfiguration(
+            setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
+        )
+        mainBinding.bottomNavView.setupWithNavController(navController)
+
+        // If we load the full screen article view, hide the bottom nav bar for a cleaner look.
+        navController.addOnDestinationChangedListener { _, frag, _ ->
+            if(frag.id == R.id.articleFragment) {
+                mainBinding.bottomNavView.visibility = View.GONE
+            } else {
+                mainBinding.bottomNavView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
     }
 
+    //enable the up button on the nav controller.
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

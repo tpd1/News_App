@@ -1,6 +1,5 @@
 package com.example.newsapp
 
-import com.example.newsapp.data.ArticleRepository
 import com.example.newsapp.data.remote.NewsApiService
 import com.example.newsapp.data.remote.RemoteNewsSource
 import okhttp3.OkHttpClient
@@ -11,13 +10,16 @@ import java.util.concurrent.TimeUnit
 // Container for dependencies used in repository, to ensure they are shared across app.
 class UtilsContainer {
 
+    //Create a GsonConverter - passed to retrofit builder
     private val gsonConverterFactory = GsonConverterFactory.create()
 
+    // use OkHttpClient when creating retrofit instance
     private val httpClient = OkHttpClient.Builder()
         .readTimeout(10, TimeUnit.SECONDS)
         .connectTimeout(15, TimeUnit.SECONDS)
         .build()
 
+    // Create a retrofit instance
     private val retrofitInstance =
         Retrofit.Builder()
             .baseUrl(Constants.ROOT_API_URL)
@@ -25,10 +27,11 @@ class UtilsContainer {
             .addConverterFactory(gsonConverterFactory)
             .build()
 
+    // use created retrofit instance with functions created in NewsApiService class.
     private val api: NewsApiService = retrofitInstance.create(NewsApiService::class.java)
-    private val remoteDataSource = RemoteNewsSource(api)
 
-    // Only accessible variable is the repository (used by the fragment to create a ViewModel)
-    val newsRepo = ArticleRepository(remoteDataSource)
+    // Only this is exposed, needs to be passed to ViewModel
+    val remoteDataSource = RemoteNewsSource(api)
+
 
 }

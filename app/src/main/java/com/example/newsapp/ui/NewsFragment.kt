@@ -3,6 +3,7 @@ package com.example.newsapp.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.Constants
 import com.example.newsapp.model.NewsAdapter
@@ -13,9 +14,9 @@ import com.example.newsapp.model.NewsArticle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 
-class NewsFragment : Fragment(R.layout.fragment_news) {
+class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClickListener {
     private lateinit var newsfeedBinding: FragmentNewsBinding
-    private val adapter = NewsAdapter() // RecyclerView adapter
+    private val adapter = NewsAdapter(this) // RecyclerView adapter
     private lateinit var newsViewModel: ArticleViewModel//Uses delegate class viewModels which preserves across UI configuration changes.
     private lateinit var tabLayout: TabLayout // fetch tablayout XML object
 
@@ -23,15 +24,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Fetch repository instance from container created in Main Activity. Use it to create viewModel
+        val remoteNewsSource = (activity as MainActivity).utilsContainer.remoteDataSource
+        newsViewModel = ArticleViewModel(remoteNewsSource)
+
         // Set up view/data binding
         newsfeedBinding = FragmentNewsBinding.bind(view)
         newsfeedBinding.lifecycleOwner = this
         newsfeedBinding.newsRecyclerView.adapter = adapter
         newsfeedBinding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        // Fetch repository instance from container created in Main Activity. Use it to create viewModel
-        val repo = (activity as MainActivity).utilsContainer.newsRepo
-        newsViewModel = ArticleViewModel(repo)
 
         // Define the tab layout and set it up using helper function
         tabLayout = newsfeedBinding.tabLayout
@@ -40,7 +41,8 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         // Initially load the trending / latest news.
         newsViewModel.getLatestNews()
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
-            response.results.let { adapter.setList(it as MutableList<NewsArticle>) }}
+            response.results.let { adapter.setList(it as MutableList<NewsArticle>) }
+        }
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -58,7 +60,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             override fun onTabUnselected(tab: Tab?) {}
             override fun onTabReselected(tab: Tab?) {}
         })
-
     }
 
     // helper function to create a single tab in the tablayout, capitalising the tab name.
@@ -66,6 +67,11 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         val tab = tabLayout.newTab()
             .setText(topic.replaceFirstChar { it.uppercase() })
         tabLayout.addTab(tab)
+    }
+
+    override fun onArticleClick(article: NewsArticle) {
+        val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(article)
+        findNavController().navigate(action)
     }
 
     // Choose tabs in toolbar based on user selected tabs. Uses a reference to the topicViewModel
@@ -115,5 +121,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             if (it) createTab(Constants.TECHNOLOGY)
         }
     }
+
 
 }

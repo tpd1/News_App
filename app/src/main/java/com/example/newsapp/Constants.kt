@@ -8,7 +8,7 @@ class Constants {
         const val COUNTRY_CODE = "gb"
         const val LANGUAGE = "en"
 
-        const val PREF_DATASTORE_NAME = "settings"
+        // Topics for selection & tab layout
         const val BUSINESS = "business"
         const val ENTERTAINMENT = "entertainment"
         const val ENVIRONMENT = "environment"
@@ -20,17 +20,9 @@ class Constants {
         const val TECHNOLOGY = "technology"
         const val TRENDING = "trending"
 
-        const val NEWS_DATABASE_NAME = "news_database"
+        // Data storage constants
+        const val PREF_DATASTORE_NAME = "settings"
+        const val SAVED_NEWS_DATABASE = "saved_article_database"
         const val ARTICLE_TABLE = "articles_table"
     }
 }
-
-//data class Topics(
-//    val selectedTopics: MutableList<Categories>
-//)
-//
-//// Contains the topic categories accepted by the API
-//enum class Categories(val catName: String) {
-//
-//}
-

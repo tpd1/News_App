@@ -1,7 +1,6 @@
 package com.example.newsapp.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.newsapp.R
@@ -19,13 +18,8 @@ class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
         topicBinding = FragmentTopicSelectBinding.bind(view)
         //topicBinding.lifecycleOwner = this
 
-
         topicsViewModel = (activity as MainActivity).topicsViewModel
 
-//        // Topic counter observe
-//        topicsViewModel.topicCount.observe(viewLifecycleOwner) {
-//            topicBinding.topicsSelected.text = it.toString()
-//        }
 
         // Data is held as LiveData in the TopicViewModel, so we must set an observer first.
         // Using LiveData means it is lifecycle-aware and this fragment is just the UI component.

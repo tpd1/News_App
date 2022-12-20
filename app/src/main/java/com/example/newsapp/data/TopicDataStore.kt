@@ -68,57 +68,39 @@ class DataStoreRepo(context: Context) {
 
     // Called when changing a datastore preference (as the user toggles a switch).
     suspend fun setBusinessEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.business] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.business] = enabled }
     }
 
     suspend fun setEntertainmentEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.entertainment] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.entertainment] = enabled }
     }
 
     suspend fun setEnvironmentEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.environment] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.environment] = enabled }
     }
 
     suspend fun setFoodEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.food] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.food] = enabled }
     }
 
     suspend fun setHealthEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.health] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.health] = enabled }
     }
 
     suspend fun setPoliticsEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.politics] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.politics] = enabled }
     }
 
     suspend fun setScienceEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.science] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.science] = enabled }
     }
 
     suspend fun setSportsEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.sports] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.sports] = enabled }
     }
 
     suspend fun setTechnologyEnabled(enabled: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.technology] = enabled
-        }
+        dataStore.edit { pref -> pref[TopicKeys.technology] = enabled }
     }
 
     // For having a toggle that sets all on or off

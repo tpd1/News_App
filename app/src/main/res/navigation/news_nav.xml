@@ -9,7 +9,11 @@
         android:id="@+id/newsFragment"
         android:name="com.example.newsapp.ui.NewsFragment"
         android:label="@string/news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -43,12 +47,6 @@
         tools:layout="@layout/fragment_bookmarks" />
 
     <fragment
-        android:id="@+id/articleFragment"
-        android:name="com.example.newsapp.ui.ArticleFragment"
-        android:label="fragment_article"
-        tools:layout="@layout/fragment_article" />
-
-    <fragment
         android:id="@+id/topicSelectFragment"
         android:name="com.example.newsapp.ui.TopicSelectFragment"
         android:label="@string/choose_topics"
@@ -74,6 +72,15 @@
         <action
             android:id="@+id/action_manageAccountFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.newsapp.ui.ArticleFragment"
+        android:label="@string/fullArticle"
+        tools:layout="@layout/fragment_article">
+        <argument
+            android:name="newsArticle"
+            app:argType="com.example.newsapp.model.NewsArticle" />
     </fragment>
 
 </navigation>

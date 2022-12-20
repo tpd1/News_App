@@ -1,7 +1,9 @@
 package com.example.newsapp.model
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,17 +12,27 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.RowNewsArticleBinding
 import java.util.*
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-
+class NewsAdapter(private val articleClickListener: OnArticleClickListener) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     private var articles = mutableListOf<NewsArticle>()
 
+    interface OnArticleClickListener {
+        fun onArticleClick(article: NewsArticle)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(list: MutableList<NewsArticle>) {
         this.articles = list
         notifyDataSetChanged()
     }
 
+    fun getItem(position: Int): NewsArticle {
+        return articles[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = RowNewsArticleBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     //Holds each row in recyclerview
@@ -30,8 +42,24 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     }
 
     //Use view binding to row_news_article
-    class ViewHolder(private val binding: RowNewsArticleBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: RowNewsArticleBinding) :
+        RecyclerView.ViewHolder(binding.root), OnClickListener {
+
+        // Set up click listener here rather than in onBindViewHolder, is re-created less often.
+        init {
+            binding.root.setOnClickListener {
+                val pos = bindingAdapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    val article = getItem(pos)
+                    articleClickListener.onArticleClick(article)
+                }
+            }
+        }
+
+        override fun onClick(v: View?) {
+            val position:Int = absoluteAdapterPosition
+            articleClickListener.onArticleClick(articles[position])
+        }
 
         fun bind(article: NewsArticle) {
             // Use Glide library to fetch the image at the provided URL
@@ -49,16 +77,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             binding.datePosted.text = article.pubDate
 
             binding.executePendingBindings()
-        }
 
-        companion object {
-            fun from(parent: ViewGroup): ViewHolder { //parent is RecyclerView
-                val inflater = LayoutInflater.from(parent.context)
-                val binding = RowNewsArticleBinding.inflate(inflater, parent, false)
-                return ViewHolder(binding)
-            }
         }
-
     }
 
     override fun getItemCount(): Int {

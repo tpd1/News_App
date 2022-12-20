@@ -5,7 +5,8 @@ import com.example.newsapp.model.APIResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
+// Accessed by ArticleViewModel class to interact with retrofit and fetch articles.
+// Gets passed NewsAPIService from MainActivity, which contains a retrofit instance.
 class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
 
     suspend fun getLatestNews(): APIResponse = newsAPIHandler.getLatestNews()
