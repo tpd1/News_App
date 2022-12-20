@@ -25,12 +25,12 @@ class Constants {
     }
 }
 
-data class Topics(
-    val selectedTopics: MutableList<Categories>
-)
-
-// Contains the topic categories accepted by the API
-enum class Categories(val catName: String) {
-
-}
+//data class Topics(
+//    val selectedTopics: MutableList<Categories>
+//)
+//
+//// Contains the topic categories accepted by the API
+//enum class Categories(val catName: String) {
+//
+//}
 

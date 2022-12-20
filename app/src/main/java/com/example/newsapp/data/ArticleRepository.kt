@@ -1,7 +1,5 @@
 package com.example.newsapp.data
 
-import android.util.Log
-import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.model.APIResponse
 

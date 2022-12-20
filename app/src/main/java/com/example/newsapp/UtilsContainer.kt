@@ -11,8 +11,6 @@ import java.util.concurrent.TimeUnit
 // Container for dependencies used in repository, to ensure they are shared across app.
 class UtilsContainer {
 
-
-
     private val gsonConverterFactory = GsonConverterFactory.create()
 
     private val httpClient = OkHttpClient.Builder()

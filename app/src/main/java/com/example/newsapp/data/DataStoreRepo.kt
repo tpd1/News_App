@@ -10,13 +10,13 @@ import com.example.newsapp.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// Create a DataStore instance. Context passed from MainActivity
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.PREF_DATASTORE_NAME)
 
 class DataStoreRepo(context: Context) {
     private val dataStore = context.dataStore // This is the only way i could make it work?
 
-
-    // Keys for the preference datastore representing the topic toggle switches
+    // Set up keys that will be used in the DataStore. These match the topics available for selection.
     object TopicKeys {
         val business = booleanPreferencesKey(Constants.BUSINESS)
         val entertainment = booleanPreferencesKey(Constants.ENTERTAINMENT)
@@ -29,6 +29,7 @@ class DataStoreRepo(context: Context) {
         val technology = booleanPreferencesKey(Constants.TECHNOLOGY)
     }
 
+    //For each topic create a variable to store as a Flow
     val businessEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.business] ?: false
     }

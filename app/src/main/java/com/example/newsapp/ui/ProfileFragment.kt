@@ -1,6 +1,5 @@
 package com.example.newsapp.ui
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentProfileBinding
-
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var profileBinding: FragmentProfileBinding? = null
@@ -22,6 +20,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val binding = FragmentProfileBinding.inflate(inflater, container, false)
         profileBinding = binding
 
+        // Set up on-click listeners for buttons
         profileBinding!!.chooseTopicsCard.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToTopicSelectFragment()
             findNavController().navigate(action)
@@ -41,7 +40,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val action = ProfileFragmentDirections.actionProfileFragmentToBookmarksFragment()
             findNavController().navigate(action)
         }
-
         return binding.root
     }
 

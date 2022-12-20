@@ -19,13 +19,12 @@ class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
 
 }
 
-
 // structures the calls to the NewsData.io for topics and handles the response. Uses Retrofit library.
-// Uses co-routines (via Paging 3 library) with suspend functions. If this was executed on main UI thread
+// Uses co-routines with suspend functions. If this was executed on main UI thread
 // It would freeze whilst waiting for the api response.
 interface NewsApiService {
 
-    // Uses co-routines to run on a background thread. For fetching top headlines from all categories
+    // For fetching top headlines from all categories, in the 'Trending' tab
     @GET("news?")
     suspend fun getLatestNews(
         @Query("country") country: String = Constants.COUNTRY_CODE,

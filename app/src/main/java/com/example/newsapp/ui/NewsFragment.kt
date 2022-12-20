@@ -114,8 +114,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         topicViewModel.technologyEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.TECHNOLOGY)
         }
-
-
     }
 
 }

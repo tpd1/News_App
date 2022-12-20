@@ -34,15 +34,15 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: NewsArticle) {
+            // Use Glide library to fetch the image at the provided URL
             binding.newsRowCardView.apply {
-                Log.i("Url: ", article.imageUrl.toString())
                 Glide.with(this)
                     .load(article.imageUrl)
                     .centerCrop()
                     .error(R.drawable.settings_icon)
                     .into(binding.newsImage)
-
             }
+            // Set other text fields.
             binding.topicText.text = article.category[0].replaceFirstChar { it.uppercase() }
             binding.newsHeadline.text = article.title
             binding.sourceText.text = article.sourceID.replaceFirstChar { it.uppercase() }
@@ -50,7 +50,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
             binding.executePendingBindings()
         }
-
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder { //parent is RecyclerView
