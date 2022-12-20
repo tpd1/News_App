@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/share_button"
+        android:icon="@drawable/share_light"
+        android:title="@string/share_button"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bookmark"
+        android:icon="@drawable/add_bookmark_light"
+        android:title="@string/bookmarkarticle"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/appSettingsFragment"
+        android:title="@string/app_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/manageAccountFragment"
+        android:title="@string/my_account"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        app:showAsAction="never" />
+
+</menu>
