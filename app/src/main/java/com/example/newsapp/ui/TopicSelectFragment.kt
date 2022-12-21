@@ -16,10 +16,14 @@ class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
         super.onViewCreated(view, savedInstanceState)
 
         topicBinding = FragmentTopicSelectBinding.bind(view)
-        //topicBinding.lifecycleOwner = this
 
+        setUpTopics()
+
+
+    }
+
+    private fun setUpTopics() {
         topicsViewModel = (activity as MainActivity).topicsViewModel
-
 
         // Data is held as LiveData in the TopicViewModel, so we must set an observer first.
         // Using LiveData means it is lifecycle-aware and this fragment is just the UI component.
@@ -95,7 +99,6 @@ class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
         topicBinding.technologyTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
             topicsViewModel.setTechnologyEnabled(isChecked)
         }
-
     }
 
 }

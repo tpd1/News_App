@@ -1,7 +1,13 @@
 package com.example.newsapp
 
+import android.content.Context
+import androidx.room.Room
+import com.example.newsapp.data.local.ArticleDao
+import com.example.newsapp.data.local.LocalNewsSource
+import com.example.newsapp.data.local.SavedArticleDatabase
 import com.example.newsapp.data.remote.NewsApiService
 import com.example.newsapp.data.remote.RemoteNewsSource
+import com.example.newsapp.ui.MainActivity
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,9 +35,41 @@ class UtilsContainer {
 
     // use created retrofit instance with functions created in NewsApiService class.
     private val api: NewsApiService = retrofitInstance.create(NewsApiService::class.java)
-
-    // Only this is exposed, needs to be passed to ViewModel
     val remoteDataSource = RemoteNewsSource(api)
+
+    /**
+     * Performs the setup for the saved articles Room database.
+     * @param context application context passed by the
+     */
+    fun setUpDatabase(context: Context) : LocalNewsSource {
+        val savedArticleDatabase = Room.databaseBuilder(
+            context.applicationContext, SavedArticleDatabase::class.java, Constants.SAVED_NEWS_DATABASE
+        ).build()
+
+        val articleDao = savedArticleDatabase.articleDao()
+
+        return LocalNewsSource(articleDao)
+    }
+
+
 
 
 }
+
+/**
+ * Room doesn't allow custom classes to be stored. We need to convert Article to String first.
+ */
+//class TypeConverters {
+
+//    private var gSonConverter = Gson()
+//
+//    @TypeConverter
+//    fun newsArticleToString(newsArticle: NewsArticle): String {
+//        return gSonConverter.toJson(newsArticle)
+//    }
+//
+//    @TypeConverter
+//    fun stringToNewsArticle(jsonData: String): NewsArticle {
+//        return gSonConverter.toJson(newsArticle)
+//    }
+//}

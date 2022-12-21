@@ -14,28 +14,36 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
+import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.TopicViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
 
-// Main activity that sets up the view model for the news fragment to use, along with a shared
-// article repository and database.
+
+/**
+ * Main activity in which most other functionality of the app is instantiated.
+ */
 
 class MainActivity : AppCompatActivity() {
-    // Create class to handle storing and loading of user settings (e.g. topic selection)
-    private lateinit var dataStoreRepo: DataStoreRepo
-    lateinit var topicsViewModel: TopicViewModel
-
-    // NavController for navigation using NavGraph
-    private lateinit var navController: NavController
-
-    //Data binding for this activity
-    lateinit var mainBinding: ActivityMainBinding
 
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
+    // Create DataStore for persisting user settings
+    private lateinit var dataStoreRepo: DataStoreRepo
+    // Create ViewModel for topics fragment here, as we need it to set tabs in news fragment.
+    lateinit var topicsViewModel: TopicViewModel
+    // Create Room database for saving bookmarked articles offline.
+    lateinit var localNewsSource: LocalNewsSource
+    // NavController for navigation using NavGraph
+    private lateinit var navController: NavController
+    //Data binding for this activity
+    lateinit var mainBinding: ActivityMainBinding
 
+
+    /**
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,12 +63,15 @@ class MainActivity : AppCompatActivity() {
         // set up bottom navigation bar:
         createBottomNavBar()
 
-        // Initialise datastore repository for topics here, as we need the values for the tab layout.
-        dataStoreRepo = DataStoreRepo(this)
+        // Initialise datastore repository, topic view model and room database for saved articles.
+        dataStoreRepo = DataStoreRepo(this.applicationContext)
         topicsViewModel = TopicViewModel(dataStoreRepo)
-
+        localNewsSource = utilsContainer.setUpDatabase(this.applicationContext) // tied to lifecycle of the application.
     }
 
+    /**
+     * Helper function to set the bottom navigation bar with the NavController.
+     */
     private fun createBottomNavBar() {
         AppBarConfiguration(
             setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)

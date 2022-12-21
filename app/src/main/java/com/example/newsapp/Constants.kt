@@ -1,5 +1,8 @@
 package com.example.newsapp
 
+/**
+ * Stores frequently uses strings as constants to be used across the app.
+ */
 class Constants {
     // (companion object so we don't need to create an instance of the class)
     companion object {
@@ -23,6 +26,6 @@ class Constants {
         // Data storage constants
         const val PREF_DATASTORE_NAME = "settings"
         const val SAVED_NEWS_DATABASE = "saved_article_database"
-        const val ARTICLE_TABLE = "articles_table"
+        const val SAVED_ARTICLE_TABLE = "saved_articles_table"
     }
 }
