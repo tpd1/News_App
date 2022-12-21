@@ -27,5 +27,8 @@ class Constants {
         const val PREF_DATASTORE_NAME = "settings"
         const val SAVED_NEWS_DATABASE = "saved_article_database"
         const val SAVED_ARTICLE_TABLE = "saved_articles_table"
+
+        // Misc strings
+        const val BOOKMARK_ADDED = "Bookmark added successfully"
     }
 }
