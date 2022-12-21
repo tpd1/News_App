@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--    Author: Tim Deville (2003506)-->
+<!--    Layout for an individual bookmarks article card. Implemented via RecyclerView.-->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--   Set up data binding to bookmark view model class-->
+    <data>
+        <variable
+            name="savedArticleEntity"
+            type="com.example.newsapp.data.local.SavedArticleEntity" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_card_height"
+        android:layout_marginTop="@dimen/news_card_margin_top"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bookmarks_row_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/news_card_margin"
+            app:cardBackgroundColor="@color/md_theme_light_surface"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="3dp">
+
+            <!--        Overall LinearLayout for card-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bookmark_topic_text"
+                    style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/md_theme_light_primary"
+                    android:paddingStart="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_small"
+                    android:text="@string/topic_category"
+                    android:textColor="@color/md_theme_light_onSecondary" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/bookmark_news_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/md_theme_light_secondary"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ImageContrastCheck" />
+
+                <!--            Nested vertical LinearLayout for headline-->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/bookmark_clickable_headline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/bookmark_news_headline"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textSize="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:padding="@dimen/margin_small"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:text="@string/news_headline" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!--            Nested horizontal LinearLayout for publisher image and date-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/bookmark_source_text"
+                        style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true"
+                        android:backgroundTint="@color/md_theme_light_primary"
+                        android:gravity="center_vertical"
+                        android:scaleType="centerInside"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ImageContrastCheck"
+                        tools:text="Test" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/bookmark_date_posted"
+                        style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:gravity="end"
+                        android:padding="@dimen/margin_standard"
+                        android:text="@string/dummy_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

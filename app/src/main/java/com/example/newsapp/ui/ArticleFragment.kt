@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.Constants.Companion.BOOKMARK_ADDED
+import com.example.newsapp.Constants.Companion.BOOKMARK_ALREADY_SAVED
 import com.example.newsapp.R
 import com.example.newsapp.data.local.SavedArticleEntity
 import com.example.newsapp.databinding.FragmentArticleBinding
@@ -83,7 +84,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             menuItem.setIcon(R.drawable.bookmark_added)
             BOOKMARK_ADDED
         } else {
-            "Bookmark already saved."
+            BOOKMARK_ALREADY_SAVED
         }
         Snackbar.make(articleBinding.articleLayout, output, Snackbar.LENGTH_SHORT).show()
 
@@ -112,8 +113,6 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     private fun processShareClick() {
         TODO("Implement social media sharing")
     }
-
-
 
 }
 

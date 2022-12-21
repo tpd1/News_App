@@ -30,5 +30,6 @@ class Constants {
 
         // Misc strings
         const val BOOKMARK_ADDED = "Bookmark added successfully"
+        const val BOOKMARK_ALREADY_SAVED = "Bookmark already saved."
     }
 }

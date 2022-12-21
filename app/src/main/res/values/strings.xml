@@ -60,6 +60,7 @@
     <string name="NewsArticle">News Article</string>
     <string name="fullArticle">Full Article</string>
     <string name="dummy_date">dd/mm/yyyy</string>
+    <string name="no_bookmarks_added">No bookmarks added</string>
 
 
 </resources>
