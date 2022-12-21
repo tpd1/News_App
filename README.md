@@ -21,3 +21,4 @@ Features that could be improved/added before publishing:
 * Add animations to transitions between fragments.
 * Add loading state to recyclerView when refreshing data.
 * Saved articles are stored by ID order in Room database. Could attach a 'Saved At' date and edit the bookmark recycler view with a "bookmarked 10 days ago" textView.
+* The Bookmark feature for each article 'knows' if the article is already saved and changes the icon on launch. This could be extended, with a further press deleting the article from the database.
