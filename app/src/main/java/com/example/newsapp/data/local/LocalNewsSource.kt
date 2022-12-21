@@ -51,7 +51,7 @@ interface ArticleDao {
      * Inserts the passed article into the database
      * @param article - The news article to be inserted.
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: SavedArticleEntity)
 
     /**

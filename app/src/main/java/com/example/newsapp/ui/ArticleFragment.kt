@@ -40,6 +40,12 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.clear()
                 menuInflater.inflate(R.menu.toolbar_top_article, menu)
+                if (isAlreadySaved(args.newsArticle.link)) {
+                    Log.i("already saved", "already saved: true")
+                    menu.findItem(R.id.bookmark).setIcon(R.drawable.bookmark_added)
+                } else {
+                    Log.i("already saved", "already saved: false")
+                }
             }
 
             // Process button button clicks for share and bookmark menu options.
@@ -56,10 +62,8 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-
         // Load the webpage into the webview
         val url = args.newsArticle.link
-        Log.i("url", "url: $url")
         articleBinding.articleWebView.webViewClient = WebViewClient()
         articleBinding.articleWebView.apply {
             settings.javaScriptEnabled = true
@@ -72,13 +76,34 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
      * @param menuItem - Required in order to change the icon to indicate bookmark is added.
      */
     private fun processBookmarkClick(menuItem: MenuItem) {
-        // Create a new database entity from the args passed to the activity fragment.
         val articleEntity = SavedArticleEntity(0, args.newsArticle)
-        // Insert into database using the ViewModel
-        bookmarksViewModel.insertArticle(articleEntity)
-        // Change the icon and show Snackbar to indicate bookmark has been added.
-        menuItem.setIcon(R.drawable.bookmark_added)
-        Snackbar.make(articleBinding.articleLayout, BOOKMARK_ADDED, Snackbar.LENGTH_SHORT).show()
+        // Insert into database using the ViewModel if not already there.
+        val output: String = if (!isAlreadySaved(articleEntity.article.link)) {
+            bookmarksViewModel.insertArticle(articleEntity)
+            menuItem.setIcon(R.drawable.bookmark_added)
+            BOOKMARK_ADDED
+        } else {
+            "Bookmark already saved."
+        }
+        Snackbar.make(articleBinding.articleLayout, output, Snackbar.LENGTH_SHORT).show()
+
+    }
+
+    /**
+     * Checks the database to see if the article is arleady saved based on a matching url.
+     * 'any' function returns true if any element matches, false otherwise.
+     * @param url = The string URL to be checked against in the database
+     */
+    private fun isAlreadySaved(url: String) : Boolean {
+        var found = false
+        bookmarksViewModel.articles.observe(viewLifecycleOwner) {
+            for (entity in it) {
+                if (entity.article.link == url) {
+                    found = true
+                }
+            }
+        }
+        return found
     }
 
     /**
@@ -87,6 +112,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     private fun processShareClick() {
         TODO("Implement social media sharing")
     }
+
 
 
 }
