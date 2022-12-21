@@ -3,8 +3,10 @@ package com.example.newsapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
 import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
+import com.example.newsapp.model.BookmarksViewModel
 import com.example.newsapp.model.TopicViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -34,7 +37,9 @@ class MainActivity : AppCompatActivity() {
     // Create ViewModel for topics fragment here, as we need it to set tabs in news fragment.
     lateinit var topicsViewModel: TopicViewModel
     // Create Room database for saving bookmarked articles offline.
-    lateinit var localNewsSource: LocalNewsSource
+    lateinit var bookmarksViewModel: BookmarksViewModel
+    // Create Room database for saving bookmarked articles offline.
+    private lateinit var localNewsSource: LocalNewsSource
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
     //Data binding for this activity
@@ -63,10 +68,26 @@ class MainActivity : AppCompatActivity() {
         // set up bottom navigation bar:
         createBottomNavBar()
 
-        // Initialise datastore repository, topic view model and room database for saved articles.
+        // Initialise datastore repository and ViewModel for topic selection.
         dataStoreRepo = DataStoreRepo(this.applicationContext)
         topicsViewModel = TopicViewModel(dataStoreRepo)
+
+        // Initialise a local Room database and ViewModel for saving bookmarked articles.
         localNewsSource = utilsContainer.setUpDatabase(this.applicationContext) // tied to lifecycle of the application.
+        bookmarksViewModel = BookmarksViewModel(localNewsSource)
+
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.toolbar_top, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return NavigationUI.onNavDestinationSelected(menuItem, navController)
+            }
+        })
+
+
     }
 
     /**
@@ -88,14 +109,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_top, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
-    }
+
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.toolbar_top, menu)
+//        return true
+//    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
+//    }
 
     //enable the up button on the nav controller.
     override fun onSupportNavigateUp(): Boolean {

@@ -35,6 +35,10 @@ class LocalNewsSource(private val articleDao: ArticleDao) {
         return articleDao.getArticles()
     }
 
+    suspend fun deleteAllArticles() {
+        return articleDao.deleteAll()
+    }
+
 }
 
 /**
