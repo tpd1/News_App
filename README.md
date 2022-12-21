@@ -20,3 +20,4 @@ Features that could be improved/added before publishing:
 * Rather than a WebView, the article could be parsed from the URL and formatted nicely in the Article fragment.
 * Add animations to transitions between fragments.
 * Add loading state to recyclerView when refreshing data.
+* Saved articles are stored by ID order in Room database. Could attach a 'Saved At' date and edit the bookmark recycler view with a "bookmarked 10 days ago" textView.
