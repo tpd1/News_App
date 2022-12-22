@@ -30,33 +30,34 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
 
         // Set up view/data binding
         newsfeedBinding = FragmentNewsBinding.bind(view)
-        newsfeedBinding.lifecycleOwner = this
-        newsfeedBinding.newsRecyclerView.adapter = adapter
-        newsfeedBinding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        newsfeedBinding.apply {
+            newsRecyclerView.adapter = adapter
+            newsRecyclerView.setHasFixedSize(true)
+            newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            lifecycleOwner = this@NewsFragment
+        }
 
         // Define the tab layout and set it up using helper function
         tabLayout = newsfeedBinding.tabLayout
         setupToolbar()
 
-        // Initially load the trending / latest news.
-        newsViewModel.getLatestNews()
-        newsViewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
-            response.results.let { adapter.setList(it as MutableList<NewsArticle>) }
-        }
+
+        // Observe changes to the article livedata list
+        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: Tab?) {
                 if (tab != null) {
                     when (val topic = tab.text.toString().lowercase()) {
-                        Constants.TRENDING -> newsViewModel.getLatestNews()
+                        Constants.TRENDING -> newsViewModel.getCategoryNews("top")
                         else -> newsViewModel.getCategoryNews(topic)
                     }
-                    newsViewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
-                        response.results.let { adapter.setList(it as MutableList<NewsArticle>) }
+                    newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
+                        adapter.submitData(viewLifecycleOwner.lifecycle, it) }
                     }
                 }
-            }
             override fun onTabUnselected(tab: Tab?) {}
             override fun onTabReselected(tab: Tab?) {}
         })
