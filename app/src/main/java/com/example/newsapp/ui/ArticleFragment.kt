@@ -42,10 +42,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
                 menu.clear()
                 menuInflater.inflate(R.menu.toolbar_top_article, menu)
                 if (isAlreadySaved(args.newsArticle.link)) {
-                    Log.i("already saved", "already saved: true")
                     menu.findItem(R.id.bookmark).setIcon(R.drawable.bookmark_added)
-                } else {
-                    Log.i("already saved", "already saved: false")
                 }
             }
 

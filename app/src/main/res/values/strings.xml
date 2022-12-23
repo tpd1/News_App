@@ -61,6 +61,16 @@
     <string name="fullArticle">Full Article</string>
     <string name="dummy_date">dd/mm/yyyy</string>
     <string name="no_bookmarks_added">No bookmarks added</string>
+    <string name="welcome_to_news_link_login_below_to_get_started">Welcome to News Link. Login below to get started.</string>
+    <string name="welcome_to_news_link">Welcome to News Link</string>
+    <string name="login_below_to_get_started">Login below to get started</string>
+    <string name="login">Login</string>
+    <string name="no_account_text">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="create_a_new_account">Create a New Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
 
 
 </resources>

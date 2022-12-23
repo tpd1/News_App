@@ -35,5 +35,9 @@ class Constants {
         // Misc strings
         const val BOOKMARK_ADDED = "Bookmark added successfully"
         const val BOOKMARK_ALREADY_SAVED = "Bookmark already saved."
+        const val ENTER_PASSWORD = "Password Must be over 6 characters long"
+        const val NON_VALID_EMAIL = "Email must be valid & non-empty"
+        const val LOGIN_SUCCESS = "Login Successful"
+        const val LOGIN_UNSUCCESSFUL = "Email or password incorrect"
     }
 }
