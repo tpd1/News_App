@@ -3,22 +3,14 @@ package com.example.newsapp.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newsapp.Constants.Companion.ENTER_PASSWORD
 import com.example.newsapp.Constants.Companion.LOGIN_SUCCESS
 import com.example.newsapp.Constants.Companion.LOGIN_UNSUCCESSFUL
 import com.example.newsapp.Constants.Companion.NON_VALID_EMAIL
-import com.example.newsapp.R
-import com.google.firebase.auth.FirebaseAuth
 import com.example.newsapp.databinding.ActivityLoginBinding
-import com.example.newsapp.databinding.ActivityMainBinding
-import com.example.newsapp.databinding.ActivityRegisterBinding
-import com.example.newsapp.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlin.math.log
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginActivity : AppCompatActivity() {

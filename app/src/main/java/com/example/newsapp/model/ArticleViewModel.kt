@@ -1,13 +1,12 @@
 package com.example.newsapp.model
 
-import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.newsapp.Constants
 import com.example.newsapp.data.remote.RemoteNewsSource
-import kotlinx.coroutines.launch
 
 
 //Inject repository into viewModel
@@ -17,7 +16,6 @@ class ArticleViewModel (
 ) : ViewModel() {
 
     // Holds the responses from our API call. Exposed to NewsFragment so tabs can be created.
-    //var newsLiveData = MutableLiveData<APIResponse>()
 
     private val currentCategory = MutableLiveData(DEFAULT)
 
@@ -28,14 +26,6 @@ class ArticleViewModel (
     fun getCategoryNews(category: String) {
         currentCategory.value = category
     }
-
-//    fun getLatestNews() = viewModelScope.launch {
-//        newsLiveData.value = remoteNewsSource.getLatestNews()
-//    }
-
-//    fun getCategoryNews(topic: String)  = viewModelScope.launch {
-//        newsLiveData.value = remoteNewsSource.getCategoryNews(topic)
-//    }
 
     companion object {
         private const val DEFAULT = Constants.TOP

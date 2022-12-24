@@ -1,8 +1,8 @@
 package com.example.newsapp.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -108,7 +108,15 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
      * Processes the 'share button' click event.
      */
     private fun processShareClick() {
-        TODO("Implement social media sharing")
+        val msg = args.newsArticle.link
+        val intent = Intent().apply {
+            type = "text/plain"
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, msg)
+        }
+
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
     }
 
 }

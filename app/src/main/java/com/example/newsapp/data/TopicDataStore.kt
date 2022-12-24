@@ -104,17 +104,17 @@ class DataStoreRepo(context: Context) {
     }
 
     // For having a toggle that sets all on or off
-    suspend fun setAllTopics(enabled: Boolean) {
+    suspend fun setAllTopics(choice: Boolean) {
         dataStore.edit { pref ->
-            pref[TopicKeys.business] = enabled
-            pref[TopicKeys.entertainment] = enabled
-            pref[TopicKeys.environment] = enabled
-            pref[TopicKeys.food] = enabled
-            pref[TopicKeys.health] = enabled
-            pref[TopicKeys.politics] = enabled
-            pref[TopicKeys.science] = enabled
-            pref[TopicKeys.sports] = enabled
-            pref[TopicKeys.technology] = enabled
+            pref[TopicKeys.business] = choice
+            pref[TopicKeys.entertainment] = choice
+            pref[TopicKeys.environment] = choice
+            pref[TopicKeys.food] = choice
+            pref[TopicKeys.health] = choice
+            pref[TopicKeys.politics] = choice
+            pref[TopicKeys.science] = choice
+            pref[TopicKeys.sports] = choice
+            pref[TopicKeys.technology] = choice
         }
     }
 }
