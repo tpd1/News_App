@@ -71,6 +71,17 @@
     <string name="email">Email</string>
     <string name="create_a_new_account">Create a New Account</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="delete_all">Delete all</string>
+    <string name="remove_all">Remove All</string>
+    <string name="manage_your_account">Manage your account</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update">Update</string>
+    <string name="delete_my_account">Delete My Account</string>
+    <string name="toggle_all">Toggle All</string>
+    <string name="toggle_all_topics_switch">Toggle all topics switch</string>
+    <string name="politics_topic_select_switch">Politics topic select switch</string>
+    <string name="select_topics_below">Select Topics Below:</string>
 
 
 </resources>

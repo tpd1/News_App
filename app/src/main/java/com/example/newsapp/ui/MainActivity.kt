@@ -23,7 +23,6 @@ import com.example.newsapp.model.TopicViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
 
-
 /**
  * Main activity in which most other functionality of the app is instantiated.
  */
@@ -32,16 +31,22 @@ class MainActivity : AppCompatActivity() {
 
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
+
     // Create DataStore for persisting user settings
     private lateinit var dataStoreRepo: DataStoreRepo
+
     // Create ViewModel for topics fragment here, as we need it to set tabs in news fragment.
     lateinit var topicsViewModel: TopicViewModel
+
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
+
     // Create Room database for saving bookmarked articles offline.
     private lateinit var localNewsSource: LocalNewsSource
+
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
+
     //Data binding for this activity
     lateinit var mainBinding: ActivityMainBinding
 
@@ -57,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
 
         // Set up bottom app navigation bar to access fragments.
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
         navController = navHostFragment.findNavController()
 
         // Set up top app bar
@@ -73,7 +79,8 @@ class MainActivity : AppCompatActivity() {
         topicsViewModel = TopicViewModel(dataStoreRepo)
 
         // Initialise a local Room database and ViewModel for saving bookmarked articles.
-        localNewsSource = utilsContainer.setUpDatabase(this.applicationContext) // tied to lifecycle of the application.
+        localNewsSource =
+            utilsContainer.setUpDatabase(this.applicationContext) // tied to lifecycle of the application.
         bookmarksViewModel = BookmarksViewModel(localNewsSource)
 
         addMenuProvider(object : MenuProvider {
@@ -86,8 +93,6 @@ class MainActivity : AppCompatActivity() {
                 return NavigationUI.onNavDestinationSelected(menuItem, navController)
             }
         })
-
-
     }
 
     /**
@@ -95,31 +100,24 @@ class MainActivity : AppCompatActivity() {
      */
     private fun createBottomNavBar() {
         AppBarConfiguration(
-            setOf(R.id.newsFragment, R.id.weatherFragment, R.id.bookmarksFragment, R.id.profileFragment)
+            setOf(
+                R.id.newsFragment,
+                R.id.weatherFragment,
+                R.id.bookmarksFragment,
+                R.id.profileFragment
+            )
         )
         mainBinding.bottomNavView.setupWithNavController(navController)
 
         // If we load the full screen article view, hide the bottom nav bar for a cleaner look.
         navController.addOnDestinationChangedListener { _, frag, _ ->
-            if(frag.id == R.id.articleFragment) {
+            if (frag.id == R.id.articleFragment) {
                 mainBinding.bottomNavView.visibility = View.GONE
             } else {
                 mainBinding.bottomNavView.visibility = View.VISIBLE
             }
         }
     }
-
-
-
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.toolbar_top, menu)
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
-//    }
 
     //enable the up button on the nav controller.
     override fun onSupportNavigateUp(): Boolean {

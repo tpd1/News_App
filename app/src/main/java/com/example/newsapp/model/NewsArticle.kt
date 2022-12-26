@@ -16,7 +16,7 @@ data class NewsArticle(
     @SerializedName("title") val title: String,
     @SerializedName("link") val link: String,
     @SerializedName("creator") val creator: List<String>?,
-    @SerializedName("description") val description: String,
+    //@SerializedName("description") val description: String,
     @SerializedName("pubDate") val pubDate: String,
     @SerializedName("image_url") val imageUrl: String?,
     @SerializedName("source_id") val sourceID: String,

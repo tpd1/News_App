@@ -39,5 +39,8 @@ class Constants {
         const val NON_VALID_EMAIL = "Email must be valid & non-empty"
         const val LOGIN_SUCCESS = "Login Successful"
         const val LOGIN_UNSUCCESSFUL = "Email or password incorrect"
+        const val BOOKMARK_REMOVED = "Bookmark Removed"
+        const val ALL_BOOKMARKS_REM = "All Bookmarks Removed"
+
     }
 }

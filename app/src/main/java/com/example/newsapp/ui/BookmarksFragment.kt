@@ -7,7 +7,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsapp.Constants
+import com.example.newsapp.Constants.Companion.ALL_BOOKMARKS_REM
+import com.example.newsapp.Constants.Companion.BOOKMARK_REMOVED
 import com.example.newsapp.R
 import com.example.newsapp.data.local.SavedArticleEntity
 import com.example.newsapp.databinding.FragmentBookmarksBinding
@@ -44,15 +45,25 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks), BookmarksAdapte
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val article = bookmarkAdapter.getItem(viewHolder.absoluteAdapterPosition)
                 bookmarksViewModel.deleteArticle(article)
-                Snackbar.make(bookmarksBinding.root, "Bookmark deleted", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(bookmarksBinding.root, BOOKMARK_REMOVED, Snackbar.LENGTH_SHORT).show()
             }
         }).attachToRecyclerView(bookmarksBinding.bookmarksRecyclerView)
-    }
 
+
+        bookmarksBinding.deleteAllButton.setOnClickListener {
+            onDeleteAllClick()
+        }
+    }
 
     override fun onSavedArticleClick(article: NewsArticle) {
         val action = BookmarksFragmentDirections.actionBookmarksFragmentToArticleFragment(article)
         findNavController().navigate(action)
+    }
+
+    private fun onDeleteAllClick() {
+        bookmarksViewModel.deleteAllArticles()
+        Snackbar.make(bookmarksBinding.root, ALL_BOOKMARKS_REM, Snackbar.LENGTH_SHORT).show()
+
     }
 }
 
