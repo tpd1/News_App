@@ -41,16 +41,14 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         }
 
 
-
-
         weatherViewModel.weatherData.observe(viewLifecycleOwner) {
             weatherBinding.temperatureText.text = it.currentWeather.temperature.toString()
             weatherBinding.windText.text = it.currentWeather.windSpeed.toString()
             weatherBinding.conditionText.text = it.currentWeather.condition.description
 
+            val url = "https:${it.currentWeather.condition.iconUrl}"
             Glide.with(this)
-                .load(it.currentWeather.condition.iconUrl)
-                .error(R.drawable.settings_icon)
+                .load(url)
                 .into(weatherBinding.weatherIcon)
         }
 
