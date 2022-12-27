@@ -7,12 +7,16 @@ class Constants {
     // (companion object so we don't need to create an instance of the class)
     companion object {
         // NewsData.io API values
-        const val API_KEY = "pub_14675c68e5438ae4a7b999feff9379dc0b3e7"
+        const val NEWS_API_KEY = "pub_14675c68e5438ae4a7b999feff9379dc0b3e7"
         const val ROOT_API_URL = "https://newsdata.io/api/1/"
         const val COUNTRY_CODE = "gb"
         const val LANGUAGE = "en"
         const val PAGE_SIZE = 10
         const val MAX_ARTICLES = 30 // Max articles shown in recyclerview
+
+        // Weather API values
+        const val WEATHER_API_KEY = "21c4fa21cb21458f86e100153222712"
+        const val WEATHER_API_URL = "https://api.weatherapi.com/v1/"
 
         // Topics for selection & tab layout
         const val BUSINESS = "business"
@@ -26,6 +30,9 @@ class Constants {
         const val TECHNOLOGY = "technology"
         const val TRENDING = "trending"
         const val TOP = "top"
+
+        // App Setting Names
+        const val WEATHER_LOCATION = "weather location"
 
         // Data storage constants
         const val PREF_DATASTORE_NAME = "settings"

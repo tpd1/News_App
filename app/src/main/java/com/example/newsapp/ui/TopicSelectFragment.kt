@@ -5,99 +5,97 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentTopicSelectBinding
-import com.example.newsapp.model.TopicViewModel
-
+import com.example.newsapp.model.SettingsViewModel
 
 class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
     private lateinit var topicBinding: FragmentTopicSelectBinding
-    private lateinit var topicsViewModel: TopicViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         topicBinding = FragmentTopicSelectBinding.bind(view)
-
         setUpTopics()
 
 
     }
 
     private fun setUpTopics() {
-        topicsViewModel = (activity as MainActivity).topicsViewModel
+        settingsViewModel = (activity as MainActivity).settingsViewModel
 
         // Data is held as LiveData in the TopicViewModel, so we must set an observer first.
         // Using LiveData means it is lifecycle-aware and this fragment is just the UI component.
-        topicsViewModel.businessEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.businessEnabled.observe(viewLifecycleOwner) {
             topicBinding.businessTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.entertainmentEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.entertainmentEnabled.observe(viewLifecycleOwner) {
             topicBinding.entertainmentTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.environmentEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.environmentEnabled.observe(viewLifecycleOwner) {
             topicBinding.environmentTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.foodEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.foodEnabled.observe(viewLifecycleOwner) {
             topicBinding.foodTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.healthEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.healthEnabled.observe(viewLifecycleOwner) {
             topicBinding.healthTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.politicsEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.politicsEnabled.observe(viewLifecycleOwner) {
             topicBinding.politicsTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.scienceEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.scienceEnabled.observe(viewLifecycleOwner) {
             topicBinding.scienceTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.sportsEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.sportsEnabled.observe(viewLifecycleOwner) {
             topicBinding.sportsTopicSwitch.isChecked = it
         }
 
-        topicsViewModel.technologyEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.technologyEnabled.observe(viewLifecycleOwner) {
             topicBinding.technologyTopicSwitch.isChecked = it
         }
 
         // Add listeners to each topic switch (might be an easier way to do this?)
         topicBinding.businessTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setBusinessEnabled(isChecked)
+            settingsViewModel.setBusinessEnabled(isChecked)
         }
 
         topicBinding.entertainmentTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setEntertainmentEnabled(isChecked)
+            settingsViewModel.setEntertainmentEnabled(isChecked)
         }
 
         topicBinding.environmentTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setEnvironmentEnabled(isChecked)
+            settingsViewModel.setEnvironmentEnabled(isChecked)
         }
 
         topicBinding.foodTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setFoodEnabled(isChecked)
+            settingsViewModel.setFoodEnabled(isChecked)
         }
 
         topicBinding.healthTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setHealthEnabled(isChecked)
+            settingsViewModel.setHealthEnabled(isChecked)
         }
 
         topicBinding.politicsTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setPoliticsEnabled(isChecked)
+            settingsViewModel.setPoliticsEnabled(isChecked)
         }
 
         topicBinding.scienceTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setScienceEnabled(isChecked)
+            settingsViewModel.setScienceEnabled(isChecked)
         }
 
         topicBinding.sportsTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setSportsEnabled(isChecked)
+            settingsViewModel.setSportsEnabled(isChecked)
         }
 
         topicBinding.technologyTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
-            topicsViewModel.setTechnologyEnabled(isChecked)
+            settingsViewModel.setTechnologyEnabled(isChecked)
         }
     }
 

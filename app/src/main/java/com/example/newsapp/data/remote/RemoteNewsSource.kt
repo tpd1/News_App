@@ -25,10 +25,6 @@ class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
            pagingSourceFactory = { ArticlePagingSource(newsAPIHandler, q) }
        ).liveData
 
-
-//    suspend fun getQueryNews(q: String): APIResponse =
-//        newsAPIHandler.searchNews(q)
-
 }
 
 // structures the calls to the NewsData.io for topics and handles the response. Uses Retrofit library.
@@ -43,17 +39,17 @@ interface NewsApiService {
         @Query("country") country: String = Constants.COUNTRY_CODE,
         @Query("language") language: String = Constants.LANGUAGE,
         @Query("page") page: Int,
-        @Query("apikey") key: String = Constants.API_KEY
+        @Query("apikey") key: String = Constants.NEWS_API_KEY
     ): APIResponse
 
 
     // Function to fetch news articles based on a search term
-    @GET("news?")
-    suspend fun searchNews(
-        @Query("q") query: String, // search term
-        @Query("country") country: String = Constants.COUNTRY_CODE,
-        @Query("language") language: String = Constants.LANGUAGE,
-        @Query("page") page: Int,
-        @Query("apikey") key: String = Constants.API_KEY
-    ): APIResponse
+//    @GET("news?")
+//    suspend fun searchNews(
+//        @Query("q") query: String, // search term
+//        @Query("country") country: String = Constants.COUNTRY_CODE,
+//        @Query("language") language: String = Constants.LANGUAGE,
+//        @Query("page") page: Int,
+//        @Query("apikey") key: String = Constants.NEWS_API_KEY
+//    ): APIResponse
 }

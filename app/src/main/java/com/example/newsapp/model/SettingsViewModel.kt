@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 /**
  *
  */
-class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
+class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
 
     // Linked to
     val businessEnabled: LiveData<Boolean> = dataRepo.businessEnabled.asLiveData()
@@ -22,6 +22,12 @@ class TopicViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     val scienceEnabled: LiveData<Boolean> = dataRepo.scienceEnabled.asLiveData()
     val sportsEnabled: LiveData<Boolean> = dataRepo.sportsEnabled.asLiveData()
     val technologyEnabled: LiveData<Boolean> = dataRepo.technologyEnabled.asLiveData()
+
+    val weatherLocation: LiveData<String> = dataRepo.weatherLocationFlow.asLiveData()
+
+    fun setWeatherLocation(location: String) {
+        viewModelScope.launch { dataRepo.setWeatherLocation(location) }
+    }
 
 
     fun setBusinessEnabled(value: Boolean) {

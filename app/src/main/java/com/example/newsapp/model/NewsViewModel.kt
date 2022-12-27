@@ -9,14 +9,11 @@ import com.example.newsapp.Constants
 import com.example.newsapp.data.remote.RemoteNewsSource
 
 
-//Inject repository into viewModel
-
-class ArticleViewModel (
+class NewsViewModel (
     private val remoteNewsSource: RemoteNewsSource
 ) : ViewModel() {
 
     // Holds the responses from our API call. Exposed to NewsFragment so tabs can be created.
-
     private val currentCategory = MutableLiveData(DEFAULT)
 
     val newsLiveData = currentCategory.switchMap {

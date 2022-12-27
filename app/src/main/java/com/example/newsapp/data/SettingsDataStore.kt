@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.newsapp.Constants
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +28,14 @@ class DataStoreRepo(context: Context) {
         val science = booleanPreferencesKey(Constants.SCIENCE)
         val sports = booleanPreferencesKey(Constants.SPORTS)
         val technology = booleanPreferencesKey(Constants.TECHNOLOGY)
+    }
+
+    object AppSettings {
+        val weatherLocation = stringPreferencesKey(Constants.WEATHER_LOCATION)
+    }
+
+    val weatherLocationFlow: Flow<String> = dataStore.data.map { i ->
+        i[AppSettings.weatherLocation] ?: "London"
     }
 
     //For each topic create a variable to store as a Flow
@@ -103,19 +112,9 @@ class DataStoreRepo(context: Context) {
         dataStore.edit { pref -> pref[TopicKeys.technology] = enabled }
     }
 
-    // For having a toggle that sets all on or off
-    suspend fun setAllTopics(choice: Boolean) {
-        dataStore.edit { pref ->
-            pref[TopicKeys.business] = choice
-            pref[TopicKeys.entertainment] = choice
-            pref[TopicKeys.environment] = choice
-            pref[TopicKeys.food] = choice
-            pref[TopicKeys.health] = choice
-            pref[TopicKeys.politics] = choice
-            pref[TopicKeys.science] = choice
-            pref[TopicKeys.sports] = choice
-            pref[TopicKeys.technology] = choice
-        }
+    suspend fun setWeatherLocation(location: String) {
+        dataStore.edit {pref -> pref[AppSettings.weatherLocation] = location}
     }
+
 }
 

@@ -19,7 +19,7 @@ import com.example.newsapp.data.DataStoreRepo
 import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.BookmarksViewModel
-import com.example.newsapp.model.TopicViewModel
+import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
 
@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
     // Create DataStore for persisting user settings
     private lateinit var dataStoreRepo: DataStoreRepo
 
-    // Create ViewModel for topics fragment here, as we need it to set tabs in news fragment.
-    lateinit var topicsViewModel: TopicViewModel
+    // Create ViewModel for storing settings to a DataStore, as we need it across the app.
+    lateinit var settingsViewModel: SettingsViewModel
 
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     //Data binding for this activity
-    lateinit var mainBinding: ActivityMainBinding
+    private lateinit var mainBinding: ActivityMainBinding
 
 
     /**
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialise datastore repository and ViewModel for topic selection.
         dataStoreRepo = DataStoreRepo(this.applicationContext)
-        topicsViewModel = TopicViewModel(dataStoreRepo)
+        settingsViewModel = SettingsViewModel(dataStoreRepo)
 
         // Initialise a local Room database and ViewModel for saving bookmarked articles.
         localNewsSource =

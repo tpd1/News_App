@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.Constants
 import com.example.newsapp.model.NewsAdapter
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsBinding
-import com.example.newsapp.model.ArticleViewModel
+import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.NewsArticle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
@@ -19,7 +17,7 @@ import com.google.android.material.tabs.TabLayout.Tab
 class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClickListener {
     private lateinit var newsfeedBinding: FragmentNewsBinding
     private val adapter = NewsAdapter(this) // RecyclerView adapter
-    private lateinit var newsViewModel: ArticleViewModel//Uses delegate class viewModels which preserves across UI configuration changes.
+    private lateinit var newsViewModel: NewsViewModel//Uses delegate class viewModels which preserves across UI configuration changes.
     private lateinit var tabLayout: TabLayout // fetch tablayout XML object
 
     // View is passed from Fragment constructor because we defined it there.
@@ -28,7 +26,7 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
 
         // Fetch repository instance from container created in Main Activity. Use it to create viewModel
         val remoteNewsSource = (activity as MainActivity).utilsContainer.remoteDataSource
-        newsViewModel = ArticleViewModel(remoteNewsSource)
+        newsViewModel = NewsViewModel(remoteNewsSource)
 
         // Set up view/data binding
         newsfeedBinding = FragmentNewsBinding.bind(view)
@@ -80,47 +78,47 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
     // Choose tabs in toolbar based on user selected tabs. Uses a reference to the topicViewModel
     // to observe the liveData in the DataStore, and add tabs accordingly. Reacts to changes in topic selection.
     private fun setupToolbar() {
-        val topicViewModel =
-            (activity as MainActivity).topicsViewModel // get topicViewmodel for data
+        val settingsViewModel =
+            (activity as MainActivity).settingsViewModel // get topicViewmodel for data
 
         tabLayout.removeAllTabs() // Start by removing all tabs from layout
         createTab(Constants.TRENDING)
 
         // For each topic category observe data changes and create a tab according to toggle position.
         // If the saved value is true then create a tab.
-        topicViewModel.businessEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.businessEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.BUSINESS)
         }
 
-        topicViewModel.entertainmentEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.entertainmentEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.ENTERTAINMENT)
         }
 
-        topicViewModel.environmentEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.environmentEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.ENVIRONMENT)
         }
 
-        topicViewModel.foodEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.foodEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.FOOD)
         }
 
-        topicViewModel.healthEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.healthEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.HEALTH)
         }
 
-        topicViewModel.politicsEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.politicsEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.POLITICS)
         }
 
-        topicViewModel.scienceEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.scienceEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.SCIENCE)
         }
 
-        topicViewModel.sportsEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.sportsEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.SPORTS)
         }
 
-        topicViewModel.technologyEnabled.observe(viewLifecycleOwner) {
+        settingsViewModel.technologyEnabled.observe(viewLifecycleOwner) {
             if (it) createTab(Constants.TECHNOLOGY)
         }
     }
