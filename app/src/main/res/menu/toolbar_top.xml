@@ -8,12 +8,6 @@
 <!--        android:title="@string/search"/>-->
 
     <item
-        android:id="@+id/notifications"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        app:showAsAction="ifRoom"
-        android:title="@string/notifications"/>
-
-    <item
         android:id="@+id/appSettingsFragment"
         android:title="@string/app_settings"
         app:showAsAction="never" />
@@ -23,9 +17,9 @@
         android:title="@string/my_account"
         app:showAsAction="never" />
 
-<!--    <item-->
-<!--        android:id="@+id/logout"-->
-<!--        app:showAsAction="never"-->
-<!--        android:title="@string/logout"/>-->
+    <item
+        android:id="@+id/loginActivity"
+        app:showAsAction="never"
+        android:title="@string/logout"/>
 
 </menu>

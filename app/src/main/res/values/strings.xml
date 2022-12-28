@@ -20,10 +20,12 @@
     <!--    News Categories-->
     <string name="category_business">Business</string>
     <string name="category_entertainment">Entertainment</string>
-    <string name="category_general">General</string>
+    <string name="environment">Environment</string>
     <string name="category_health">Health</string>
     <string name="category_science">Science</string>
     <string name="category_sports">Sports</string>
+    <string name="food">Food</string>
+    <string name="politics">Politics</string>
     <string name="category_technology">Technology</string>
     <string name="select_topics">Select Topics Below</string>
     <string name="most_popular">Most Popular</string>
@@ -52,5 +54,45 @@
     <string name="technology_topic_switch">Technology topic switch</string>
     <string name="share_button">Share</string>
     <string name="manage_account">Manage Account</string>
+
+    <string name="food_topic_switch">Food topic switch</string>
+    <string name="bookmarkarticle">bookmarkArticle</string>
+    <string name="NewsArticle">News Article</string>
+    <string name="fullArticle">Full Article</string>
+    <string name="dummy_date">dd/mm/yyyy</string>
+    <string name="no_bookmarks_added">No bookmarks added</string>
+    <string name="welcome_to_news_link_login_below_to_get_started">Welcome to News Link. Login below to get started.</string>
+    <string name="welcome_to_news_link">Welcome to News Link</string>
+    <string name="login_below_to_get_started">Login below to get started</string>
+    <string name="login">Login</string>
+    <string name="no_account_text">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="create_a_new_account">Create a New Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="delete_all">Delete all</string>
+    <string name="remove_all">Remove All</string>
+    <string name="manage_your_account">Manage your account</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update">Update</string>
+    <string name="delete_my_account">Delete My Account</string>
+    <string name="toggle_all">Toggle All</string>
+    <string name="toggle_all_topics_switch">Toggle all topics switch</string>
+    <string name="politics_topic_select_switch">Politics topic select switch</string>
+    <string name="select_topics_below">Select Topics Below:</string>
+    <string name="location">Location</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="condition_description">Condition Description</string>
+    <string name="feels_like">Feels like:</string>
+    <string name="deg_c">℃</string>
+    <string name="country">Country</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="update_name">Update Name</string>
+    <string name="update_password">Update Password</string>
+
 
 </resources>

@@ -105,4 +105,10 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/md_theme_dark_errorContainer</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
 </resources>
