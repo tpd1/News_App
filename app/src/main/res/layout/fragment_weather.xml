@@ -12,7 +12,7 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/enter_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         style="@style/Widget.Material3.Button.IconButton.Filled"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:text="@string/search"
         app:icon="@drawable/ic_baseline_search_24"
@@ -31,14 +31,25 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/locationText"
-        style="@style/TextAppearance.MaterialComponents.Headline5"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="@string/location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_edit_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/countryText"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lastUpdatedText"
@@ -49,7 +60,7 @@
         android:text="@string/last_updated"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationText" />
+        app:layout_constraintTop_toBottomOf="@+id/countryText" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/icon_layout"
@@ -66,8 +77,7 @@
             android:id="@+id/weatherIcon"
             android:layout_width="128dp"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/placeholder_sun" />
+            android:scaleType="fitXY" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="150dp"
@@ -78,7 +88,7 @@
                 android:id="@+id/temperatureValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8\u2103"
+                android:text="@string/deg_c"
                 android:textSize="45sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +112,7 @@
                 android:id="@+id/feelsLikeValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-5\u2103"
+                android:text="@string/deg_c"
                 android:textSize="26sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +125,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/conditionText"
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_standard"

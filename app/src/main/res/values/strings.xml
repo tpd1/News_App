@@ -87,6 +87,8 @@
     <string name="last_updated">Last Updated</string>
     <string name="condition_description">Condition Description</string>
     <string name="feels_like">Feels like:</string>
+    <string name="deg_c">℃</string>
+    <string name="country">Country</string>
 
 
 </resources>

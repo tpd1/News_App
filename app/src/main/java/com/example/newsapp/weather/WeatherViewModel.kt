@@ -3,26 +3,23 @@ package com.example.newsapp.weather
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class WeatherViewModel(
     private val remoteWeatherSource: RemoteWeatherSource
-): ViewModel() {
-
+) : ViewModel() {
     var weatherData = MutableLiveData<ApiResponseStatus<WeatherApiResponse>>()
 
     fun getWeatherForecast(location: String) = viewModelScope.launch {
         try {
             val data = remoteWeatherSource.getForecast(location)
             weatherData.value = handleAPIResponse(data)
-        }
-        catch (e:Exception) {
+        } catch (e: Exception) {
             weatherData.value = ApiResponseStatus.Error("Location Not Found")
         }
     }
-
-
 
     /**
      * This function and the idea of using a APIResponseStatus class was designed by following
@@ -33,10 +30,10 @@ class WeatherViewModel(
         return when {
             // List know / expected errors from WeatherAPI:
             response.code() == 400 -> {
-                ApiResponseStatus.Error("No matching Location")
+                ApiResponseStatus.Error(Constants.ERROR_400)
             }
-            response.code() == 500 -> {
-                TODO("Catch other errors")
+            (response.code() == 401 || response.code() == 403) -> {
+                ApiResponseStatus.Error(Constants.ERROR_401)
             }
             // If response is 200-300 then return response body.
             response.isSuccessful -> {
@@ -45,7 +42,7 @@ class WeatherViewModel(
             }
             else -> {
                 // Un-categorised error.
-                ApiResponseStatus.Error("Unknown Error")
+                ApiResponseStatus.Error(Constants.UNKNOWN_ERROR)
             }
         }
     }

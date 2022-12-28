@@ -39,6 +39,11 @@ class Constants {
         const val SAVED_NEWS_DATABASE = "saved_article_database"
         const val SAVED_ARTICLE_TABLE = "saved_articles_table"
 
+        // Error messages
+        const val ERROR_400 = "Location Not Found"
+        const val ERROR_401 = "API Key Not Valid"
+        const val UNKNOWN_ERROR = "Unknown Error"
+
         // Misc strings
         const val BOOKMARK_ADDED = "Bookmark added successfully"
         const val BOOKMARK_ALREADY_SAVED = "Bookmark already saved."
@@ -48,6 +53,7 @@ class Constants {
         const val LOGIN_UNSUCCESSFUL = "Email or password incorrect"
         const val BOOKMARK_REMOVED = "Bookmark Removed"
         const val ALL_BOOKMARKS_REM = "All Bookmarks Removed"
+        const val DEFAULT_LOCATION = "London"
 
     }
 }
