@@ -24,6 +24,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         profileBinding = binding
 
         firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser
+        val name = user?.displayName
+        val nameText = "Welcome \n$name"
+        profileBinding.nameText.text = nameText
+
         // Set up on-click listeners for buttons
         profileBinding.chooseTopicsCard.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToTopicSelectFragment()

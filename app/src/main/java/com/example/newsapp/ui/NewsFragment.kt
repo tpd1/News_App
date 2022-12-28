@@ -43,8 +43,8 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
 
 
         // Observe changes to the article livedata list
-        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
+//        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
+//            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

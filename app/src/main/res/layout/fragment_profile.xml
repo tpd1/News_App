@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/profile_card"
+            android:id="@+id/logo_card"
             android:layout_width="@dimen/profile_page_image"
             android:layout_height="@dimen/profile_page_image"
             app:cardCornerRadius="@dimen/card_corner_radius"
@@ -23,11 +23,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/logo_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_small"
-                android:background="@drawable/profile_example" />
+                app:srcCompat="@drawable/login_logo"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -40,10 +40,9 @@
             android:text="@string/firstname_lastname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_card" />
+            app:layout_constraintTop_toBottomOf="@+id/logo_card" />
 
         <!--    Grid Layout for displaying the four dashboard cards-->
-
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
@@ -56,7 +55,6 @@
             app:layout_constraintTop_toBottomOf="@+id/name_text">
 
             <!--        Individual button cards-->
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/choose_topics_card"
                 android:clickable="true"

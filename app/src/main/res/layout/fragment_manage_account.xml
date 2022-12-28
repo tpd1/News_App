@@ -26,6 +26,25 @@
                 android:text="@string/manage_your_account" />
 
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/update_email_layout"
+                android:layout_width="match_parent"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_standard"
+                android:hint="@string/email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/update_email_text"
+                    android:layout_width="match_parent"
+                    android:textIsSelectable="false"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/update_name_layout"
                 android:layout_width="match_parent"
@@ -41,27 +60,19 @@
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/update_email_layout"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/update_name_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_standard"
-                android:hint="@string/email">
+                android:text="@string/update_name" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/update_email_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/update_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_standard"
-                android:hint="@string/password"
+                android:hint="@string/new_password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -77,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_standard"
-                android:hint="@string/confirm_password"
+                android:hint="@string/confirm_new_password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -90,10 +101,10 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/update_button"
+                android:id="@+id/update_pass_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/update" />
+                android:text="@string/update_password" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/del_acc_button"
