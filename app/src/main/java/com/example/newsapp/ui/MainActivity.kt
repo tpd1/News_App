@@ -17,8 +17,10 @@ import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
 import com.example.newsapp.data.local.LocalNewsSource
+import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.BookmarksViewModel
+import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -28,28 +30,20 @@ import com.google.android.material.appbar.MaterialToolbar
  */
 
 class MainActivity : AppCompatActivity() {
-
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
-
-    // Create DataStore for persisting user settings
-    private lateinit var dataStoreRepo: DataStoreRepo
-
     // Create ViewModel for storing settings to a DataStore, as we need it across the app.
     lateinit var settingsViewModel: SettingsViewModel
-
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
-
-    // Create Room database for saving bookmarked articles offline.
+    // Store news view model here to access "filter null images" toggle.
+    lateinit var newsViewModel: NewsViewModel
+    // Create room database for saving bookmarked articles offline.
     private lateinit var localNewsSource: LocalNewsSource
-
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
-
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
-
 
     /**
      *
@@ -60,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         //Set up View binding for main activity
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+
+        // Set up Remote API source for news. Create News View model as intermediate layer.
+        val remoteNewsSource = RemoteNewsSource(utilsContainer.newsApi, true)
+        newsViewModel = NewsViewModel(remoteNewsSource)
 
         // Set up bottom app navigation bar to access fragments.
         val navHostFragment =
@@ -75,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         createBottomNavBar()
 
         // Initialise datastore repository and ViewModel for topic selection.
-        dataStoreRepo = DataStoreRepo(this.applicationContext)
+        val dataStoreRepo = DataStoreRepo(this.applicationContext)
         settingsViewModel = SettingsViewModel(dataStoreRepo)
 
         // Initialise a local Room database and ViewModel for saving bookmarked articles.
@@ -108,7 +106,6 @@ class MainActivity : AppCompatActivity() {
             )
         )
         mainBinding.bottomNavView.setupWithNavController(navController)
-
         // If we load the full screen article view, hide the bottom nav bar for a cleaner look.
         navController.addOnDestinationChangedListener { _, frag, _ ->
             if (frag.id == R.id.articleFragment) {

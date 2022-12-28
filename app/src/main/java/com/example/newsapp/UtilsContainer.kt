@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.data.local.SavedArticleDatabase
 import com.example.newsapp.data.remote.NewsApiService
-import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.weather.RemoteWeatherSource
 import com.example.newsapp.weather.WeatherApiService
 import okhttp3.OkHttpClient
@@ -42,8 +41,8 @@ class UtilsContainer {
             .build()
 
     // use created retrofit instance with functions created in NewsApiService class.
-    private val api: NewsApiService = retrofitNews.create(NewsApiService::class.java)
-    val remoteDataSource = RemoteNewsSource(api)
+    val newsApi: NewsApiService = retrofitNews.create(NewsApiService::class.java)
+
 
     private val weatherApi: WeatherApiService = retrofitWeather.create(WeatherApiService::class.java)
     val remoteWeatherSource = RemoteWeatherSource(weatherApi)

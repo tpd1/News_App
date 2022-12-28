@@ -24,6 +24,11 @@ class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     val technologyEnabled: LiveData<Boolean> = dataRepo.technologyEnabled.asLiveData()
 
     val weatherLocation: LiveData<String> = dataRepo.weatherLocationFlow.asLiveData()
+    val filterImages: LiveData<Boolean> = dataRepo.filterNoImagesFlow.asLiveData()
+
+    fun setFilterImages(enabled: Boolean) {
+        viewModelScope.launch { dataRepo.setFilterImages(enabled) }
+    }
 
     fun setWeatherLocation(location: String) {
         viewModelScope.launch { dataRepo.setWeatherLocation(location) }

@@ -33,6 +33,7 @@ class Constants {
 
         // App Setting Names
         const val WEATHER_LOCATION = "weather location"
+        const val FILTER_IMAGES = "Filter results"
 
         // Data storage constants
         const val PREF_DATASTORE_NAME = "settings"

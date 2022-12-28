@@ -18,7 +18,6 @@ import com.example.newsapp.databinding.RowNewsArticleBinding
 class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
     PagingDataAdapter<NewsArticle, NewsAdapter.ViewHolder>(NewsArticleDiffUtil()) {
 
-
     interface OnArticleClickListener {
         fun onArticleClick(article: NewsArticle)
     }
@@ -28,6 +27,7 @@ class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
         val binding = RowNewsArticleBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
+
 
     //Holds each row in recyclerview
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,9 +40,7 @@ class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
     //Use view binding to row_news_article
     inner class ViewHolder(private val binding: RowNewsArticleBinding) :
         RecyclerView.ViewHolder(binding.root)
-    //,OnClickListener
     {
-
         // Set up click listener here rather than in onBindViewHolder, is re-created less often.
         init {
             binding.root.setOnClickListener {
@@ -70,9 +68,7 @@ class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
             binding.newsHeadline.text = article.title
             binding.sourceText.text = article.sourceID.replaceFirstChar { it.uppercase() }
             binding.datePosted.text = article.pubDate
-
             binding.executePendingBindings()
-
         }
     }
 

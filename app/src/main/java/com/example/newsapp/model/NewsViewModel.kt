@@ -20,6 +20,10 @@ class NewsViewModel (
         remoteNewsSource.getPagingNews(it).cachedIn(viewModelScope)
     }
 
+    fun setFilterResults(isFiltered: Boolean) {
+        remoteNewsSource.filterResults = isFiltered
+    }
+
     fun getCategoryNews(category: String) {
         currentCategory.value = category
     }

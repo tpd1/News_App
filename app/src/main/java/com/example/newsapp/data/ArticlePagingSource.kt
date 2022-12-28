@@ -17,7 +17,8 @@ private const val START_INDEX = 1
  */
 class ArticlePagingSource (
     private val newsApiService: NewsApiService,
-    private val category: String
+    private val category: String,
+    private val filterResults: Boolean
         ) : PagingSource<Int, NewsArticle>() {
 
 
@@ -27,12 +28,16 @@ class ArticlePagingSource (
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsArticle> {
         val pos = params.key ?: START_INDEX
-
         return try {
             val response = newsApiService.getCategoryNews(category, page = pos)
             val articles = response.results
+            val filteredArticles: List<NewsArticle> = if (filterResults) {
+                articles.filter { it.imageUrl != null }
+            } else {
+                articles
+            }
             LoadResult.Page(
-                data = articles,
+                data = filteredArticles,
                 prevKey = if (pos == START_INDEX) null else pos - 1, //Ensure start key is lowest key
                 nextKey = if (articles.isEmpty()) null else pos + 1  // When we reach end of API results
             )

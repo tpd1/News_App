@@ -13,7 +13,9 @@ import retrofit2.http.Query
 
 // Accessed by ArticleViewModel class to interact with retrofit and fetch articles.
 // Gets passed NewsAPIService from MainActivity, which contains a retrofit instance.
-class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
+class RemoteNewsSource(
+    private val newsAPIHandler: NewsApiService,
+    var filterResults: Boolean) {
 
    fun getPagingNews(q: String) =
        Pager(
@@ -22,9 +24,8 @@ class RemoteNewsSource(private val newsAPIHandler: NewsApiService) {
                maxSize = MAX_ARTICLES,
                enablePlaceholders = true
            ),
-           pagingSourceFactory = { ArticlePagingSource(newsAPIHandler, q) }
+           pagingSourceFactory = { ArticlePagingSource(newsAPIHandler, q, filterResults) }
        ).liveData
-
 }
 
 // structures the calls to the NewsData.io for topics and handles the response. Uses Retrofit library.

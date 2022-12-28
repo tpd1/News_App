@@ -11,6 +11,7 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsBinding
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.NewsArticle
+import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 
@@ -19,14 +20,14 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
     private val adapter = NewsAdapter(this) // RecyclerView adapter
     private lateinit var newsViewModel: NewsViewModel//Uses delegate class viewModels which preserves across UI configuration changes.
     private lateinit var tabLayout: TabLayout // fetch tablayout XML object
+    private lateinit var settingsViewModel: SettingsViewModel
 
     // View is passed from Fragment constructor because we defined it there.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Fetch repository instance from container created in Main Activity. Use it to create viewModel
-        val remoteNewsSource = (activity as MainActivity).utilsContainer.remoteDataSource
-        newsViewModel = NewsViewModel(remoteNewsSource)
+        newsViewModel = (activity as MainActivity).newsViewModel
 
         // Set up view/data binding
         newsfeedBinding = FragmentNewsBinding.bind(view)
@@ -42,9 +43,14 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
         setupToolbar()
 
 
+        settingsViewModel = (activity as MainActivity).settingsViewModel
+        settingsViewModel.filterImages.observe(viewLifecycleOwner) {
+                newsViewModel.setFilterResults(it)
+            }
+
         // Observe changes to the article livedata list
-//        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
-//            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
+        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

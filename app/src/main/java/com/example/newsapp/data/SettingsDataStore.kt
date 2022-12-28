@@ -32,7 +32,13 @@ class DataStoreRepo(context: Context) {
 
     object AppSettings {
         val weatherLocation = stringPreferencesKey(Constants.WEATHER_LOCATION)
+        val filterNoImages = booleanPreferencesKey(Constants.FILTER_IMAGES)
     }
+
+    val filterNoImagesFlow: Flow<Boolean> = dataStore.data.map { i ->
+        i[AppSettings.filterNoImages] ?: true
+    }
+
 
     val weatherLocationFlow: Flow<String> = dataStore.data.map { i ->
         i[AppSettings.weatherLocation] ?: "London"
@@ -114,6 +120,10 @@ class DataStoreRepo(context: Context) {
 
     suspend fun setWeatherLocation(location: String) {
         dataStore.edit {pref -> pref[AppSettings.weatherLocation] = location}
+    }
+
+    suspend fun setFilterImages(enabled: Boolean) {
+        dataStore.edit { pref -> pref[AppSettings.filterNoImages] = enabled }
     }
 
 }
