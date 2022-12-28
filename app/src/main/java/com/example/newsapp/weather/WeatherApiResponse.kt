@@ -7,7 +7,13 @@ import com.google.gson.annotations.SerializedName
  */
 data class WeatherApiResponse(
     @SerializedName("current") val currentWeather: CurrentWeather,
+    @SerializedName("location") val location: Location,
     @SerializedName("forecast") val forecast: WeeklyForecast
+)
+
+data class Location(
+    @SerializedName("name") val name: String,
+    @SerializedName("country") val country: String
 )
 
 /**

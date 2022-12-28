@@ -4,77 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_dark_onSecondaryContainer"
     tools:context=".ui.WeatherFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/location_edit_text"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enter_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/search_weather_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/search"
+        app:icon="@drawable/ic_baseline_search_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/locationText"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lastUpdatedText"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/last_updated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationText" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/icon_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/location_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Location">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/temperature_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Temperature">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/wind_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Wind speed">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/condition_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Condition">
-
-        </TextView>
+        android:layout_height="120dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastUpdatedText">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/weather_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="20dp"/>
+            android:id="@+id/weatherIcon"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/placeholder_sun" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/location_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:hint="Enter Location"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/search_weather_button"
-            style="@style/Widget.Material3.Button.IconButton.Filled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Search"
-            app:icon="@drawable/ic_baseline_search_24"
-            app:iconPadding="4dp" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/temperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8\u2103"
+                android:textSize="45sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.242" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feelsLikeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feels_like"
+                android:textSize="16sp"
+                android:layout_marginStart="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feelsLikeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-5\u2103"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/feelsLikeLabel"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/conditionText"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="@string/condition_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_layout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

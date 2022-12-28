@@ -82,6 +82,11 @@
     <string name="toggle_all_topics_switch">Toggle all topics switch</string>
     <string name="politics_topic_select_switch">Politics topic select switch</string>
     <string name="select_topics_below">Select Topics Below:</string>
+    <string name="location">Location</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="condition_description">Condition Description</string>
+    <string name="feels_like">Feels like:</string>
 
 
 </resources>
