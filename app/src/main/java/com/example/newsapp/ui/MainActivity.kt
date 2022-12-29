@@ -23,6 +23,7 @@ import com.example.newsapp.model.BookmarksViewModel
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 
 
 /**
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         //Set up View binding for main activity
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+
+        // Show login message if coming from login activity.
+        val msg = intent.extras?.getString("msg")
+        msg?.let { Snackbar.make(mainBinding.root, it, Snackbar.LENGTH_SHORT).show() }
 
         // Set up Remote API source for news. Create News View model as intermediate layer.
         val remoteNewsSource = RemoteNewsSource(utilsContainer.newsApi, true)

@@ -27,6 +27,10 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
 
+        // Show message if just registered an account.
+        val msg = intent.extras?.getString("msg")
+        msg?.let { Snackbar.make(loginBinding.root, it, Snackbar.LENGTH_SHORT).show() }
+
         // Get firebase instance
         fireBase = FirebaseAuth.getInstance()
 
@@ -39,9 +43,8 @@ class LoginActivity : AppCompatActivity() {
             if (isValidInput(userEmail, userPassword)) {
                 fireBase.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Snackbar.make(loginBinding.root, LOGIN_SUCCESS, Snackbar.LENGTH_SHORT)
-                            .show()
                         val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("msg", LOGIN_SUCCESS)
                         startActivity(intent)
                         finish()
                     } else {

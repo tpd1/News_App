@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import com.example.newsapp.Constants.Companion.ACC_SUCCESS
 import com.example.newsapp.Constants.Companion.ENTER_PASSWORD
-import com.example.newsapp.Constants.Companion.LOGIN_SUCCESS
 import com.example.newsapp.Constants.Companion.LOGIN_UNSUCCESSFUL
 import com.example.newsapp.Constants.Companion.NON_VALID_EMAIL
 import com.example.newsapp.Constants.Companion.NOT_MATCHING
@@ -44,19 +44,16 @@ class RegisterActivity : AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Snackbar.make(
-                                registerBinding.root,
-                                LOGIN_SUCCESS,
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-
                             // Set the user name
                             val user = firebaseAuth.currentUser
                             val profileUpdates = UserProfileChangeRequest.Builder()
                                 .setDisplayName(userName)
                                 .build()
                             user?.updateProfile(profileUpdates)
-                            navigateToLogin()
+                            val intent = Intent(this, LoginActivity::class.java)
+                            intent.putExtra("msg", ACC_SUCCESS)
+                            startActivity(intent)
+                            finish()
                         } else {
                             Snackbar.make(
                                 registerBinding.root,
@@ -69,7 +66,9 @@ class RegisterActivity : AppCompatActivity() {
         }
         // add on click listener to login button.
         registerBinding.backToLoginButton.setOnClickListener {
-            navigateToLogin()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -97,13 +96,5 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    /**
-     * Helper function - Navigates to the login activity.
-     */
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 }
 

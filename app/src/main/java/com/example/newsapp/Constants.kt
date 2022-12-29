@@ -58,6 +58,7 @@ class Constants {
         const val BOOKMARK_ALREADY_SAVED = "Bookmark already saved."
         const val ENTER_PASSWORD = "Password Must be over 6 characters long"
         const val LOGIN_SUCCESS = "Login Successful"
+        const val ACC_SUCCESS = "Account Created Successfully. Log in to continue."
         const val BOOKMARK_REMOVED = "Bookmark Removed"
         const val ALL_BOOKMARKS_REM = "All Bookmarks Removed"
         const val DEFAULT_LOCATION = "London"
