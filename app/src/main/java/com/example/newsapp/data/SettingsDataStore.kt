@@ -37,13 +37,18 @@ class DataStoreRepo(context: Context) {
     object AppSettings {
         val weatherLocation = stringPreferencesKey(Constants.WEATHER_LOCATION)
         val filterNoImages = booleanPreferencesKey(Constants.FILTER_IMAGES)
+        val notifications = stringPreferencesKey("Notifications")
+    }
+
+    // For each user setting, create a variable to store as a Flow.
+    val notifications: Flow<String> = dataStore.data.map { i ->
+        i[AppSettings.notifications] ?: Constants.ALL
     }
 
     // For each user setting, create a variable to store as a Flow.
     val filterNoImagesFlow: Flow<Boolean> = dataStore.data.map { i ->
         i[AppSettings.filterNoImages] ?: true
     }
-
     val weatherLocationFlow: Flow<String> = dataStore.data.map { i ->
         i[AppSettings.weatherLocation] ?: "London"
     }
@@ -52,35 +57,27 @@ class DataStoreRepo(context: Context) {
     val businessEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.business] ?: false
     }
-
     val entertainmentEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.entertainment] ?: false
     }
-
     val environmentEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.environment] ?: false
     }
-
     val foodEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.food] ?: false
     }
-
     val healthEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.health] ?: false
     }
-
     val politicsEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.politics] ?: false
     }
-
     val scienceEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.science] ?: false
     }
-
     val sportsEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.sports] ?: false
     }
-
     val technologyEnabled: Flow<Boolean> = dataStore.data.map { i ->
         i[TopicKeys.technology] ?: false
     }
@@ -89,7 +86,6 @@ class DataStoreRepo(context: Context) {
         The following functions are called when changing
         a datastore preference (as the user toggles a switch for example).
      */
-
     suspend fun setBusinessEnabled(enabled: Boolean) {
         dataStore.edit { pref -> pref[TopicKeys.business] = enabled }
     }
@@ -133,6 +129,11 @@ class DataStoreRepo(context: Context) {
     suspend fun setFilterImages(enabled: Boolean) {
         dataStore.edit { pref -> pref[AppSettings.filterNoImages] = enabled }
     }
+
+    suspend fun setNotifications(status: String) {
+        dataStore.edit { pref -> pref[AppSettings.notifications] = status }
+    }
+
 
 }
 

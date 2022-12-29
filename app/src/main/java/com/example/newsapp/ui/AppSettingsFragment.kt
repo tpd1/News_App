@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.newsapp.Constants.Companion.ALL
+import com.example.newsapp.Constants.Companion.NONE
+import com.example.newsapp.Constants.Companion.SELECTED
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentAppSettingsBinding
 import com.example.newsapp.model.SettingsViewModel
@@ -34,6 +37,33 @@ class AppSettingsFragment : Fragment(R.layout.fragment_app_settings) {
         // Observe the 'Filter articles with no images' toggle.
         settingsViewModel.filterImages.observe(viewLifecycleOwner) {
             appSettingsBinding.filterResultsSwitch.isChecked = it
+        }
+
+        // Set toggle group status based on DataStore saved value
+        settingsViewModel.notifications.observe(viewLifecycleOwner) { status ->
+            when (status) {
+                ALL -> appSettingsBinding.allTopicsButton.isChecked = true
+                SELECTED -> appSettingsBinding.selectedTopicsButton.isChecked = true
+                NONE -> appSettingsBinding.noTopicsButton.isChecked = true
+            }
+
+        }
+
+        // Add click listener to toggle group and update settings datastore.
+        appSettingsBinding.toggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.no_topics_button -> {
+                        settingsViewModel.setNotifications(NONE)
+                    }
+                    R.id.selected_topics_button -> {
+                        settingsViewModel.setNotifications(SELECTED)
+                    }
+                    R.id.all_topics_button -> {
+                        settingsViewModel.setNotifications(ALL)
+                    }
+                }
+            }
         }
 
         // Apply the changes to the filter articles button to the newsViewModel.

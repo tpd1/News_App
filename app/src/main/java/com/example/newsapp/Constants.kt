@@ -18,6 +18,9 @@ class Constants {
         const val WEATHER_API_KEY = "21c4fa21cb21458f86e100153222712"
         const val WEATHER_API_URL = "https://api.weatherapi.com/v1/"
 
+        // Firebase
+       // const val FIREBASE_URL = "https://fcm.googleapis.com"
+
         // Topics for selection & tab layout
         const val BUSINESS = "business"
         const val ENTERTAINMENT = "entertainment"
@@ -61,13 +64,18 @@ class Constants {
         const val ACC_SUCCESS = "Account Created Successfully. Log in to continue."
         const val BOOKMARK_REMOVED = "Bookmark Removed"
         const val ALL_BOOKMARKS_REM = "All Bookmarks Removed"
-        const val DEFAULT_LOCATION = "London"
+        //const val DEFAULT_LOCATION = "London"
         const val NAME_SUCCESS = "Name Updated Successfully"
         const val PASSWORD_SUCCESS = "Password Updated Successfully"
         const val DIALOG_DELETE_ACC = "Permanently Delete Your Account?"
         const val DELETE_ACCOUNT = "Delete Account"
         const val YES = "YES"
         const val NO = "NO"
+
+        // Notification Settings
+        const val ALL = "all"
+        const val SELECTED = "selected"
+        const val NONE = "None"
 
     }
 }

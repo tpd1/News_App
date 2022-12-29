@@ -35,22 +35,16 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
-
     // Create ViewModel for storing settings to a DataStore, as we need it across the app.
     lateinit var settingsViewModel: SettingsViewModel
-
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
-
     // Store news view model here to access "filter null images" toggle.
     lateinit var newsViewModel: NewsViewModel
-
     // Create room database for saving bookmarked articles offline.
     private lateinit var localNewsSource: LocalNewsSource
-
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
-
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 

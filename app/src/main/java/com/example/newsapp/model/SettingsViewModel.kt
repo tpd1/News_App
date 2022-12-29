@@ -28,8 +28,14 @@ class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     // Other app settings
     val weatherLocation: LiveData<String> = dataRepo.weatherLocationFlow.asLiveData()
     val filterImages: LiveData<Boolean> = dataRepo.filterNoImagesFlow.asLiveData()
+    val notifications: LiveData<String> = dataRepo.notifications.asLiveData()
+
 
     // Functions to change the values stored in the data repository.
+    fun setNotifications(status: String) {
+        viewModelScope.launch { dataRepo.setNotifications(status) }
+    }
+
     fun setFilterImages(enabled: Boolean) {
         viewModelScope.launch { dataRepo.setFilterImages(enabled) }
     }
@@ -37,7 +43,6 @@ class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     fun setWeatherLocation(location: String) {
         viewModelScope.launch { dataRepo.setWeatherLocation(location) }
     }
-
 
     fun setBusinessEnabled(value: Boolean) {
         viewModelScope.launch { dataRepo.setBusinessEnabled(value) }
