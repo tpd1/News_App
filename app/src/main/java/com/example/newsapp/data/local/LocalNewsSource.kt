@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
  * Interface for fetching and inserting saved articles in the Bookmarks fragment.
  * Designed by following Android code-labs tutorial (Room with a View):
  * https://developer.android.com/codelabs/android-room-with-a-view-kotlin
- * @param articleDao - Instance of the data access object to handle Room database calls.
+ * @property articleDao - Instance of the data access object to handle Room database calls.
  */
 class LocalNewsSource(private val articleDao: ArticleDao) {
 

@@ -13,7 +13,7 @@ import com.example.newsapp.databinding.RowNewsArticleBinding
  * Class to provide a source for the paging of news articles in the recyclerview.
  * Implemented by following tutorials from Florian Walther and Android code-labs:
  * https://github.com/codinginflow/ImageSearchApp
- * @param articleClickListener - click listener applied to articles in the recyclerview
+ * @property articleClickListener - click listener applied to articles in the recyclerview
  */
 class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
     PagingDataAdapter<NewsArticle, NewsAdapter.ViewHolder>(NewsArticleDiffUtil()) {
@@ -72,7 +72,9 @@ class NewsAdapter(private val articleClickListener: OnArticleClickListener) :
         }
     }
 
-    //Diff Util Class
+    /**
+     * Required for paging library. Checks whether items in the recyclerview are the same.
+     */
     private class NewsArticleDiffUtil : DiffUtil.ItemCallback<NewsArticle>() {
 
         override fun areItemsTheSame(oldItem: NewsArticle, newItem: NewsArticle): Boolean {

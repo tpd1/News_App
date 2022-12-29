@@ -10,6 +10,9 @@ import com.example.newsapp.databinding.FragmentAppSettingsBinding
 import com.example.newsapp.model.SettingsViewModel
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Class associated with the App Settings Fragment. Provides functionality to the UI elements.
+ */
 class AppSettingsFragment : Fragment(R.layout.fragment_app_settings) {
     private lateinit var appSettingsBinding: FragmentAppSettingsBinding
     private lateinit var firebaseAuth: FirebaseAuth

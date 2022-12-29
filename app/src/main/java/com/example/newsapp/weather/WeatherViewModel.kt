@@ -7,6 +7,11 @@ import com.example.newsapp.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
+/**
+ * View model for the weather bonus feature. provides a layer between the UI and data source in order
+ * to store data in a lifecycle aware manner.
+ * @property remoteWeatherSource The instance of the class that interacts with the Weather API.
+ */
 class WeatherViewModel(
     private val remoteWeatherSource: RemoteWeatherSource
 ) : ViewModel() {
@@ -22,6 +27,9 @@ class WeatherViewModel(
     }
 
     /**
+     * Handles the response by the API, handling errors and returning the data wrapped in a
+     * repose status class.
+     *
      * This function and the idea of using a APIResponseStatus class was designed by following
      * a YouTube tutorial by Stefan Jovanovic. Adapted for use with the Weather API.
      * https://github.com/stevdza-san/Foody/

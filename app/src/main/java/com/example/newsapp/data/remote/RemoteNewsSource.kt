@@ -12,22 +12,36 @@ import com.example.newsapp.model.APIResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// Accessed by ArticleViewModel class to interact with retrofit and fetch articles.
-// Gets passed NewsAPIService from MainActivity, which contains a retrofit instance.
+/**
+ * Interacts with the API service and uses Paging3 library to handle pagination of API calls.
+ * Pagination functions designed by following a tutorial by Vikas Kumar:
+ * https://medium.com/swlh/paging3-recyclerview-pagination-made-easy-333c7dfa8797
+ * @param newsAPIHandler Instance of Retrofit interface for making calls to NewsAPI
+ * @param filterResults Decides if the articles returned will be filtered by imageURL
+ */
 class RemoteNewsSource(
     private val newsAPIHandler: NewsApiService,
-    var filterResults: Boolean) {
+    var filterResults: Boolean
+) {
 
-   fun getPagingCategoryNews(category: String) =
-       Pager(
-           config = PagingConfig(
-               pageSize = PAGE_SIZE,
-               maxSize = MAX_ARTICLES,
-               enablePlaceholders = true
-           ),
-           pagingSourceFactory = { CategoryPagingSource(newsAPIHandler, category, filterResults) }
-       ).liveData
+    /**
+     * Handles pagination of fetching news by category.
+     * @param category The selected news topic
+     */
+    fun getPagingCategoryNews(category: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                maxSize = MAX_ARTICLES,
+                enablePlaceholders = true
+            ),
+            pagingSourceFactory = { CategoryPagingSource(newsAPIHandler, category, filterResults) }
+        ).liveData
 
+    /**
+     * Handles pagination of fetching news by search query.
+     * @param q The search term
+     */
     fun getPagingSearchNews(q: String) =
         Pager(
             config = PagingConfig(
@@ -37,14 +51,12 @@ class RemoteNewsSource(
             ),
             pagingSourceFactory = { SearchPagingSource(newsAPIHandler, q, filterResults) }
         ).liveData
-
 }
 
-// structures the calls to the NewsData.io for topics and handles the response. Uses Retrofit library.
-// Uses co-routines with suspend functions. If this was executed on main UI thread
-// It would freeze whilst waiting for the api response.
+/**
+ * structures the calls to the NewsData.io for topics and handles the response using Retrofit library.
+ */
 interface NewsApiService {
-
     // Fetches news based on the category selected. By default searches UK news articles.
     @GET("news?")
     suspend fun getCategoryNews(
@@ -54,7 +66,6 @@ interface NewsApiService {
         @Query("page") page: Int,
         @Query("apikey") key: String = Constants.NEWS_API_KEY
     ): APIResponse
-
 
     // Function to fetch news articles based on a search term
     @GET("news?")

@@ -8,11 +8,13 @@ import com.example.newsapp.data.DataStoreRepo
 import kotlinx.coroutines.launch
 
 /**
- *
+ * Provides an interface between the DataStore layer and the UI. Used to store user
+ * settings within the app.
+ * @property dataRepo The DataStore repository instance used to store settings.
  */
 class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
 
-    // Linked to
+    // Topic selection switches
     val businessEnabled: LiveData<Boolean> = dataRepo.businessEnabled.asLiveData()
     val entertainmentEnabled: LiveData<Boolean> = dataRepo.entertainmentEnabled.asLiveData()
     val environmentEnabled: LiveData<Boolean> = dataRepo.environmentEnabled.asLiveData()
@@ -23,9 +25,11 @@ class SettingsViewModel(private val dataRepo: DataStoreRepo) : ViewModel() {
     val sportsEnabled: LiveData<Boolean> = dataRepo.sportsEnabled.asLiveData()
     val technologyEnabled: LiveData<Boolean> = dataRepo.technologyEnabled.asLiveData()
 
+    // Other app settings
     val weatherLocation: LiveData<String> = dataRepo.weatherLocationFlow.asLiveData()
     val filterImages: LiveData<Boolean> = dataRepo.filterNoImagesFlow.asLiveData()
 
+    // Functions to change the values stored in the data repository.
     fun setFilterImages(enabled: Boolean) {
         viewModelScope.launch { dataRepo.setFilterImages(enabled) }
     }

@@ -1,21 +1,14 @@
 <resources>
-    <string name="app_name">News App</string>
+    <string name="app_name">News Link</string>
     <string name="logout">Log Out</string>
     <string name="app_settings">App Settings</string>
-    <string name="home">Home</string>
     <string name="profile">Profile</string>
-    <string name="top_stories">Top Stories</string>
     <string name="news">News</string>
     <string name="weather">Weather</string>
-    <string name="my_profile">My Profile</string>
-    <string name="upload">Upload</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="choose_topics">Select Topics</string>
     <string name="sign_out">Sign Out</string>
     <string name="my_account">Manage Account</string>
-    <string name="tim_deville">Tim Deville</string>
-    <string name="news_topics">News Topics</string>
-    <string name="topic_title">Topic Title</string>
 
     <!--    News Categories-->
     <string name="category_business">Business</string>
@@ -27,22 +20,12 @@
     <string name="food">Food</string>
     <string name="politics">Politics</string>
     <string name="category_technology">Technology</string>
-    <string name="select_topics">Select Topics Below</string>
-    <string name="most_popular">Most Popular</string>
     <string name="trending">Trending</string>
-    <string name="all">All</string>
-    <string name="_0_topics_selected">0 Topics Selected</string>
     <string name="firstname_lastname">Firstname Lastname</string>
     <string name="search">Search</string>
-    <string name="notifications">Notifications</string>
     <string name="most_read">Most Read</string>
-    <string name="news_content">News Content</string>
     <string name="news_headline">News Headline</string>
-    <string name="image_description_topic">Image description topic</string>
-    <string name="tick_box_description">Tick box</string>
     <string name="topic_category">Topic Category</string>
-    <string name="article_date">Article Date</string>
-    <string name="select_news_topics_text">Select News Topics</string>
 
     <!--    Topic toggle switch Descriptions-->
     <string name="business_topic_switch">Business Topic Switch</string>
@@ -52,16 +35,14 @@
     <string name="science_topic_switch">Science topic switch</string>
     <string name="sports_topic_switch">Sports topic switch</string>
     <string name="technology_topic_switch">Technology topic switch</string>
+
     <string name="share_button">Share</string>
     <string name="manage_account">Manage Account</string>
-
     <string name="food_topic_switch">Food topic switch</string>
-    <string name="bookmarkarticle">bookmarkArticle</string>
-    <string name="NewsArticle">News Article</string>
-    <string name="fullArticle">Full Article</string>
+    <string name="bookmark_article">bookmarkArticle</string>
+    <string name="full_Article">Full Article</string>
     <string name="dummy_date">dd/mm/yyyy</string>
     <string name="no_bookmarks_added">No bookmarks added</string>
-    <string name="welcome_to_news_link_login_below_to_get_started">Welcome to News Link. Login below to get started.</string>
     <string name="welcome_to_news_link">Welcome to News Link</string>
     <string name="login_below_to_get_started">Login below to get started</string>
     <string name="login">Login</string>
@@ -71,15 +52,11 @@
     <string name="email">Email</string>
     <string name="create_a_new_account">Create a New Account</string>
     <string name="already_have_an_account">Already have an account?</string>
-    <string name="delete_all">Delete all</string>
     <string name="remove_all">Remove All</string>
     <string name="manage_your_account">Manage your account</string>
     <string name="full_name">Full Name</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="update">Update</string>
     <string name="delete_my_account">Delete My Account</string>
-    <string name="toggle_all">Toggle All</string>
-    <string name="toggle_all_topics_switch">Toggle all topics switch</string>
     <string name="politics_topic_select_switch">Politics topic select switch</string>
     <string name="select_topics_below">Select Topics Below:</string>
     <string name="location">Location</string>
@@ -93,6 +70,5 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="update_name">Update Name</string>
     <string name="update_password">Update Password</string>
-
 
 </resources>

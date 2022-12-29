@@ -12,8 +12,8 @@ import kotlinx.parcelize.Parcelize
 /** A table in the Room database that stores individual articles bookmarked by the user.
  * Designed by following Android official tutorial (Room with a View):
 * https://developer.android.com/codelabs/android-room-with-a-view-kotlin
- * @param artId - A unique ID for each article
- * @param article - News Article class object containing article details from API.
+ * @property artId - A unique ID for each article
+ * @property article - News Article class object containing article details from API.
 */
 @Parcelize
 @TypeConverters(ArticleConverter::class)

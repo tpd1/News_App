@@ -11,11 +11,14 @@ import com.example.newsapp.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-// Create a DataStore instance. Context passed from MainActivity
+// Create a DataStore instance outside the class. This is the only way i could make it work?
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.PREF_DATASTORE_NAME)
 
+/**
+ * Provides local storage for user settings, using a DataStore object.
+ */
 class DataStoreRepo(context: Context) {
-    private val dataStore = context.dataStore // This is the only way i could make it work?
+    private val dataStore = context.dataStore
 
     // Set up keys that will be used in the DataStore. These match the topics available for selection.
     object TopicKeys {
@@ -30,15 +33,16 @@ class DataStoreRepo(context: Context) {
         val technology = booleanPreferencesKey(Constants.TECHNOLOGY)
     }
 
+    // Define keys that are used for other settings in the app.
     object AppSettings {
         val weatherLocation = stringPreferencesKey(Constants.WEATHER_LOCATION)
         val filterNoImages = booleanPreferencesKey(Constants.FILTER_IMAGES)
     }
 
+    // For each user setting, create a variable to store as a Flow.
     val filterNoImagesFlow: Flow<Boolean> = dataStore.data.map { i ->
         i[AppSettings.filterNoImages] ?: true
     }
-
 
     val weatherLocationFlow: Flow<String> = dataStore.data.map { i ->
         i[AppSettings.weatherLocation] ?: "London"
@@ -81,7 +85,11 @@ class DataStoreRepo(context: Context) {
         i[TopicKeys.technology] ?: false
     }
 
-    // Called when changing a datastore preference (as the user toggles a switch).
+    /*
+        The following functions are called when changing
+        a datastore preference (as the user toggles a switch for example).
+     */
+
     suspend fun setBusinessEnabled(enabled: Boolean) {
         dataStore.edit { pref -> pref[TopicKeys.business] = enabled }
     }
@@ -119,7 +127,7 @@ class DataStoreRepo(context: Context) {
     }
 
     suspend fun setWeatherLocation(location: String) {
-        dataStore.edit {pref -> pref[AppSettings.weatherLocation] = location}
+        dataStore.edit { pref -> pref[AppSettings.weatherLocation] = location }
     }
 
     suspend fun setFilterImages(enabled: Boolean) {

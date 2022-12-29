@@ -12,7 +12,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-// Container for dependencies used in repository, to ensure they are shared across app.
+/**
+ * Provides a container for dependencies used in repository, to ensure they are shared across app.
+ */
 class UtilsContainer {
 
     //Create a GsonConverter - passed to retrofit builders
@@ -43,7 +45,7 @@ class UtilsContainer {
     // use created retrofit instance with functions created in NewsApiService class.
     val newsApi: NewsApiService = retrofitNews.create(NewsApiService::class.java)
 
-
+    // Create a weather api interface using the retrofit instance.
     private val weatherApi: WeatherApiService = retrofitWeather.create(WeatherApiService::class.java)
     val remoteWeatherSource = RemoteWeatherSource(weatherApi)
 

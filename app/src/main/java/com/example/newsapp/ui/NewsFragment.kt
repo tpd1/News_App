@@ -16,19 +16,27 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 
+/**
+ * Provides functionality to the news feed fragment which displays the RecyclerView list of articles.
+ */
 class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClickListener {
     private lateinit var newsfeedBinding: FragmentNewsBinding
     private val adapter = NewsAdapter(this) // RecyclerView adapter
     private lateinit var newsViewModel: NewsViewModel//Uses delegate class viewModels which preserves across UI configuration changes.
-    private lateinit var tabLayout: TabLayout // fetch tablayout XML object
+    private lateinit var tabLayout: TabLayout // fetch tab layout XML object
     private lateinit var settingsViewModel: SettingsViewModel
 
-    // View is passed from Fragment constructor because we defined it there.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Fetch repository instance from container created in Main Activity. Use it to create viewModel
+        // Fetch view model instance from Main Activity as we need it in other fragments.
         newsViewModel = (activity as MainActivity).newsViewModel
+
+        // Fetch the settings view model and observe the "Filter articles with no image URL" switch
+        settingsViewModel = (activity as MainActivity).settingsViewModel
+        settingsViewModel.filterImages.observe(viewLifecycleOwner) {
+            newsViewModel.setFilterResults(it)
+        }
 
         // Set up view/data binding
         newsfeedBinding = FragmentNewsBinding.bind(view)
@@ -43,18 +51,10 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
         tabLayout = newsfeedBinding.tabLayout
         setupToolbar()
 
-
-        settingsViewModel = (activity as MainActivity).settingsViewModel
-        settingsViewModel.filterImages.observe(viewLifecycleOwner) {
-                newsViewModel.setFilterResults(it)
-            }
-
         // Observe changes to the article livedata list and update recyclerView
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it) }
-
-        // Observe changes to the search query, update adapter if not null
-
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -66,22 +66,29 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
                         else -> newsViewModel.getCategoryNews(topic)
                     }
                     newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
-                        adapter.submitData(viewLifecycleOwner.lifecycle, it) }
+                        adapter.submitData(viewLifecycleOwner.lifecycle, it)
                     }
                 }
-            override fun onTabUnselected(tab: Tab?) {}
-            override fun onTabReselected(tab: Tab?) {}
+            }
+
+            override fun onTabUnselected(tab: Tab?) {} // Not needed
+            override fun onTabReselected(tab: Tab?) {} // Not needed
         })
 
+        // Set on click listener for search button
         newsfeedBinding.searchButton.setOnClickListener {
             val query = newsfeedBinding.searchQueryText.text.toString()
             if (query.isNotBlank()) {
                 newsViewModel.getSearchNews(query)
-
+                // Observe the returned liveData and use if not null.
                 newsViewModel.queryLiveData.observe(viewLifecycleOwner) {
-                    it?.let {
+                    if (it != null) {
                         adapter.submitData(viewLifecycleOwner.lifecycle, it)
-                    }
+                    } else Snackbar.make(
+                        newsfeedBinding.root,
+                        "Please enter a search query",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } else {
                 Snackbar.make(
@@ -93,26 +100,35 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
         }
     }
 
-    // helper function to create a single tab in the tablayout, capitalising the tab name.
+    /**
+     *  helper function to create a single tab in the tab layout, capitalising the tab name.
+     *  @param topic The name of the tab to be created.
+     */
     private fun createTab(topic: String) {
         val tab = tabLayout.newTab()
             .setText(topic.replaceFirstChar { it.uppercase() })
         tabLayout.addTab(tab)
     }
 
+    /**
+     * Allows the user to navigate to an article when clicked.
+     * @param article the article that has been clicked
+     */
     override fun onArticleClick(article: NewsArticle) {
         val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(article)
         findNavController().navigate(action)
     }
 
-    // Choose tabs in toolbar based on user selected tabs. Uses a reference to the topicViewModel
-    // to observe the liveData in the DataStore, and add tabs accordingly. Reacts to changes in topic selection.
+
+    /**
+     * Sets up the tab layout based on the user-selected topics.
+     */
     private fun setupToolbar() {
         val settingsViewModel =
-            (activity as MainActivity).settingsViewModel // get topicViewmodel for data
+            (activity as MainActivity).settingsViewModel // get topic View model for data
 
         tabLayout.removeAllTabs() // Start by removing all tabs from layout
-        createTab(Constants.TRENDING)
+        createTab(Constants.TRENDING) // Always have a trending tab.
 
         // For each topic category observe data changes and create a tab according to toggle position.
         // If the saved value is true then create a tab.
@@ -152,6 +168,5 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
             if (it) createTab(Constants.TECHNOLOGY)
         }
     }
-
 
 }

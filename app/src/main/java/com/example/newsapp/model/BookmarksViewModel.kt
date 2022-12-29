@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
  * Separates backend from UI to allow for a lifecycle-aware architecture.
  * Designed by following the 'Room with a View' Android code-labs tutorial:
  * https://developer.android.com/codelabs/android-room-with-a-view-kotlin#15
- * @param localNewsSource - Reference to the Room database source containing saved articles.
+ * @property localNewsSource - Reference to the Room database source containing saved articles.
  */
 class BookmarksViewModel (private val localNewsSource: LocalNewsSource) : ViewModel() {
 

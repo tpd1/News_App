@@ -9,11 +9,12 @@ import java.io.IOException
 private const val START_INDEX = 1
 
 /**
- * Class to provide a source for the paging of news articles in the recyclerview.
+ * Class to provide a source for the paging of categorised news articles in the recyclerview.
  * Designed by following tutorials by Florian Walther and Android code-labs:
  * https://github.com/codinginflow/ImageSearchApp
- * @param newsApiService - interface that shapes queries to the API
- * @param category - For fetching category news.
+ * @property newsApiService Interface that shapes queries to the API
+ * @property category For fetching category news.
+ * @property filterResults Whether the results will be filtered by having no imageURL.
  */
 class CategoryPagingSource (
     private val newsApiService: NewsApiService,
@@ -21,11 +22,16 @@ class CategoryPagingSource (
     private val filterResults: Boolean
         ) : PagingSource<Int, NewsArticle>() {
 
-
+    /**
+     * For handling the last accessed position in the list. Not used in this project.
+     */
     override fun getRefreshKey(state: PagingState<Int, NewsArticle>): Int? {
-        TODO("Not yet implemented")
+        return null
     }
 
+    /***
+     * Loads items into the list
+     */
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsArticle> {
         val pos = params.key ?: START_INDEX
         return try {

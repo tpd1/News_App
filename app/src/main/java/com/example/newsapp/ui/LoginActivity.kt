@@ -12,7 +12,10 @@ import com.example.newsapp.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
-
+/**
+ * Provides functionality to the login activity UI. Uses Firebase authentication to
+ * allow users to login to the app.
+ */
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginBinding: ActivityLoginBinding
     private lateinit var fireBase: FirebaseAuth
@@ -24,20 +27,26 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
 
+        // Get firebase instance
         fireBase = FirebaseAuth.getInstance()
 
+        // Set on click listener for the login button.
         loginBinding.loginButton.setOnClickListener {
             val userEmail = loginBinding.loginEmail.text.toString()
             val userPassword = loginBinding.loginPassword.text.toString()
 
+            // Attempt sign-in using Firebase.
             if (isValidInput(userEmail, userPassword)) {
                 fireBase.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Snackbar.make(loginBinding.root, LOGIN_SUCCESS, Snackbar.LENGTH_SHORT).show()
-                        navigateToNews()
+                        Snackbar.make(loginBinding.root, LOGIN_SUCCESS, Snackbar.LENGTH_SHORT)
+                            .show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                         finish()
                     } else {
-                        Snackbar.make(loginBinding.root, LOGIN_UNSUCCESSFUL, Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(loginBinding.root, LOGIN_UNSUCCESSFUL, Snackbar.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -50,12 +59,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun navigateToNews() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
-
+    /**
+     * Checks whether the email and password are in the correct format.
+     * @param email The email to be checked.
+     * @param password The password to be checked.
+     * @return true if both inputs are valid, false otherwise.
+     */
     private fun isValidInput(email: String, password: String): Boolean {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
             loginBinding.loginEmail.error = NON_VALID_EMAIL
@@ -67,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
-
 
 }
 

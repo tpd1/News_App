@@ -2,17 +2,22 @@ package com.example.newsapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.newsapp.Constants
+import com.example.newsapp.Constants.Companion.DELETE_ACCOUNT
+import com.example.newsapp.Constants.Companion.DELETE_ACC_FAILED
 import com.example.newsapp.Constants.Companion.DIALOG_DELETE_ACC
 import com.example.newsapp.Constants.Companion.NAME_SUCCESS
+import com.example.newsapp.Constants.Companion.NO
 import com.example.newsapp.Constants.Companion.PASSWORD_SUCCESS
+import com.example.newsapp.Constants.Companion.PASS_UPDATE_FAIL
 import com.example.newsapp.Constants.Companion.UNCHANGED_NAME
+import com.example.newsapp.Constants.Companion.USERNAME_UPDATE_FAIL
+import com.example.newsapp.Constants.Companion.YES
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentManageAccountBinding
 import com.google.android.material.snackbar.Snackbar
@@ -36,8 +41,10 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
         val binding = FragmentManageAccountBinding.inflate(inflater, container, false)
         manageAccountBinding = binding
 
+        // Get Firebase instance.
         firebaseAuth = FirebaseAuth.getInstance()
-        // Fill EditText boxes with current user's details.
+
+        // pre-fill EditText boxes with current user's details.
         val user = firebaseAuth.currentUser
         val currentName = user?.displayName
         val email = user?.email
@@ -76,12 +83,12 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
      */
     private fun confirmDelete() {
         val builder = AlertDialog.Builder(this.requireContext())
-        builder.setTitle("Delete Account")
+        builder.setTitle(DELETE_ACCOUNT)
         builder.setMessage(DIALOG_DELETE_ACC)
-        builder.setPositiveButton("Yes") { _, _ ->
+        builder.setPositiveButton(YES) { _, _ ->
             deleteAccount()
         }
-        builder.setNegativeButton("No") { _, _ ->
+        builder.setNegativeButton(NO) { _, _ ->
         }
         val dialog = builder.create()
         dialog.show()
@@ -97,12 +104,12 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Snackbar.make(
-                        manageAccountBinding.root,
-                        PASSWORD_SUCCESS,
-                        Snackbar.LENGTH_SHORT
+                        manageAccountBinding.root, PASSWORD_SUCCESS, Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
-                    Log.i("Password", "Password update failed")
+                    Snackbar.make(
+                        manageAccountBinding.root, PASS_UPDATE_FAIL, Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -125,7 +132,9 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
-                    Log.i("User name", "User name failed")
+                    Snackbar.make(
+                        manageAccountBinding.root, USERNAME_UPDATE_FAIL, Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -141,13 +150,15 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
                     startActivity(intent)
                     requireActivity().finish()
                 } else {
-                    Log.i("Delete Account", "Delete Account Failed")
+                    Snackbar.make(
+                        manageAccountBinding.root, DELETE_ACC_FAILED, Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
 
     /**
-     * Checks whether the password is in a valid format.
+     * Checks whether the password is in a valid format and matches the validation password.
      * @param password The password entered by the user.
      * @param confirmPass The validation password entered by the user.
      * @return true if the email and password is valid, false otherwise.

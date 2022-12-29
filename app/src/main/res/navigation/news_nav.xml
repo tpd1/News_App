@@ -80,7 +80,7 @@
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.example.newsapp.ui.ArticleFragment"
-        android:label="@string/fullArticle"
+        android:label="@string/full_Article"
         tools:layout="@layout/fragment_article">
         <argument
             android:name="newsArticle"

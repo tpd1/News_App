@@ -7,6 +7,10 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentTopicSelectBinding
 import com.example.newsapp.model.SettingsViewModel
 
+/**
+ * Provides functionality to the topic selection fragment UI. Allows the user to select
+ * which topics they wish to appear in the tab layout in the news feed fragment.
+ */
 class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
     private lateinit var topicBinding: FragmentTopicSelectBinding
     private lateinit var settingsViewModel: SettingsViewModel
@@ -20,6 +24,9 @@ class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
 
     }
 
+    /**
+     * Helper function to set up topics based on the live data in the settings view model.
+     */
     private fun setUpTopics() {
         settingsViewModel = (activity as MainActivity).settingsViewModel
 
@@ -61,7 +68,7 @@ class TopicSelectFragment : Fragment(R.layout.fragment_topic_select) {
             topicBinding.technologyTopicSwitch.isChecked = it
         }
 
-        // Add listeners to each topic switch (might be an easier way to do this?)
+        // Add listeners to each topic switch.
         topicBinding.businessTopicSwitch.setOnCheckedChangeListener { _, isChecked ->
             settingsViewModel.setBusinessEnabled(isChecked)
         }

@@ -48,6 +48,10 @@ class Constants {
         const val LOGIN_UNSUCCESSFUL = "Email or password incorrect"
         const val UNCHANGED_NAME = "New name must be different to current name"
         const val NON_VALID_EMAIL = "Email must be valid & non-empty"
+        const val PASS_UPDATE_FAIL = "Password update failed"
+        const val USERNAME_UPDATE_FAIL = "Username update failed"
+        const val DELETE_ACC_FAILED = "Account deletion failed"
+        const val ENTER_FULL_LOC = "Please enter the full location name"
 
         // Misc strings
         const val BOOKMARK_ADDED = "Bookmark added successfully"
@@ -60,6 +64,9 @@ class Constants {
         const val NAME_SUCCESS = "Name Updated Successfully"
         const val PASSWORD_SUCCESS = "Password Updated Successfully"
         const val DIALOG_DELETE_ACC = "Permanently Delete Your Account?"
+        const val DELETE_ACCOUNT = "Delete Account"
+        const val YES = "YES"
+        const val NO = "NO"
 
     }
 }

@@ -21,7 +21,12 @@ import com.example.newsapp.databinding.FragmentArticleBinding
 import com.example.newsapp.model.BookmarksViewModel
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * Provides functionality to the article view activity. Displays the website information passed
+ * via a URL arg.
+ */
 class ArticleFragment : Fragment(R.layout.fragment_article) {
+    // arguments passed by actions in the NavGraph.
     private val args by navArgs<ArticleFragmentArgs>()
     private lateinit var articleBinding: FragmentArticleBinding
     private lateinit var bookmarksViewModel: BookmarksViewModel
@@ -88,11 +93,11 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     }
 
     /**
-     * Checks the database to see if the article is arleady saved based on a matching url.
+     * Checks the database to see if the article is already saved based on a matching url.
      * 'any' function returns true if any element matches, false otherwise.
      * @param url = The string URL to be checked against in the database
      */
-    private fun isAlreadySaved(url: String) : Boolean {
+    private fun isAlreadySaved(url: String): Boolean {
         var found = false
         bookmarksViewModel.articles.observe(viewLifecycleOwner) {
             for (entity in it) {

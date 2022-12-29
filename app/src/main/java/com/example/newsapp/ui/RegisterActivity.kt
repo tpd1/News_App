@@ -2,7 +2,6 @@ package com.example.newsapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newsapp.Constants.Companion.ENTER_PASSWORD
@@ -15,26 +14,33 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
-
+/**
+ * Provides functionality to the register fragment UI. Allows the user to sign up to the app
+ * using their email. Registers the user using Firebase.
+ */
 class RegisterActivity : AppCompatActivity() {
     private lateinit var registerBinding: ActivityRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Get firebase instance.
         firebaseAuth = FirebaseAuth.getInstance()
 
         //Set up View binding for activity
         registerBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(registerBinding.root)
 
+        // Set on click listener for register button.
         registerBinding.registerButton.setOnClickListener {
+            // Get user entered fields.
             val userEmail = registerBinding.registerEmail.text.toString()
             val userPassword = registerBinding.registerPassword.text.toString()
             val confirmPass = registerBinding.registerConfirmPass.text.toString()
             val userName = registerBinding.registerName.text.toString()
 
             if (isValidInput(userEmail, userPassword, confirmPass)) {
+                // Create new user in Firebase
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -43,19 +49,13 @@ class RegisterActivity : AppCompatActivity() {
                                 LOGIN_SUCCESS,
                                 Snackbar.LENGTH_SHORT
                             ).show()
+
+                            // Set the user name
                             val user = firebaseAuth.currentUser
                             val profileUpdates = UserProfileChangeRequest.Builder()
                                 .setDisplayName(userName)
                                 .build()
-
                             user?.updateProfile(profileUpdates)
-                                ?.addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        Log.i("User name", "User name added successfully")
-                                    } else {
-                                        Log.i("User name", "User name failed")
-                                    }
-                                }
                             navigateToLogin()
                         } else {
                             Snackbar.make(
@@ -67,6 +67,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
             }
         }
+        // add on click listener to login button.
         registerBinding.backToLoginButton.setOnClickListener {
             navigateToLogin()
         }
@@ -97,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     /**
-     * Navigates to the login activity.
+     * Helper function - Navigates to the login activity.
      */
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)

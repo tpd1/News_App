@@ -15,24 +15,31 @@ import com.example.newsapp.databinding.FragmentBookmarksBinding
 import com.example.newsapp.model.*
 import com.google.android.material.snackbar.Snackbar
 
-class BookmarksFragment : Fragment(R.layout.fragment_bookmarks), BookmarksAdapter.OnSavedArticleClickListener {
+/**
+ * Provides functionality to the UI elements in the Bookmark fragment. Allows the user
+ * to view and delete bookmarked articles.
+ */
+class BookmarksFragment : Fragment(R.layout.fragment_bookmarks),
+    BookmarksAdapter.OnSavedArticleClickListener {
     private val bookmarkAdapter = BookmarksAdapter(this)
     private lateinit var bookmarksBinding: FragmentBookmarksBinding
     private lateinit var bookmarksViewModel: BookmarksViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Set up binding
         bookmarksViewModel = (activity as MainActivity).bookmarksViewModel
         bookmarksBinding = FragmentBookmarksBinding.bind(view)
         bookmarksBinding.bookmarksRecyclerView.adapter = bookmarkAdapter
         bookmarksBinding.bookmarksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // observe the list of articles stored as LiveData.
         bookmarksViewModel.articles.observe(viewLifecycleOwner) { response ->
             bookmarkAdapter.setList(response as MutableList<SavedArticleEntity>)
         }
-        // Recyclerview library to implement swipe to delete.
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        // Recyclerview library to implement swipe to delete. Implemented following android developer tutorial.
+        ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -42,6 +49,9 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks), BookmarksAdapte
                 return false
             }
 
+            /**
+             * Processes the user swipe action.
+             */
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val article = bookmarkAdapter.getItem(viewHolder.absoluteAdapterPosition)
                 bookmarksViewModel.deleteArticle(article)
@@ -49,21 +59,21 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks), BookmarksAdapte
             }
         }).attachToRecyclerView(bookmarksBinding.bookmarksRecyclerView)
 
-
+        // Set on click listener for 'Delete All' button.
         bookmarksBinding.deleteAllButton.setOnClickListener {
-            onDeleteAllClick()
+            bookmarksViewModel.deleteAllArticles()
+            Snackbar.make(bookmarksBinding.root, ALL_BOOKMARKS_REM, Snackbar.LENGTH_SHORT).show()
         }
     }
 
+    /**
+     * Implements the on click function defined in the bookmarks adapter interface.
+     * When the user clicks an article in the RecyclerView, it loads the article fragment.
+     * @param article The article that has been clicked.
+     */
     override fun onSavedArticleClick(article: NewsArticle) {
         val action = BookmarksFragmentDirections.actionBookmarksFragmentToArticleFragment(article)
         findNavController().navigate(action)
-    }
-
-    private fun onDeleteAllClick() {
-        bookmarksViewModel.deleteAllArticles()
-        Snackbar.make(bookmarksBinding.root, ALL_BOOKMARKS_REM, Snackbar.LENGTH_SHORT).show()
-
     }
 }
 

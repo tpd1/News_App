@@ -8,19 +8,27 @@ import androidx.paging.cachedIn
 import com.example.newsapp.Constants
 import com.example.newsapp.data.remote.RemoteNewsSource
 
-
-class NewsViewModel (
+/**
+ * ViewModel class for the news feed fragment. Provides an interface between the UI layer
+ * and the remote data source.
+ * @property remoteNewsSource The instance of a class that handles API calls.
+ */
+class NewsViewModel(
     private val remoteNewsSource: RemoteNewsSource
 ) : ViewModel() {
 
-    // Holds the responses from our API call. Exposed to NewsFragment so tabs can be created.
-    private val currentCategory = MutableLiveData(DEFAULT_CATEGORY)
-    private val currentQuery = MutableLiveData(DEFAULT_SEARCH)
+    // Holds the currently selected category as live data.
+    private val currentCategory = MutableLiveData(Constants.TOP)
 
+    // Holds the current search query as live data.
+    private val currentQuery = MutableLiveData("")
+
+    // Fetches paging news based on category when currentCategory is changed.
     val newsLiveData = currentCategory.switchMap {
         remoteNewsSource.getPagingCategoryNews(it).cachedIn(viewModelScope)
     }
 
+    // Fetches paging news based on search query when currentQuery is changed
     val queryLiveData = currentQuery.switchMap {
         if (!it.isNullOrBlank()) {
             remoteNewsSource.getPagingSearchNews(it).cachedIn(viewModelScope)
@@ -29,22 +37,28 @@ class NewsViewModel (
         }
     }
 
-
+    /**
+     * Allows the user to hide news articles that have no imageURL
+     * @param isFiltered true if news is to be filtered, false otherwise
+     */
     fun setFilterResults(isFiltered: Boolean) {
         remoteNewsSource.filterResults = isFiltered
     }
 
+    /**
+     * Allows a user to select a category, changes the livedata variable.
+     * @param category The selected news topic.
+     */
     fun getCategoryNews(category: String) {
         currentCategory.value = category
     }
 
+    /**
+     * Allows the user to enter a search term. Changes the query livedata.
+     * @param q The search term.
+     */
     fun getSearchNews(q: String) {
         currentQuery.value = q
-    }
-
-    companion object {
-        private const val DEFAULT_CATEGORY = Constants.TOP
-        private const val DEFAULT_SEARCH = ""
     }
 
 }

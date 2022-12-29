@@ -27,27 +27,32 @@ import com.google.android.material.appbar.MaterialToolbar
 
 /**
  * Main activity in which most other functionality of the app is instantiated.
+ * Provides a base for other fragments to access variables that exist for the lifetime
+ * of the activity.
  */
 
 class MainActivity : AppCompatActivity() {
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
+
     // Create ViewModel for storing settings to a DataStore, as we need it across the app.
     lateinit var settingsViewModel: SettingsViewModel
+
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
+
     // Store news view model here to access "filter null images" toggle.
     lateinit var newsViewModel: NewsViewModel
+
     // Create room database for saving bookmarked articles offline.
     private lateinit var localNewsSource: LocalNewsSource
+
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
+
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 
-    /**
-     *
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -81,12 +86,13 @@ class MainActivity : AppCompatActivity() {
             utilsContainer.setUpDatabase(this.applicationContext) // tied to lifecycle of the application.
         bookmarksViewModel = BookmarksViewModel(localNewsSource)
 
+        // Create top menu
         addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
                 menuInflater.inflate(R.menu.toolbar_top, menu)
             }
 
+            // On menu item selected, navigate to that fragment
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return NavigationUI.onNavDestinationSelected(menuItem, navController)
             }
@@ -116,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //enable the up button on the nav controller.
+    // Enables the up button on the nav controller.
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

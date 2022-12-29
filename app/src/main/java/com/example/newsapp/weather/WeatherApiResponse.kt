@@ -11,6 +11,9 @@ data class WeatherApiResponse(
     @SerializedName("forecast") val forecast: WeeklyForecast
 )
 
+/**
+ * Data class to model the location data returned from WeatherAPI.
+ */
 data class Location(
     @SerializedName("name") val name: String,
     @SerializedName("country") val country: String
