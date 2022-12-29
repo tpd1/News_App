@@ -70,5 +70,10 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="update_name">Update Name</string>
     <string name="update_password">Update Password</string>
+    <string name="none">None</string>
+    <string name="selected_topics">Selected Topics</string>
+    <string name="all_topics">All Topics</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="filter_images_switch">Filter images switch</string>
 
 </resources>

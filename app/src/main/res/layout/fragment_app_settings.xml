@@ -7,29 +7,76 @@
     tools:context=".ui.AppSettingsFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/push_notifications_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="App Settings Fragment"
+        android:layout_marginTop="16dp"
+        android:text="@string/push_notifications"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+    </androidx.appcompat.widget.AppCompatTextView>
 
-    </TextView>
-
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/filter_results_switch"
-        style="?attr/materialIconButtonStyle"
-        android:layout_width="70dp"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:contentDescription="@string/business_topic_switch"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:checkedButton="@id/no_topics_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/push_notifications_text">
+
+        <Button
+            android:id="@+id/no_topics_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/none" />
+
+        <Button
+            android:id="@+id/selected_topics_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/selected_topics" />
+
+        <Button
+            android:id="@+id/all_topics_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_topics" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/filter_results_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Exclude articles with no images" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/filter_results_switch"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:contentDescription="@string/filter_images_switch" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
