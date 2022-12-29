@@ -15,7 +15,7 @@ private const val START_INDEX = 1
  * @param newsApiService - interface that shapes queries to the API
  * @param category - For fetching category news.
  */
-class ArticlePagingSource (
+class CategoryPagingSource (
     private val newsApiService: NewsApiService,
     private val category: String,
     private val filterResults: Boolean

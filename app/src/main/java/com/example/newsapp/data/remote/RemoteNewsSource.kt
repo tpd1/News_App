@@ -6,7 +6,8 @@ import androidx.paging.liveData
 import com.example.newsapp.Constants
 import com.example.newsapp.Constants.Companion.MAX_ARTICLES
 import com.example.newsapp.Constants.Companion.PAGE_SIZE
-import com.example.newsapp.data.ArticlePagingSource
+import com.example.newsapp.data.CategoryPagingSource
+import com.example.newsapp.data.SearchPagingSource
 import com.example.newsapp.model.APIResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,15 +18,26 @@ class RemoteNewsSource(
     private val newsAPIHandler: NewsApiService,
     var filterResults: Boolean) {
 
-   fun getPagingNews(q: String) =
+   fun getPagingCategoryNews(category: String) =
        Pager(
            config = PagingConfig(
                pageSize = PAGE_SIZE,
                maxSize = MAX_ARTICLES,
                enablePlaceholders = true
            ),
-           pagingSourceFactory = { ArticlePagingSource(newsAPIHandler, q, filterResults) }
+           pagingSourceFactory = { CategoryPagingSource(newsAPIHandler, category, filterResults) }
        ).liveData
+
+    fun getPagingSearchNews(q: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                maxSize = MAX_ARTICLES,
+                enablePlaceholders = true
+            ),
+            pagingSourceFactory = { SearchPagingSource(newsAPIHandler, q, filterResults) }
+        ).liveData
+
 }
 
 // structures the calls to the NewsData.io for topics and handles the response. Uses Retrofit library.
@@ -45,12 +57,11 @@ interface NewsApiService {
 
 
     // Function to fetch news articles based on a search term
-//    @GET("news?")
-//    suspend fun searchNews(
-//        @Query("q") query: String, // search term
-//        @Query("country") country: String = Constants.COUNTRY_CODE,
-//        @Query("language") language: String = Constants.LANGUAGE,
-//        @Query("page") page: Int,
-//        @Query("apikey") key: String = Constants.NEWS_API_KEY
-//    ): APIResponse
+    @GET("news?")
+    suspend fun searchNews(
+        @Query("q") query: String, // search term
+        @Query("language") language: String = Constants.LANGUAGE,
+        @Query("page") page: Int,
+        @Query("apikey") key: String = Constants.NEWS_API_KEY
+    ): APIResponse
 }

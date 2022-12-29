@@ -12,6 +12,7 @@ import com.example.newsapp.databinding.FragmentNewsBinding
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.NewsArticle
 import com.example.newsapp.model.SettingsViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 
@@ -48,16 +49,20 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
                 newsViewModel.setFilterResults(it)
             }
 
-        // Observe changes to the article livedata list
+        // Observe changes to the article livedata list and update recyclerView
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it) }
+
+        // Observe changes to the search query, update adapter if not null
+
 
         // Set up listeners for tabs
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: Tab?) {
                 if (tab != null) {
                     when (val topic = tab.text.toString().lowercase()) {
-                        Constants.TRENDING -> newsViewModel.getCategoryNews("top")
+                        // Changes the live data category which triggers an API call
+                        Constants.TRENDING -> newsViewModel.getCategoryNews(Constants.TOP)
                         else -> newsViewModel.getCategoryNews(topic)
                     }
                     newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
@@ -67,6 +72,25 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
             override fun onTabUnselected(tab: Tab?) {}
             override fun onTabReselected(tab: Tab?) {}
         })
+
+        newsfeedBinding.searchButton.setOnClickListener {
+            val query = newsfeedBinding.searchQueryText.text.toString()
+            if (query.isNotBlank()) {
+                newsViewModel.getSearchNews(query)
+
+                newsViewModel.queryLiveData.observe(viewLifecycleOwner) {
+                    it?.let {
+                        adapter.submitData(viewLifecycleOwner.lifecycle, it)
+                    }
+                }
+            } else {
+                Snackbar.make(
+                    newsfeedBinding.root,
+                    "Please enter a search query",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     // helper function to create a single tab in the tablayout, capitalising the tab name.

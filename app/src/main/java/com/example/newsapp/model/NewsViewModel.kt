@@ -14,11 +14,21 @@ class NewsViewModel (
 ) : ViewModel() {
 
     // Holds the responses from our API call. Exposed to NewsFragment so tabs can be created.
-    private val currentCategory = MutableLiveData(DEFAULT)
+    private val currentCategory = MutableLiveData(DEFAULT_CATEGORY)
+    private val currentQuery = MutableLiveData(DEFAULT_SEARCH)
 
     val newsLiveData = currentCategory.switchMap {
-        remoteNewsSource.getPagingNews(it).cachedIn(viewModelScope)
+        remoteNewsSource.getPagingCategoryNews(it).cachedIn(viewModelScope)
     }
+
+    val queryLiveData = currentQuery.switchMap {
+        if (!it.isNullOrBlank()) {
+            remoteNewsSource.getPagingSearchNews(it).cachedIn(viewModelScope)
+        } else {
+            newsLiveData
+        }
+    }
+
 
     fun setFilterResults(isFiltered: Boolean) {
         remoteNewsSource.filterResults = isFiltered
@@ -28,8 +38,13 @@ class NewsViewModel (
         currentCategory.value = category
     }
 
+    fun getSearchNews(q: String) {
+        currentQuery.value = q
+    }
+
     companion object {
-        private const val DEFAULT = Constants.TOP
+        private const val DEFAULT_CATEGORY = Constants.TOP
+        private const val DEFAULT_SEARCH = ""
     }
 
 }
