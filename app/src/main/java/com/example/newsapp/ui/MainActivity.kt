@@ -7,12 +7,24 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.newsapp.Constants
+import com.example.newsapp.Constants.Companion.BUSINESS
+import com.example.newsapp.Constants.Companion.ENTERTAINMENT
+import com.example.newsapp.Constants.Companion.ENVIRONMENT
+import com.example.newsapp.Constants.Companion.FOOD
+import com.example.newsapp.Constants.Companion.HEALTH
+import com.example.newsapp.Constants.Companion.POLITICS
+import com.example.newsapp.Constants.Companion.SCIENCE
+import com.example.newsapp.Constants.Companion.SPORTS
+import com.example.newsapp.Constants.Companion.TECHNOLOGY
+import com.example.newsapp.NotificationControl
 import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
@@ -20,10 +32,12 @@ import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.BookmarksViewModel
+import com.example.newsapp.model.NewsArticle
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 
 /**
@@ -48,6 +62,8 @@ class MainActivity : AppCompatActivity() {
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 
+    private lateinit var notificationController: NotificationControl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,14 +75,27 @@ class MainActivity : AppCompatActivity() {
         val msg = intent.extras?.getString("msg")
         msg?.let { Snackbar.make(mainBinding.root, it, Snackbar.LENGTH_SHORT).show() }
 
+
+
         // Set up Remote API source for news. Create News View model as intermediate layer.
         val remoteNewsSource = RemoteNewsSource(utilsContainer.newsApi, true)
         newsViewModel = NewsViewModel(remoteNewsSource)
 
+        // Initialise datastore repository and ViewModel for topic selection.
+        val dataStoreRepo = DataStoreRepo(this.applicationContext)
+        settingsViewModel = SettingsViewModel(dataStoreRepo)
+
+        notificationController = NotificationControl(this, settingsViewModel, remoteNewsSource)
         // Set up bottom app navigation bar to access fragments.
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
         navController = navHostFragment.findNavController()
+
+//        val data: NewsArticle? = intent.extras?.get("article") as NewsArticle?
+//        if (data != null) {
+//            val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(data)
+//            navController.navigate(action)
+//        }
 
         // Set up top app bar
         val topAppBar: MaterialToolbar = mainBinding.topNavBar
@@ -76,9 +105,7 @@ class MainActivity : AppCompatActivity() {
         // set up bottom navigation bar:
         createBottomNavBar()
 
-        // Initialise datastore repository and ViewModel for topic selection.
-        val dataStoreRepo = DataStoreRepo(this.applicationContext)
-        settingsViewModel = SettingsViewModel(dataStoreRepo)
+
 
         // Initialise a local Room database and ViewModel for saving bookmarked articles.
         localNewsSource =
@@ -96,6 +123,9 @@ class MainActivity : AppCompatActivity() {
                 return NavigationUI.onNavDestinationSelected(menuItem, navController)
             }
         })
+        updateChannelSubscriptions()
+        getArticle()
+
     }
 
     /**
@@ -124,5 +154,52 @@ class MainActivity : AppCompatActivity() {
     // Enables the up button on the nav controller.
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    fun getArticle() {
+        var article: NewsArticle
+        lifecycleScope.launch {
+            article = notificationController.getAPIArticle(Constants.TOP)
+            notificationController.postNews(article)
+        }
+    }
+
+    private fun updateChannelSubscriptions() {
+        settingsViewModel.businessEnabled.observe(this) {
+            notificationController.subscribedChannels[BUSINESS] = it
+        }
+
+        settingsViewModel.entertainmentEnabled.observe(this) {
+            notificationController.subscribedChannels[ENTERTAINMENT] = it
+        }
+
+        settingsViewModel.environmentEnabled.observe(this) {
+            notificationController.subscribedChannels[ENVIRONMENT] = it
+        }
+
+        settingsViewModel.foodEnabled.observe(this) {
+            notificationController.subscribedChannels[FOOD] = it
+        }
+
+        settingsViewModel.healthEnabled.observe(this) {
+            notificationController.subscribedChannels[HEALTH] = it
+        }
+
+        settingsViewModel.politicsEnabled.observe(this) {
+            notificationController.subscribedChannels[POLITICS] = it
+        }
+
+        settingsViewModel.scienceEnabled.observe(this) {
+            notificationController.subscribedChannels[SCIENCE] = it
+        }
+
+        settingsViewModel.sportsEnabled.observe(this) {
+            notificationController.subscribedChannels[SPORTS] = it
+        }
+
+        settingsViewModel.technologyEnabled.observe(this) {
+            notificationController.subscribedChannels[TECHNOLOGY] = it
+        }
+
     }
 }

@@ -51,6 +51,9 @@ class RemoteNewsSource(
             ),
             pagingSourceFactory = { SearchPagingSource(newsAPIHandler, q, filterResults) }
         ).liveData
+
+    suspend fun getNotificationNews(category: String): APIResponse =
+        newsAPIHandler.getCategoryNews(category, page = 1)
 }
 
 /**

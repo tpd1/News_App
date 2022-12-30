@@ -38,6 +38,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
         bookmarksViewModel = (activity as MainActivity).bookmarksViewModel
 
+
         // Latest method to control the menu bar after update:
         //https://developer.android.com/jetpack/androidx/releases/activity#1.4.0-alpha01
         val menuHost: MenuHost = requireActivity()
@@ -65,7 +66,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        // Load the webpage into the webview
+
         val url = args.newsArticle.link
         articleBinding.articleWebView.webViewClient = WebViewClient()
         articleBinding.articleWebView.apply {
