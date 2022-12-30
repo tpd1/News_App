@@ -14,16 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.newsapp.Constants
-import com.example.newsapp.Constants.Companion.BUSINESS
-import com.example.newsapp.Constants.Companion.ENTERTAINMENT
-import com.example.newsapp.Constants.Companion.ENVIRONMENT
-import com.example.newsapp.Constants.Companion.FOOD
-import com.example.newsapp.Constants.Companion.HEALTH
-import com.example.newsapp.Constants.Companion.POLITICS
-import com.example.newsapp.Constants.Companion.SCIENCE
-import com.example.newsapp.Constants.Companion.SPORTS
-import com.example.newsapp.Constants.Companion.TECHNOLOGY
 import com.example.newsapp.NotificationControl
 import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
@@ -32,7 +22,6 @@ import com.example.newsapp.data.local.LocalNewsSource
 import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.BookmarksViewModel
-import com.example.newsapp.model.NewsArticle
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
@@ -49,16 +38,22 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
+
     // Create ViewModel for storing settings to a DataStore, as we need it across the app.
     lateinit var settingsViewModel: SettingsViewModel
+
     // Create Room database for saving bookmarked articles offline.
     lateinit var bookmarksViewModel: BookmarksViewModel
+
     // Store news view model here to access "filter null images" toggle.
     lateinit var newsViewModel: NewsViewModel
+
     // Create room database for saving bookmarked articles offline.
     private lateinit var localNewsSource: LocalNewsSource
+
     // NavController for navigation using NavGraph
     private lateinit var navController: NavController
+
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 
@@ -75,8 +70,6 @@ class MainActivity : AppCompatActivity() {
         val msg = intent.extras?.getString("msg")
         msg?.let { Snackbar.make(mainBinding.root, it, Snackbar.LENGTH_SHORT).show() }
 
-
-
         // Set up Remote API source for news. Create News View model as intermediate layer.
         val remoteNewsSource = RemoteNewsSource(utilsContainer.newsApi, true)
         newsViewModel = NewsViewModel(remoteNewsSource)
@@ -91,12 +84,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-//        val data: NewsArticle? = intent.extras?.get("article") as NewsArticle?
-//        if (data != null) {
-//            val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(data)
-//            navController.navigate(action)
-//        }
-
         // Set up top app bar
         val topAppBar: MaterialToolbar = mainBinding.topNavBar
         setSupportActionBar(topAppBar)
@@ -104,8 +91,6 @@ class MainActivity : AppCompatActivity() {
 
         // set up bottom navigation bar:
         createBottomNavBar()
-
-
 
         // Initialise a local Room database and ViewModel for saving bookmarked articles.
         localNewsSource =
@@ -123,8 +108,7 @@ class MainActivity : AppCompatActivity() {
                 return NavigationUI.onNavDestinationSelected(menuItem, navController)
             }
         })
-        updateChannelSubscriptions()
-        getArticle()
+        observeSettings()
 
     }
 
@@ -156,49 +140,49 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    fun getArticle() {
-        var article: NewsArticle
-        lifecycleScope.launch {
-            article = notificationController.getAPIArticle(Constants.TOP)
-            notificationController.postNews(article)
+    private fun observeSettings() {
+        settingsViewModel.notifications.observe(this) {
+            notificationController.updateNotificationSettings()
         }
-    }
 
-    private fun updateChannelSubscriptions() {
         settingsViewModel.businessEnabled.observe(this) {
-            notificationController.subscribedChannels[BUSINESS] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.entertainmentEnabled.observe(this) {
-            notificationController.subscribedChannels[ENTERTAINMENT] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.environmentEnabled.observe(this) {
-            notificationController.subscribedChannels[ENVIRONMENT] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.foodEnabled.observe(this) {
-            notificationController.subscribedChannels[FOOD] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.healthEnabled.observe(this) {
-            notificationController.subscribedChannels[HEALTH] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.politicsEnabled.observe(this) {
-            notificationController.subscribedChannels[POLITICS] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.scienceEnabled.observe(this) {
-            notificationController.subscribedChannels[SCIENCE] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.sportsEnabled.observe(this) {
-            notificationController.subscribedChannels[SPORTS] = it
+            notificationController.updateSubscribedChannels()
         }
 
         settingsViewModel.technologyEnabled.observe(this) {
-            notificationController.subscribedChannels[TECHNOLOGY] = it
+            notificationController.updateSubscribedChannels()
+        }
+
+        lifecycleScope.launch {
+            notificationController.getArticle()
         }
 
     }
