@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.newsapp.Constants.Companion.ALL
 import com.example.newsapp.Constants.Companion.NONE
 import com.example.newsapp.Constants.Companion.SELECTED
@@ -12,6 +13,7 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentAppSettingsBinding
 import com.example.newsapp.model.SettingsViewModel
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 /**
  * Class associated with the App Settings Fragment. Provides functionality to the UI elements.
@@ -30,7 +32,6 @@ class AppSettingsFragment : Fragment(R.layout.fragment_app_settings) {
         appSettingsBinding = binding
         firebaseAuth = FirebaseAuth.getInstance()
 
-
         // Get reference to settings view model for stored preferences.
         settingsViewModel = (activity as MainActivity).settingsViewModel
 
@@ -47,6 +48,14 @@ class AppSettingsFragment : Fragment(R.layout.fragment_app_settings) {
                 NONE -> appSettingsBinding.noTopicsButton.isChecked = true
             }
 
+        }
+
+        // Set up notification demo button
+        val notificationController = (activity as MainActivity).notificationController
+        appSettingsBinding.demoNotificationsButton.setOnClickListener {
+            lifecycleScope.launch {
+                notificationController.getArticle()
+            }
         }
 
         // Add click listener to toggle group and update settings datastore.
@@ -73,7 +82,6 @@ class AppSettingsFragment : Fragment(R.layout.fragment_app_settings) {
             settingsViewModel.setFilterImages(isChecked)
             newsViewModel.setFilterResults(isChecked)
         }
-
         return binding.root
     }
 

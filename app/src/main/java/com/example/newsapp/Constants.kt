@@ -7,7 +7,8 @@ class Constants {
     // (companion object so we don't need to create an instance of the class)
     companion object {
         // NewsData.io API values
-        const val NEWS_API_KEY = "pub_14675c68e5438ae4a7b999feff9379dc0b3e7"
+        //const val NEWS_API_KEY = "pub_14675c68e5438ae4a7b999feff9379dc0b3e7"
+        const val NEWS_API_KEY = "pub_1514878e318f1d53ba26c95eb960c49c80228" // Second Key in case I hit the limit
         const val ROOT_API_URL = "https://newsdata.io/api/1/"
         const val COUNTRY_CODE = "gb"
         const val LANGUAGE = "en"

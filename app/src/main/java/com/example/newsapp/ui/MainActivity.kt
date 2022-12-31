@@ -1,20 +1,28 @@
 package com.example.newsapp.ui
 
+
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.newsapp.NotificationControl
+import com.example.newsapp.notifications.NotificationControl
 import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
 import com.example.newsapp.data.DataStoreRepo
@@ -26,8 +34,9 @@ import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
 
 /**
  * Main activity in which most other functionality of the app is instantiated.
@@ -57,8 +66,10 @@ class MainActivity : AppCompatActivity() {
     //Data binding for this activity
     private lateinit var mainBinding: ActivityMainBinding
 
-    private lateinit var notificationController: NotificationControl
+    // Notification controller for updating topics.
+    lateinit var notificationController: NotificationControl
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -110,6 +121,46 @@ class MainActivity : AppCompatActivity() {
         })
         observeSettings()
 
+
+        val broadCastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(contxt: Context, intent: Intent) {
+                    GlobalScope.launch {
+                        notificationController.getArticle()
+                    }
+
+                }
+            }
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(broadCastReceiver, IntentFilter("getArticle"))
+
+//        val receiver = NotificationReceiver(notificationController)
+//        val intentFilter = IntentFilter("getArticle")
+//        registerReceiver(receiver, intentFilter)
+
+        scheduleNotifications()
+    }
+
+
+    private fun scheduleNotifications() {
+        Log.d("Function called", "scheduleNotificaitons called")
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        notificationIntent.action = "getArticle"
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        // Set up the alarm to trigger every hour
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            AlarmManager.INTERVAL_HOUR,
+            pendingIntent
+        )
     }
 
     /**
@@ -180,10 +231,18 @@ class MainActivity : AppCompatActivity() {
         settingsViewModel.technologyEnabled.observe(this) {
             notificationController.updateSubscribedChannels()
         }
-
-        lifecycleScope.launch {
-            notificationController.getArticle()
-        }
-
     }
+
+
 }
+
+//class NotificationReceiver(private val notificationControl: NotificationControl) : BroadcastReceiver() {
+//    @OptIn(DelicateCoroutinesApi::class)
+//    override fun onReceive(context: Context, intent: Intent) {
+//        Log.d("Function called", "onreceived called")
+//            GlobalScope.launch {
+//                notificationControl.getArticle()
+//            }
+//    }
+//
+//}

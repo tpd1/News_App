@@ -1,11 +1,11 @@
-package com.example.newsapp
+package com.example.newsapp.notifications
+
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
@@ -24,20 +24,26 @@ import com.example.newsapp.Constants.Companion.SELECTED
 import com.example.newsapp.Constants.Companion.SPORTS
 import com.example.newsapp.Constants.Companion.TECHNOLOGY
 import com.example.newsapp.Constants.Companion.TOP
+import com.example.newsapp.R
 import com.example.newsapp.data.remote.RemoteNewsSource
 import com.example.newsapp.model.NewsArticle
 import com.example.newsapp.model.SettingsViewModel
 import com.example.newsapp.ui.ArticleFragmentArgs
 import com.example.newsapp.ui.MainActivity
 
-
+/**
+ *
+ * This class was implemented following the tutorial below (in addition to lecture recording):
+ * https://www.kodeco.com/1214490-android-notifications-tutorial-getting-started
+ */
 class NotificationControl(
     base: Context,
     private val settingsViewModel: SettingsViewModel,
     private val remoteSource: RemoteNewsSource
 ) : ContextWrapper(base) {
 
-    private val subscribedChannels = hashMapOf(
+    // A list of topics that the user has already selected, with a key that can be to send notifications.
+    private val subscribedTopics = hashMapOf(
         BUSINESS to MutableLiveData(true),
         ENTERTAINMENT to MutableLiveData(true),
         ENVIRONMENT to MutableLiveData(true),
@@ -49,6 +55,8 @@ class NotificationControl(
         TECHNOLOGY to MutableLiveData(true)
     )
 
+    // Based on the notification setting in App Settings. Initialise to 'All notifications' as the update coroutine
+    // finishes before any notifications are sent.
     private val notificationSetting = MutableLiveData(ALL)
 
     private val manager: NotificationManager
@@ -60,13 +68,15 @@ class NotificationControl(
     }
 
     private fun createTopicChannels() {
+        // Channel for top news (covers all categories)
         val topChannel =
             NotificationChannel(CHANNEL_TOP_ID, TOP, NotificationManager.IMPORTANCE_DEFAULT)
+        // Channel for just the topics the user has selected.
         val selectedChannel =
             NotificationChannel(CHANNEL_SELECTED_ID, SELECTED, NotificationManager.IMPORTANCE_DEFAULT)
-
         manager.createNotificationChannels(listOf(topChannel, selectedChannel))
     }
+
 
     suspend fun getArticle() {
         if (notificationSetting.value == null) {
@@ -74,36 +84,41 @@ class NotificationControl(
         }
         val article: NewsArticle
         when (notificationSetting.value) {
+            // If the user has "All Topics" chose, send a Top news notification.
             ALL -> {
-                Log.i("Top Topic", "top topic selected")
                 article = getCategoryArticle(TOP)
-                postNews(article, CHANNEL_TOP_ID)
+                postNews(article, CHANNEL_TOP_ID, TOP)
             }
+            // If the user has "Selected Topics" chosen, pick a random topic from their possible options.
             SELECTED -> {
-                Log.i("Random Topic", "random topic selected")
-                val category = chooseRandomTopic()
-                article = getCategoryArticle(category)
-                postNews(article, CHANNEL_SELECTED_ID)
-            }
-            else -> {
-                // Do nothing
+                if (subscribedTopics.values.all { it.value == false }) { //If no topics selected, otherwise causes crash
+                    return
+                } else {
+                    val category = chooseRandomTopic()
+                    article = getCategoryArticle(category)
+                    postNews(article, CHANNEL_SELECTED_ID, category)
+                }
             }
         }
 
     }
 
     private fun chooseRandomTopic(): String {
-        return subscribedChannels.filterValues { it.value!! }.keys.shuffled().first()
+        return if (subscribedTopics.size > 0) {
+            subscribedTopics.filterValues { it.value!! }.keys.shuffled().first()
+        } else {
+            TOP
+        }
     }
 
-    private fun postNews(newsArticle: NewsArticle, channelID: String) {
+    private fun postNews(newsArticle: NewsArticle, channelID: String, category: String) {
         val contentText = newsArticle.title
-        val category = newsArticle.category[0] // Just use first topic from API
-
+        val capCategory = category.replaceFirstChar { it.uppercase() }
         val builder = NotificationCompat.Builder(this, channelID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Latest $category News")
+            .setContentTitle("Latest $capCategory News")
             .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle())
             .setContentIntent(pendingIntentHelper(newsArticle))
 
         with(NotificationManagerCompat.from(this)) {
@@ -153,17 +168,16 @@ class NotificationControl(
         val scienceEnabled = settingsViewModel.scienceEnabled.value
         val sportsEnabled = settingsViewModel.sportsEnabled.value
         val technologyEnabled = settingsViewModel.technologyEnabled.value
-
         // Update the hashmap with these values.
-        subscribedChannels[BUSINESS]?.value = businessEnabled
-        subscribedChannels[ENTERTAINMENT]?.value = entertainmentEnabled
-        subscribedChannels[ENVIRONMENT]?.value = environmentEnabled
-        subscribedChannels[FOOD]?.value = foodEnabled
-        subscribedChannels[HEALTH]?.value = healthEnabled
-        subscribedChannels[POLITICS]?.value = politicsEnabled
-        subscribedChannels[SCIENCE]?.value = scienceEnabled
-        subscribedChannels[SPORTS]?.value = sportsEnabled
-        subscribedChannels[TECHNOLOGY]?.value = technologyEnabled
+        subscribedTopics[BUSINESS]?.value = businessEnabled
+        subscribedTopics[ENTERTAINMENT]?.value = entertainmentEnabled
+        subscribedTopics[ENVIRONMENT]?.value = environmentEnabled
+        subscribedTopics[FOOD]?.value = foodEnabled
+        subscribedTopics[HEALTH]?.value = healthEnabled
+        subscribedTopics[POLITICS]?.value = politicsEnabled
+        subscribedTopics[SCIENCE]?.value = scienceEnabled
+        subscribedTopics[SPORTS]?.value = sportsEnabled
+        subscribedTopics[TECHNOLOGY]?.value = technologyEnabled
     }
 
     fun updateNotificationSettings() {
@@ -172,5 +186,9 @@ class NotificationControl(
         println(setting)
     }
 
+
+
 }
+
+
 
