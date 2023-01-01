@@ -6,6 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.Constants
+import com.example.newsapp.Constants.Companion.SEARCH_TERM
 import com.example.newsapp.model.NewsAdapter
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsBinding
@@ -86,17 +87,19 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnArticleClic
                         adapter.submitData(viewLifecycleOwner.lifecycle, it)
                     } else Snackbar.make(
                         newsfeedBinding.root,
-                        "Please enter a search query",
+                        SEARCH_TERM,
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
             } else {
                 Snackbar.make(
                     newsfeedBinding.root,
-                    "Please enter a search query",
+                    SEARCH_TERM,
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
+            // Reset the search box.
+            newsfeedBinding.searchQueryText.setText("")
         }
     }
 

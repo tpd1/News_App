@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/news_card_margin"
-            app:cardBackgroundColor="@color/md_theme_light_surface"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="3dp">
 

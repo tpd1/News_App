@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.Constants
+import com.example.newsapp.Constants.Companion.LOCATION_NOT_FOUND
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -22,7 +23,7 @@ class WeatherViewModel(
             val data = remoteWeatherSource.getForecast(location)
             weatherData.value = handleAPIResponse(data)
         } catch (e: Exception) {
-            weatherData.value = ApiResponseStatus.Error("Location Not Found")
+            weatherData.value = ApiResponseStatus.Error(LOCATION_NOT_FOUND)
         }
     }
 

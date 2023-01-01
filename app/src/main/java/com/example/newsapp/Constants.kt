@@ -19,9 +19,6 @@ class Constants {
         const val WEATHER_API_KEY = "21c4fa21cb21458f86e100153222712"
         const val WEATHER_API_URL = "https://api.weatherapi.com/v1/"
 
-        // Firebase
-       // const val FIREBASE_URL = "https://fcm.googleapis.com"
-
         // Topics for selection & tab layout
         const val BUSINESS = "business"
         const val ENTERTAINMENT = "entertainment"
@@ -56,6 +53,8 @@ class Constants {
         const val USERNAME_UPDATE_FAIL = "Username update failed"
         const val DELETE_ACC_FAILED = "Account deletion failed"
         const val ENTER_FULL_LOC = "Please enter the full location name"
+        const val SEARCH_TERM = "Please enter a search query"
+        const val LOCATION_NOT_FOUND = "Location not found"
 
         // Misc strings
         const val BOOKMARK_ADDED = "Bookmark added successfully"

@@ -226,13 +226,5 @@ class MainActivity : AppCompatActivity() {
             notificationController.updateSubscribedChannels()
         }
     }
-
-    /*
-     * Unregister the receiver (apparently this is needed to stop a memory leak).
-     */
-    override fun onStop() {
-        super.onStop()
-        unregisterReceiver(receiver)
-    }
 }
 
