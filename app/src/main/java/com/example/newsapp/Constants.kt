@@ -78,16 +78,8 @@ class Constants {
         const val SELECTED = "selected"
         const val NONE = "None"
         const val CHANNEL_TOP_ID = "com.example.newsapp.TOP"
-//        const val CHANNEL_BUSINESS_ID = "com.example.newsapp.BUSINESS"
-//        const val CHANNEL_ENTERTAINMENT_ID = "com.example.newsapp.ENTERTAINMENT"
-//        const val CHANNEL_ENVIRONMENT_ID = "com.example.newsapp.ENVIRONMENT"
-//        const val CHANNEL_FOOD_ID = "com.example.newsapp.FOOD"
-//        const val CHANNEL_HEALTH_ID = "com.example.newsapp.HEALTH"
-//        const val CHANNEL_POLITICS_ID = "com.example.newsapp.POLITICS"
-//        const val CHANNEL_SCIENCE_ID = "com.example.newsapp.SCIENCE"
-//        const val CHANNEL_SPORTS_ID = "com.example.newsapp.SPORTS"
-//        const val CHANNEL_TECHNOLOGY_ID = "com.example.newsapp.TECHNOLOGY"
         const val CHANNEL_SELECTED_ID = "com.example.newsapp.SELECTED"
+        const val INTENT_ACTION = "com.example.newsapp.NOTIFICATION_EVENT"
 
     }
 }

@@ -67,6 +67,9 @@ class NotificationControl(
         createTopicChannels()
     }
 
+    /**
+     * Creates two notification channels: One for all notifications and one for user selected notifications.
+     */
     private fun createTopicChannels() {
         // Channel for top news (covers all categories)
         val topChannel =
@@ -78,6 +81,9 @@ class NotificationControl(
     }
 
 
+    /**
+     * Top level function that posts a notification to the user based on the notification settings.
+     */
     suspend fun getArticle() {
         if (notificationSetting.value == null) {
             return
@@ -103,16 +109,27 @@ class NotificationControl(
 
     }
 
+    /**
+     * Out of the user subscribed topics, chooses one at random.
+     * @return The selected topic string.
+     */
     private fun chooseRandomTopic(): String {
         return if (subscribedTopics.size > 0) {
             subscribedTopics.filterValues { it.value!! }.keys.shuffled().first()
         } else {
-            TOP
+            TOP // If the user has not selected any topics, show trending/top news.
         }
     }
 
+    /**
+     * Helper function that builds the notification to be sent.
+     * @param newsArticle The news article to be posted
+     * @param channelID The channel that the notification will be posted to.
+     * @param category The category of the news article.
+     */
     private fun postNews(newsArticle: NewsArticle, channelID: String, category: String) {
         val contentText = newsArticle.title
+        // Pass category here - news API returns array of categories for each article, so is usually not accurate.
         val capCategory = category.replaceFirstChar { it.uppercase() }
         val builder = NotificationCompat.Builder(this, channelID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -180,13 +197,13 @@ class NotificationControl(
         subscribedTopics[TECHNOLOGY]?.value = technologyEnabled
     }
 
+    /**
+     * Updates the user notification settings (All / Selected / None)
+     */
     fun updateNotificationSettings() {
         val setting = settingsViewModel.notifications.value
         notificationSetting.value = setting
-        println(setting)
     }
-
-
 
 }
 

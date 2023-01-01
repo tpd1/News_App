@@ -3,25 +3,24 @@ package com.example.newsapp.ui
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.SystemClock
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.newsapp.Constants.Companion.INTENT_ACTION
 import com.example.newsapp.notifications.NotificationControl
 import com.example.newsapp.R
 import com.example.newsapp.UtilsContainer
@@ -32,11 +31,10 @@ import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.model.BookmarksViewModel
 import com.example.newsapp.model.NewsViewModel
 import com.example.newsapp.model.SettingsViewModel
+import com.example.newsapp.notifications.NotificationReceiver
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+
 
 /**
  * Main activity in which most other functionality of the app is instantiated.
@@ -47,6 +45,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     // Utils container creates one instance of dependencies for other classes across app.
     val utilsContainer = UtilsContainer()
+
+    private var receiver: NotificationReceiver = NotificationReceiver()
 
     // Create ViewModel for storing settings to a DataStore, as we need it across the app.
     lateinit var settingsViewModel: SettingsViewModel
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
     // Notification controller for updating topics.
     lateinit var notificationController: NotificationControl
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -89,7 +88,9 @@ class MainActivity : AppCompatActivity() {
         val dataStoreRepo = DataStoreRepo(this.applicationContext)
         settingsViewModel = SettingsViewModel(dataStoreRepo)
 
+        // Initialise class to control notifications.
         notificationController = NotificationControl(this, settingsViewModel, remoteNewsSource)
+
         // Set up bottom app navigation bar to access fragments.
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFrag) as NavHostFragment
@@ -121,32 +122,22 @@ class MainActivity : AppCompatActivity() {
         })
         observeSettings()
 
-
-        val broadCastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(contxt: Context, intent: Intent) {
-                    GlobalScope.launch {
-                        notificationController.getArticle()
-                    }
-
-                }
-            }
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(broadCastReceiver, IntentFilter("getArticle"))
-
-//        val receiver = NotificationReceiver(notificationController)
-//        val intentFilter = IntentFilter("getArticle")
-//        registerReceiver(receiver, intentFilter)
+        // Create a BroadcastReceiver to process notifications on an alarm. Initialise it here
+        // so we can use the MainActivity context to access the NotificationControl class.
+        receiver = NotificationReceiver()
+        val filter = IntentFilter(INTENT_ACTION)
+        registerReceiver(receiver, filter)
 
         scheduleNotifications()
     }
 
-
+    /**
+     *  Sets up periodic notifications to be pushed to the user twice per day.
+     * Ref: https://developer.android.com/training/scheduling/alarms.html#type
+     */
     private fun scheduleNotifications() {
-        Log.d("Function called", "scheduleNotificaitons called")
-
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val notificationIntent = Intent(this, MainActivity::class.java)
-        notificationIntent.action = "getArticle"
+        val notificationIntent = Intent(INTENT_ACTION)
         val pendingIntent = PendingIntent.getBroadcast(
             this,
             0,
@@ -154,11 +145,11 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        // Set up the alarm to trigger every hour
-        alarmManager.setRepeating(
+        // Set up the alarm to trigger twice per day
+        alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis(),
-            AlarmManager.INTERVAL_HOUR,
+            SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+            AlarmManager.INTERVAL_HALF_DAY,
             pendingIntent
         )
     }
@@ -191,6 +182,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    /**
+     * Sets observers for the notification settings, to allow the controller to post correct notifications.
+     */
     private fun observeSettings() {
         settingsViewModel.notifications.observe(this) {
             notificationController.updateNotificationSettings()
@@ -233,16 +227,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    /*
+     * Unregister the receiver (apparently this is needed to stop a memory leak).
+     */
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(receiver)
+    }
 }
 
-//class NotificationReceiver(private val notificationControl: NotificationControl) : BroadcastReceiver() {
-//    @OptIn(DelicateCoroutinesApi::class)
-//    override fun onReceive(context: Context, intent: Intent) {
-//        Log.d("Function called", "onreceived called")
-//            GlobalScope.launch {
-//                notificationControl.getArticle()
-//            }
-//    }
-//
-//}
