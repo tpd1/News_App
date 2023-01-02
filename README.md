@@ -3,6 +3,7 @@
 ### Author: Tim Deville
 ### Student No: 2003506
 
+Access to private Github repository available on request.
 ___
 
 Login credentials for app (Registration also works, no email verification so just requires a valid email format - stored in Firebase):
@@ -19,6 +20,7 @@ Described in CW1 (Main features):
  Additional Features:
 * Ability to change username and password in app (and delete account).
 * Ability to Search for news using keywords.
+* Dark theme to match system perferences (only for APK level 29 or newer).
 ___
 
 Design changes from CW1:
@@ -29,7 +31,7 @@ ___
 Known Issues - If this app were to be published, the following bugs would be fixed as a priority:
 * Returning from viewing an article to the news feed loses the position of the tab in the news TabLayout. 
 * Article source icons - NewsData.io API returns a source id that is not formattted very well. Changing this involves an extra call to their Source API, which is a limitation on the free tier with only 200 calls/day.
-* A large number of NewsAPI articles have no imageURL for displaying a recyclerview image. In App Settings, i've included a toggle button to hide these from being displayed. A better option would be to parse the URL and fetch the main image.
+* A large number of NewsAPI articles have no imageURL for displaying a recyclerview image. In App Settings, i've included a toggle button to hide these from being displayed. A better option would be to parse the HTML and fetch the main image.
 ___
 
 Features that could be improved/added before publishing:
