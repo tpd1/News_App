@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         // Set up the alarm to trigger twice per day
         alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
-            SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+            SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HOUR,
             AlarmManager.INTERVAL_HALF_DAY,
             pendingIntent
         )
