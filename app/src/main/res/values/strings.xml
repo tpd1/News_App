@@ -76,7 +76,6 @@
     <string name="push_notifications">Push Notifications</string>
     <string name="filter_images_switch">Filter images switch</string>
     <string name="exclude_articles_with_no_images">Exclude articles with no images</string>
-    <string name="demo_notifications_button">Demo Notifications Button</string>
     <string name="send_demonstration_notification">Send demonstration notification:</string>
     <string name="send">Send</string>
     <string name="powered_by_weatherapi_com">Powered by WeatherAPI.com</string>
