@@ -18,7 +18,7 @@
             android:layout_height="@dimen/profile_page_image"
             app:cardCornerRadius="@dimen/card_corner_radius"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/md_theme_dark_secondary"
+            android:backgroundTint="@color/md_theme_light_secondaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,6 +37,7 @@
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/margin_small"
             android:text="@string/firstname_lastname"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/choose_topics_card"
                 android:clickable="true"
-                android:backgroundTint="@color/md_theme_dark_secondary"
+                android:backgroundTint="@color/md_theme_light_secondaryContainer"
                 style="@style/dashboard_card_view">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -80,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="@string/choose_topics"
-                        android:textColor="#000000"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
                         android:textAlignment="center" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -89,7 +90,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/bookmarks_card"
                 style="@style/dashboard_card_view"
-                android:backgroundTint="@color/md_theme_dark_secondary">
+                android:backgroundTint="@color/md_theme_light_secondaryContainer">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -110,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="@string/bookmarks"
-                        android:textColor="#000000"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
                         android:textAlignment="center" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -119,7 +120,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/manage_account_card"
                 style="@style/dashboard_card_view"
-                android:backgroundTint="@color/md_theme_dark_secondary">
+                android:backgroundTint="@color/md_theme_light_secondaryContainer">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -140,7 +141,7 @@
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="@string/my_account"
                         android:textAlignment="center"
-                        android:textColor="#000000" />
+                        android:textColor="@color/md_theme_light_onPrimaryContainer" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.google.android.material.card.MaterialCardView>
@@ -148,7 +149,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/app_settings_card"
                 style="@style/dashboard_card_view"
-                android:backgroundTint="@color/md_theme_dark_secondary">
+                android:backgroundTint="@color/md_theme_light_secondaryContainer">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -168,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="@string/app_settings"
-                        android:textColor="#000000"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
                         android:textAlignment="center" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
