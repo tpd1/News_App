@@ -80,6 +80,8 @@ class ManageAccountFragment : Fragment(R.layout.fragment_manage_account) {
 
     /**
      * Provides a dialog box for the user to confirm the permanent deletion of their account.
+     * Implemented by following the tutorial by Anupam Chugh:
+     * https://www.digitalocean.com/community/tutorials/android-alert-dialog-using-kotlin
      */
     private fun confirmDelete() {
         val builder = AlertDialog.Builder(this.requireContext())

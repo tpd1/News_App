@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 /**
  * Provides functionality to the login activity UI. Uses Firebase authentication to
  * allow users to login to the app.
+ * Implemented by following official Firebase docs, found at:
+ * https://firebase.google.com/docs/auth/android/start
  */
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginBinding: ActivityLoginBinding

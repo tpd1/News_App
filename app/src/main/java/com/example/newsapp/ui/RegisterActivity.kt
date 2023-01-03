@@ -17,6 +17,8 @@ import com.google.firebase.auth.UserProfileChangeRequest
 /**
  * Provides functionality to the register fragment UI. Allows the user to sign up to the app
  * using their email. Registers the user using Firebase.
+ * Implemented by following official Firebase docs, found at:
+ * https://firebase.google.com/docs/auth/android/start
  */
 class RegisterActivity : AppCompatActivity() {
     private lateinit var registerBinding: ActivityRegisterBinding

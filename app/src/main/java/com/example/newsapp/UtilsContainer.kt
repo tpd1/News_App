@@ -62,26 +62,4 @@ class UtilsContainer {
 
         return LocalNewsSource(articleDao)
     }
-
-
-
-
 }
-
-/**
- * Room doesn't allow custom classes to be stored. We need to convert Article to String first.
- */
-//class TypeConverters {
-
-//    private var gSonConverter = Gson()
-//
-//    @TypeConverter
-//    fun newsArticleToString(newsArticle: NewsArticle): String {
-//        return gSonConverter.toJson(newsArticle)
-//    }
-//
-//    @TypeConverter
-//    fun stringToNewsArticle(jsonData: String): NewsArticle {
-//        return gSonConverter.toJson(newsArticle)
-//    }
-//}

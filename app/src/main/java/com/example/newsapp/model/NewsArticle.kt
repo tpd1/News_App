@@ -29,4 +29,3 @@ data class NewsArticle(
     @SerializedName("language") val language: String
 ) : Parcelable
 
-

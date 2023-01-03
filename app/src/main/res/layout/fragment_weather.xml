@@ -135,4 +135,16 @@
         app:layout_constraintTop_toBottomOf="@+id/icon_layout" />
 
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/attribution_text"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/powered_by_weatherapi_com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditionText" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

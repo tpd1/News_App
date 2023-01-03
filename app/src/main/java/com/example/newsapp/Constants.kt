@@ -64,7 +64,6 @@ class Constants {
         const val ACC_SUCCESS = "Account Created Successfully. Log in to continue."
         const val BOOKMARK_REMOVED = "Bookmark Removed"
         const val ALL_BOOKMARKS_REM = "All Bookmarks Removed"
-        //const val DEFAULT_LOCATION = "London"
         const val NAME_SUCCESS = "Name Updated Successfully"
         const val PASSWORD_SUCCESS = "Password Updated Successfully"
         const val DIALOG_DELETE_ACC = "Permanently Delete Your Account?"

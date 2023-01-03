@@ -24,6 +24,8 @@ class NewsViewModel(
     private val currentQuery = MutableLiveData("")
 
     // Fetches paging news based on category when currentCategory is changed.
+    // The use of a switchMap is credited to the tutorial by Florian Walther:
+    // https://github.com/codinginflow/ImageSearchApp
     val newsLiveData = currentCategory.switchMap {
         remoteNewsSource.getPagingCategoryNews(it).cachedIn(viewModelScope)
     }

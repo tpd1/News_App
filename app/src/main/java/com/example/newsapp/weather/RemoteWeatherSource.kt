@@ -43,7 +43,8 @@ interface WeatherApiService {
  * Provides a wrapper for the API response to easily catch errors when the user
  * is searching for locations. Provides a generic template for error handling.
  *
- * This class was adapted from a tutorial by Stefan Jovanovic.
+ * This class was adapted from a tutorial, author:
+ * Stefan Jovanovic.
  * https://github.com/stevdza-san/Foody/
  */
 sealed class ApiResponseStatus<T>(
