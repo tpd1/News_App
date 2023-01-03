@@ -4,11 +4,13 @@
 ### Student No: 2003506
 
 Access to private Github repository available on request.
+
+I've also included a pdf of the screenshots referenced in the quiz questions as a backup. The links on Canvas should work anyway, but I wasn't sure.
 ___
 
 Login credentials for app (Registration also works, no email verification so just requires a valid email format - stored in Firebase):
 
-* Email: cs306@gmail.com
+* Email: csc306@gmail.com
 * Password: 2003506
 ___
 
@@ -29,7 +31,6 @@ Design changes from CW1:
 ___
 
 Known Issues - If this app were to be published, the following bugs would be fixed as a priority:
-* Returning from viewing an article to the news feed loses the position of the tab in the news TabLayout. 
 * Article source icons - NewsData.io API returns a source id that is not formattted very well. Changing this involves an extra call to their Source API, which is a limitation on the free tier with only 200 calls/day.
 * A large number of NewsAPI articles have no imageURL for displaying a recyclerview image. In App Settings, i've included a toggle button to hide these from being displayed. A better option would be to parse the HTML and fetch the main image.
 ___
